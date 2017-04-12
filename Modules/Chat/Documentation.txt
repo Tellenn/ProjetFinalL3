@@ -5,6 +5,11 @@ Partie client :
 	- update_order(int idmsg, String msg, int dest, bool type) [0 = user ; 1 = salon] {Envoi l'ordre de changer le message idmsg par msg dans dest qui est un type}
 	- update(int idmsg, String msg, int dest, bool type) {Met à jour le message idmsg par msg dans la conversation type n° dest}
 	- receive(){Fonction qui permet de recevoir les messages du serveurs}
+	- infoSalon(int idSalon) {Renvoi les informations associées à un salon}
+	- getSalon(int iduser) : int[] {Renvoi un tableau d'idSalon qui sont autorisées à l'utilisateur}
+	- getUsers(int idSalon) : int[] {Renvoi la liste d'utilisateur sur le salon}
+	- connection(int idUser, int idSalon) {Connecte l'utilisateur à un salon}
+	
 	
 Partie serveur : 
 	- write(int dest, String msg, type bool) {Permet d'écrire sur le xml et d'envoyer aux utilisateurs connectés un msg dans dest}
@@ -15,3 +20,7 @@ Partie serveur :
 	- remove_salon(int idsalon) {Supprime un salon}
 	- getIdByName(String conv, bool type) : int {Permet de récuperer l'id d'un utilisateur ou salon par son nom}
 	- receive(){Fonction qui permet de recevoir les messages clients}
+	- infoSalon(int idSalon) {Renvoi les informations associées à un salon}
+	- getSalon(int iduser) : int[] {Renvoi un tableau d'idSalon qui sont autorisées à l'utilisateur}
+	- getUsers(idSalon) : int[] {Renvoi la liste d'utilisateur sur le salon}
+	- connection(int idUser, int idSalon) : String[] {Connecte l'utilisateur à un salon}
