@@ -1,5 +1,5 @@
 BDD :
-Evenement(idEvent, dateDebut, dateFin, libelle, #idUser)
+Evenement(idEvent)
 Participant(idEvent, idUser)
 User(idUser, ...)
 
@@ -27,3 +27,11 @@ Partie Serveur :
 	{Ajoute un participant selon son idParticipant à l’événement idEvent identifié par idEvent}
 	- deleteParticipant(int idEvent, int idParticipant)
 	{Supprime le participant selon son idParticipant sur l’événement identifié par idEvent}
+	- createField(int idEvent, String nameField)
+	{Créer un nouveau champ, pour un événement}
+	- getField(int idEvent, String nameField)
+	{Récupère la valeur du champ pour un événement}
+	- setField(int idEvent, String nameField, String valueField)
+	{Fixe la valeur du champ pour un événement donné}
+	- deleteField(String nameField)
+	{Supprime un champ selon son nom}
