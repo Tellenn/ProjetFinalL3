@@ -5,15 +5,15 @@ User(idUser, ...)
 
 Partie Client :
 	- createEventOrder(date dateDebut, date dateFin, String libelle)
-	{Crée un événement}
+	{Envoi l’ordre de créer un événement}
 	- updateEventOrder(int idEvent, date dateDebut, date dateFin, String libelle)
-	{Modifie un événement identifié par idEvent}
+	{Envoi l’ordre de modifier un événement identifié par idEvent}
 	- deleteEventOrder(int idEvent)
-	{Supprime l’événement identifié par idEvent}
+	{Envoi l’ordre de supprimer l’événement identifié par idEvent}
 	- addParticipantOrder(int idEvent, int idParticipant)
-	{Ajoute un participant selon son idParticipant à l’événement idEvent identifié par idEvent}
+	{Envoi l’ordre d’ajouter un participant selon son idParticipant à l’événement idEvent identifié par idEvent}
 	- deleteParticipantOrder(int idEvent, int idParticipant)
-	{Supprimer le participant selon son idParticipant sur l’événement identifié par idEvent}
+	{Envoi l’ordre de supprimer le participant selon son idParticipant sur l’événement identifié par idEvent}
 	
 
 Partie Serveur :
@@ -26,4 +26,4 @@ Partie Serveur :
 	- addParticipant(int idEvent, int idParticipant)
 	{Ajoute un participant selon son idParticipant à l’événement idEvent identifié par idEvent}
 	- deleteParticipant(int idEvent, int idParticipant)
-	{Supprimer le participant selon son idParticipant sur l’événement identifié par idEvent}
+	{Supprime le participant selon son idParticipant sur l’événement identifié par idEvent}
