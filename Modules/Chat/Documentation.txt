@@ -1,0 +1,17 @@
+Partie client :
+	- send(int dest, String msg, bool type) [0 = user ; 1 = salon] {Envoi un message msg à dest qui est un type}
+	- remove_order(int idmsg, int dest, bool type) [0 = user ; 1 = salon] {Envoi l'ordre au serveur de supprimer un message idmsg dans dest qui est un type}
+	- remove(int idmsg , int dest, bool type) {supprime le message idmsg dans  la conversation type nommé dest}
+	- update_order(int idmsg, String msg, int dest, bool type) [0 = user ; 1 = salon] {Envoi l'ordre de changer le message idmsg par msg dans dest qui est un type}
+	- update(int idmsg, String msg, int dest, bool type) {Met à jour le message idmsg par msg dans la conversation type n° dest}
+	- receive(){Fonction qui permet de recevoir les messages du serveurs}
+	
+Partie serveur : 
+	- write(int dest, String msg, type bool) {Permet d'écrire sur le xml et d'envoyer aux utilisateurs connectés un msg dans dest}
+	- remove(int idmsg, int dest, type bool) {Permet de supprimer sur le xml et aux utilisateurs connectés un msg dans dest}
+	- update(int idmsg, int dest, String msg, type bool) {Permet de modifier sur le xml et aux utilisateurs connectés un idmsg par msg dans dest}
+	- warn(int dest, type bool) {Previens un canal qu'un nouveau message est apparu
+	- create_salon(String nom) : int {Créer un salon et renvoi l'id de ce dernier}
+	- remove_salon(int idsalon) {Supprime un salon}
+	- getIdByName(String conv, bool type) : int {Permet de récuperer l'id d'un utilisateur ou salon par son nom}
+	- receive(){Fonction qui permet de recevoir les messages clients}
