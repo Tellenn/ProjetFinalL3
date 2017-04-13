@@ -1,2 +1,33 @@
 # ProjetFinalL3
-On this project, we'll be working on Netbeans, so stay tunned for the next episode.
+
+
+# TODO LIST :
+
+- Gestion de projet :
+	- Recherches sur RMI Carine Kyllian
+	- Cahier des Charges Antoine
+	- Planning prévisionnel Quentin
+
+- GED :
+	- ~~BD~~ Carine
+	- ~~XML~~ Kyllian
+	- CLIENT
+	- SERVEUR
+	
+- Gestion utilisateur :
+	- ~~BD~~ Ibrahima
+	- ~~XML~~ Ibrahima
+	- CLIENT
+	- SERVEUR
+	
+- Chat :
+	- ~~BD~~ Kyllian
+	- ~~XML~~ Kyllian
+	- CLIENT
+	- SERVEUR
+	
+- Calendrier :
+	- BD
+	- ~~XML~~ Quentin
+	- CLIENT
+	- SERVEUR
