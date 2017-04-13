@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ns1:calendrier
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:ns1='http://www.ujf-grenoble.fr/l3miage/projetjava'
+    xsi:schemaLocation='http://www.ujf-grenoble.fr/l3miage/projetjava file:/home/b/blondelq/Documents/S2/TestProjet/schema.xsd'>
+    <ns1:evenement idEvenement="1" idUser="1">
+        <ns1:dateDebut>2017-04-13T09:00:00</ns1:dateDebut>
+        <ns1:dateFin>2017-04-13T11:00:00</ns1:dateFin>
+        <ns1:libelle>Reunion</ns1:libelle>
+    </ns1:evenement>
+
+</ns1:calendrier>

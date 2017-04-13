@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.ujf-grenoble.fr/l3miage/projetjava"
+           xmlns="http://www.ujf-grenoble.fr/l3miage/projetjava"
+           elementFormDefault="qualified">
+    
+    <xs:element name="calendrier" type="Calendrier"/>
+    <xs:complexType name="Calendrier">
+        <xs:sequence>
+            <xs:element name="evenement" type="Evenement"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Evenement">
+        <xs:sequence>
+            <xs:element name="dateDebut" type="xs:dateTime"/>
+            <xs:element name="dateFin" type="xs:dateTime"/>
+            <xs:element name="libelle" type="xs:string"/>    
+        </xs:sequence>
+        <xs:attribute name="idEvenement" type="xs:int"/>
+        <xs:attribute name="idUser" type="xs:int"/>
+    </xs:complexType>
+    
+</xs:schema>
