@@ -7,6 +7,7 @@
 	- Recherches sur RMI _Carine_
 	- Cahier des Charges _Antoine_
 	- Planning prévisionnel _Quentin_
+	- Représentation des classes _Kyllian_
 
 - GED :
 	- ~~BD~~ _Carine_
@@ -23,7 +24,7 @@
 - Chat :
 	- ~~BD~~ _Kyllian_
 	- ~~XML~~ _Kyllian_
-	- CLIENT _Kyllian_
+	- CLIENT 
 	- SERVEUR
 	
 - Calendrier :
