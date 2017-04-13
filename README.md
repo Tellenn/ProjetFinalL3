@@ -4,30 +4,30 @@
 # TODO LIST :
 
 - Gestion de projet :
-	- Recherches sur RMI Carine Kyllian
-	- Cahier des Charges Antoine
-	- Planning prévisionnel Quentin
+	- Recherches sur RMI _Carine Kyllian_
+	- Cahier des Charges _Antoine_
+	- Planning prévisionnel _Quentin_
 
 - GED :
-	- ~~BD~~ Carine
-	- ~~XML~~ Kyllian
+	- ~~BD~~ _Carine_
+	- ~~XML~~ _Kyllian_
 	- CLIENT
 	- SERVEUR
 	
 - Gestion utilisateur :
-	- ~~BD~~ Ibrahima
-	- ~~XML~~ Ibrahima
+	- ~~BD~~ _Ibrahima_
+	- ~~XML~~ _Ibrahima_
 	- CLIENT
 	- SERVEUR
 	
 - Chat :
-	- ~~BD~~ Kyllian
-	- ~~XML~~ Kyllian
+	- ~~BD~~ _Kyllian_
+	- ~~XML~~ _Kyllian_
 	- CLIENT
 	- SERVEUR
 	
 - Calendrier :
 	- BD
-	- ~~XML~~ Quentin
+	- ~~XML~~ _Quentin_
 	- CLIENT
 	- SERVEUR
