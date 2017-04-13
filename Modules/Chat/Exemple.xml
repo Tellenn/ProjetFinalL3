@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chat>
+	<message id="1" iduser="2">
+		Bonjour! Ca va?
+	</message>
+	<message id="2" iduser="1">
+		Bien et toi?
+	</message>
+	<message id="3" iduser="2">
+		Bien, merci. Fort utile cet outil!
+	</message>
+</chat>
