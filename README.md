@@ -4,7 +4,7 @@
 # TODO LIST :
 
 - Gestion de projet :
-	- Recherches sur RMI _Carine Kyllian_
+	- Recherches sur RMI _Carine_
 	- Cahier des Charges _Antoine_
 	- Planning prévisionnel _Quentin_
 
@@ -23,7 +23,7 @@
 - Chat :
 	- ~~BD~~ _Kyllian_
 	- ~~XML~~ _Kyllian_
-	- CLIENT
+	- CLIENT _Kyllian_
 	- SERVEUR
 	
 - Calendrier :
