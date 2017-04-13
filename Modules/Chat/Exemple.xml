@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<users>
+	<user id=1>
+		<nom>Perrin</nom>
+		<prenom>Kyllian</prenom>
+		<birthday>26/10/1994</birthday>
+		<placeOfBirth>Voiron<placeOfBirth>
+	</user>
+	<user id=2>
+		<nom>Amin</nom>
+		<age>21</age>
+	</user>
+	<user id=3></user>
+</users>
