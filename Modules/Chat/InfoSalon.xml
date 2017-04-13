@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<salons>
+	<salon id="1">
+		<nom>RH</nom>
+		<description>Salon réservé au staff RH</description>
+		<userMax>40</userMax>
+	</salon>
+	<salon id="2">
+		<nom>Compta</nom>
+	</salon>
+</salons>
