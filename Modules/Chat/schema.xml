@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-Truc à mettre ici
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-TODO users
 	<xs:element name="chat">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="message" type="..."/>
+				<xs:element name="message" minOccurs="0" maxOccurs="unbounded">
+  				  	<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="id" type="xs:int" use="required"/>
+								<xs:attribute name="iduser" type="xs:int" use="required"/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-TODO users
+	
+</xs:schema>
