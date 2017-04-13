@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<us:schema xmlns:us="http://www.w3.org/2001/XMLSchema">
+        <us:element name="user" type="User" />
+		<us:complexType name="User">
+			<us:sequence>
+				<us:element name="iduser" type="Int">
+                                <us:element name="username" type="String">
+                                <us:element name="passwor" type="String">
+			</us:sequence>
+		</us:complexType>
+</us:schema>
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<us:schema xmlns:us="http://www.w3.org/2001/XMLSchema">
+        <us:element name="admin" type="Admin" />
+		<us:complexType name="Admin">
+			<us:sequence>
+				<us:element name="idadmin" type="Int">
+                                <us:element name="adminpassword" type="String">
+			</us:sequence>
+		</us:complexType>
+</us:schema>
+
