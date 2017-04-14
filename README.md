@@ -5,7 +5,7 @@
 
 - Gestion de projet :
 	- Recherches sur RMI _Carine_
-	- Cahier des Charges _Antoine_
+	- ~~Cahier des Charges~~ _Antoine_
 	- ~~Planning prévisionnel~~ _Quentin_
 	- Représentation des classes _Kyllian_
 
@@ -28,7 +28,7 @@
 	- SERVEUR
 	
 - Calendrier :
-	- BD
+	- ~~BD~~
 	- ~~XML~~ _Quentin_
 	- CLIENT
 	- SERVEUR
