@@ -14,6 +14,7 @@ and open the template in the editor.
         <ns1:dateDebut>2017-04-13T09:00:00</ns1:dateDebut>
         <ns1:dateFin>2017-04-13T11:00:00</ns1:dateFin>
         <ns1:libelle>Reunion</ns1:libelle>
+        <ns1:description>Reunion du conseil d'administration de l'entreprise</ns1:description>
     </ns1:evenement>
 
 </ns1:calendrier>

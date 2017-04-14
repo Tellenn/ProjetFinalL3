@@ -21,10 +21,13 @@ and open the template in the editor.
         <xs:sequence>
             <xs:element name="dateDebut" type="xs:dateTime"/>
             <xs:element name="dateFin" type="xs:dateTime"/>
-            <xs:element name="libelle" type="xs:string"/>    
+            <xs:element name="libelle" type="xs:string"/>
+            <xs:any minOccurs="0" maxOccurs="unbounded"/>    
         </xs:sequence>
         <xs:attribute name="idEvenement" type="xs:int"/>
         <xs:attribute name="idUser" type="xs:int"/>
     </xs:complexType>
+    
+    <xs:element name="description" type="xs:string"/>
     
 </xs:schema>
