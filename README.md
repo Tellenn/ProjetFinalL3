@@ -1,7 +1,7 @@
 # ProjetFinalL3
 Concernant les XML : Il faudra parser les schémas pour ajouter un element de type :
-```
- <xs:element name="desc" type="xs:string"/>
+```{xml}
+ <xs:element name="nom" type="xs:string"/>
 ```
 à la fin du document avant de fermer le schéma
 # TODO LIST :
