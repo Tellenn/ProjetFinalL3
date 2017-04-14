@@ -6,7 +6,7 @@
 - Gestion de projet :
 	- Recherches sur RMI _Carine_
 	- Cahier des Charges _Antoine_
-	- Planning prévisionnel _Quentin_
+	- ~~Planning prévisionnel~~ _Quentin_
 	- Représentation des classes _Kyllian_
 
 - GED :
