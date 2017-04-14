@@ -24,7 +24,7 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 	- Recherches sur RMI _Carine_
 	- ~~Cahier des Charges~~ _Antoine_
 	- ~~Planning prévisionnel~~ _Quentin_
-	- Représentation des classes _Kyllian a fait un travail nul_
+	- ~~Représentation des classes~~ _Kyllian a fait un travail nul_
 
 - GED :
 	- ~~BD~~ _Carine_
@@ -45,7 +45,7 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 	- SERVEUR
 	
 - Calendrier :
-	- ~~BD~~
+	- ~~BD~~ _Quentin_
 	- ~~XML~~ _Quentin_
 	- CLIENT
 	- SERVEUR
