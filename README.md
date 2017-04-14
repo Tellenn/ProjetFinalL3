@@ -13,9 +13,11 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - RMI : 
 	- Chat à au moins deux utilisateurs
 - Base de donnée :
-	- Lister les requètes de consultation et modification des bases
+	- Lister les requètes de consultation et modification des bases _Kyllian s'en occupe_
 - XML : 
-	- Faire un parser qui parcours les trois documents qui existent
+	- Faire un parser qui parcours les trois documents qui existent 
+- Specs : 
+	- Faire les specs pour chaque fonction qui existe dans des fichiers _Kyllian peux en faire une partie_
 
 
 # TODO LIST :
