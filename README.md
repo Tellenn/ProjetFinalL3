@@ -1,7 +1,9 @@
 # ProjetFinalL
 
-[La TODO LIST](https://github.com/Tellenn/ProjetFinalL3#todo-list-)
-[La liste des choses à faire pendant les vacances](https://github.com/Tellenn/ProjetFinalL3#Holiday-work-)
+[La TODO LIST](https://github.com/Tellenn/ProjetFinalL3#todo-list-) 
+
+[La liste des choses à faire pendant les vacances](https://github.com/Tellenn/ProjetFinalL3#holiday-work-)
+
 Concernant les XML : Il faudra parser les schémas pour ajouter un element de type :
 ```{xml}
  <xs:element name="nom" type="xs:string"/>
