@@ -10,11 +10,19 @@ and open the template in the editor.
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xmlns:ns1='http://www.ujf-grenoble.fr/l3miage/projetjava'
     xsi:schemaLocation='http://www.ujf-grenoble.fr/l3miage/projetjava file:/home/b/blondelq/Documents/S2/TestProjet/schema.xsd'>
+    
     <ns1:evenement idEvenement="1" idUser="1">
         <ns1:dateDebut>2017-04-13T09:00:00</ns1:dateDebut>
         <ns1:dateFin>2017-04-13T11:00:00</ns1:dateFin>
         <ns1:libelle>Reunion</ns1:libelle>
         <ns1:description>Reunion du conseil d'administration de l'entreprise</ns1:description>
+    </ns1:evenement>
+    
+    <ns1:evenement idEvenement="2" idUser="1">
+        <ns1:dateDebut>2017-04-14T14:00:00</ns1:dateDebut>
+        <ns1:dateFin>2017-04-14T15:00:00</ns1:dateFin>
+        <ns1:libelle>Reunion</ns1:libelle>
+        <ns1:description>Reunion audit projet KICQA</ns1:description>
     </ns1:evenement>
 
 </ns1:calendrier>

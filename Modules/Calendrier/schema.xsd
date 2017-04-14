@@ -14,7 +14,7 @@ and open the template in the editor.
     <xs:element name="calendrier" type="Calendrier"/>
     <xs:complexType name="Calendrier">
         <xs:sequence>
-            <xs:element name="evenement" type="Evenement"/>
+            <xs:element name="evenement" type="Evenement" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="Evenement">
