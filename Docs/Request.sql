@@ -7,13 +7,13 @@
 -- Récupération des salons accessible par un utilisateur 'X'
 
 SELECT idsalon
-FROM droit_salons
+FROM droitSalons
 WHERE iduser='X'
 
 -- Récupération des clients d'un salon 'Y'
 
 SELECT isuser
-FROM droit_salons
+FROM droitSalons
 WHERE idsalon='Y'
 
 
