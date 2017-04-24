@@ -1,10 +1,3 @@
-----------------------------------
---								--
---		MODULE : Users			--
---								--
-----------------------------------
-
-
 -- Utilisateur(iduser,userName,userPassword)
 INSERT INTO Utilisateur VALUES (1,'Kyllian','miage');
 INSERT INTO Utilisateur VALUES (2,'Ibrahima','miage');
@@ -85,10 +78,10 @@ INSERT INTO Dossier VALUES(5);
 
 --DossierDansDossier(idDossierFils,idDossierPere)
 
-INSERT INTO DossierDansDossier VALUES(1,2);
-INSERT INTO DossierDansDossier VALUES(1,3);
-INSERT INTO DossierDansDossier VALUES(2,4);
-INSERT INTO DossierDansDossier VALUES(4,5);
+INSERT INTO DossierDansDossier VALUES(2,1);
+INSERT INTO DossierDansDossier VALUES(3,1);
+INSERT INTO DossierDansDossier VALUES(4,2);
+INSERT INTO DossierDansDossier VALUES(5,5);
 
 --FichierDansDossier(idFichier,idDossier)
 
@@ -100,21 +93,21 @@ INSERT INTO FichierDansDossier VALUES(5,5);
 
 --DroitDossier(idDossier,idUser)
 
-INSERT INTO DroitFichier VALUES(1,1);
-INSERT INTO DroitFichier VALUES(1,2);
-INSERT INTO DroitFichier VALUES(1,3);
-INSERT INTO DroitFichier VALUES(1,4);
-INSERT INTO DroitFichier VALUES(1,5);
-INSERT INTO DroitFichier VALUES(2,2);
-INSERT INTO DroitFichier VALUES(2,3);
-INSERT INTO DroitFichier VALUES(2,4);
-INSERT INTO DroitFichier VALUES(3,3);
-INSERT INTO DroitFichier VALUES(3,4);
-INSERT INTO DroitFichier VALUES(3,5);
-INSERT INTO DroitFichier VALUES(4,3);
-INSERT INTO DroitFichier VALUES(4,5);
-INSERT INTO DroitFichier VALUES(5,1);
-INSERT INTO DroitFichier VALUES(5,2);
+INSERT INTO DroitDossier VALUES(1,1);
+INSERT INTO DroitDossier VALUES(1,2);
+INSERT INTO DroitDossier VALUES(1,3);
+INSERT INTO DroitDossier VALUES(1,4);
+INSERT INTO DroitDossier VALUES(1,5);
+INSERT INTO DroitDossier VALUES(2,2);
+INSERT INTO DroitDossier VALUES(2,3);
+INSERT INTO DroitDossier VALUES(2,4);
+INSERT INTO DroitDossier VALUES(3,3);
+INSERT INTO DroitDossier VALUES(3,4);
+INSERT INTO DroitDossier VALUES(3,5);
+INSERT INTO DroitDossier VALUES(4,3);
+INSERT INTO DroitDossier VALUES(4,5);
+INSERT INTO DroitDossier VALUES(5,1);
+INSERT INTO DroitDossier VALUES(5,2);
 
 --DroitFichier(idFichier,idUser)
 
