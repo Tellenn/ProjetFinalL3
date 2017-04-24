@@ -60,7 +60,7 @@ SELECT idUser1 as idUser
 FROM Relation
 WHERE idUser2='X'
 UNION
-SELECT idUser2 ad idUser
+SELECT idUser2 as idUser
 FROM relation
 WHERE idUser1='X'
 
@@ -70,7 +70,7 @@ SELECT idUser1 as idUser
 FROM Relation
 WHERE idUser2='X' and idUser1='Y'
 UNION
-SELECT idUser2 ad idUser
+SELECT idUser2 as idUser
 FROM relation
 WHERE idUser1='X' and idUser2='Y'
 
