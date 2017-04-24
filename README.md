@@ -20,7 +20,10 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - XML : 
 	- Faire un parser qui parcours les trois documents qui existent _Ibrahima à commencer_
 - Specs : 
-	- Faire les specs pour chaque fonction qui existe dans des fichiers 
+	- Faire les specs pour chaque fonction qui existe dans des fichiers
+		- Calendrier : 
+		- GED : commencé, à compléter...
+		- UserManagement : commencé, à compléter...
 
 
 # TODO LIST :
