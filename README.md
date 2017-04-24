@@ -38,23 +38,23 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - GED :
 	- ~~BD~~ _Carine_
 	- ~~XML~~ _Kyllian_
-	- CLIENT
+	- CLIENT _Kyllian_
 	- SERVEUR
 	
 - Gestion utilisateur :
 	- ~~BD~~ _Ibrahima_
 	- ~~XML~~ _Ibrahima_
-	- CLIENT
-	- SERVEUR
+	- CLIENT _Ibrahima & Carine_
+	- SERVEUR _Ibrahima & Carine_
 	
 - Chat :
 	- ~~BD~~ _Kyllian_
 	- ~~XML~~ _Kyllian_
-	- CLIENT 
+	- CLIENT _Antoine_
 	- SERVEUR
 	
 - Calendrier :
 	- ~~BD~~ _Quentin_
 	- ~~XML~~ _Quentin_
-	- CLIENT
+	- CLIENT _Quentin_
 	- SERVEUR
