@@ -98,7 +98,7 @@ getField(int idEvent, String nameField);
 setField(int idEvent, String nameField, String valueField);
 
 /**
-* Pour un événement donnée, supprimer un champ
+* Pour un événement donné, supprimer un champ
 * @param idEvent	id de l’événement
 * @param nameField	nom du champ à supprimer
 */
