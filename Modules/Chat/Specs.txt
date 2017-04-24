@@ -1,0 +1,170 @@
+//Méthodes côté client
+/**
+* Envoi le message msg à un destinataire dest de type type
+* @param dest
+* @param msg
+* @param type
+*/
+void send(int dest, String msg, bool type);
+
+/**
+* Envoi l'ordre au serveur de supprimer un message idmsg dans dest qui est un type
+* @param idmsg
+* @param dest
+* @param type
+*/
+void remove_order(int idmsg, int dest, bool type);
+
+/**
+* Supprime le message idmsg dans  la conversation type nommé dest
+* @param idmsg
+* @param dest
+* @param type
+*/
+void remove(int idmsg , int dest, bool type);
+
+/**
+* Envoi l'ordre de changer le message idmsg par msg dans dest qui est un type
+* @param idmsg
+* @param msg
+* @param dest
+* @param type
+*/
+void update_order(int idmsg, String msg, int dest, bool type);
+
+/**
+* Met à jour le message idmsg par msg dans la conversation type n° dest
+* @param idmsg
+* @param msg
+* @param dest
+* @param type
+*/
+void update(int idmsg, String msg, int dest, bool type);
+
+/**
+* Fonction qui permet de recevoir les messages du serveurs
+*/
+void receive();
+
+/**
+* Renvoi les informations associées à un salon
+* @param idSalon
+*/
+void infoSalon(int idSalon);
+
+/**
+* Renvoi un tableau d'idSalon qui sont autorisées à l'utilisateur
+* @param iduser
+*/
+int getSalon(int iduser);
+
+/**
+* Renvoi la liste d'utilisateur sur le salon
+* @param idSalon
+*/
+int getUsers(int idSalon);
+
+/**
+* Connecte l'utilisateur à un salon
+* @param idUser
+* @param idSalon
+*/
+void connection(int idUser, int idSalon);
+	
+
+//Méthodes côté client
+/**
+* Permet d'écrire sur le xml et d'envoyer aux utilisateurs connectés un msg dans dest
+* @param dest
+* @param msg
+* @param bool
+*/
+void write(int dest, String msg, type bool);
+
+/**
+* Permet d'envoyer un message sur la conversation
+* @param dest
+* @param msg
+* @param bool
+*/
+void send(int dest, String msg, type bool);
+
+/**
+* Permet d'envoyer l'ensemble de la conversation
+* @param dest
+* @param bool
+*/
+void send_all(int dest, type bool);
+
+/**
+* Permet de supprimer sur le xml et aux utilisateurs connectés un msg dans dest
+* @param idmsg
+* @param dest
+* @param bool
+*/
+void remove(int idmsg, int dest, type bool);
+
+/**
+* Permet de modifier sur le xml et aux utilisateurs connectés un idmsg par msg dans dest
+* @param idmsg
+* @param dest
+* @param msg
+* @param bool
+*/
+void update(int idmsg, int dest, String msg, type bool);
+
+/**
+* Previens un canal qu'un nouveau message est apparu
+* @param dest
+* @param bool
+*/
+void warn(int dest, type bool);
+
+/**
+* Créer un salon et renvoi l'id de ce dernier
+* @param nom
+*/
+int create_salon(String nom);
+
+/**
+* Supprime un salon
+* @param idsalon
+*/
+void remove_salon(int idsalon);
+
+/**
+* Permet de récuperer l'id d'un utilisateur ou salon par son nom
+* @param conv
+* @param type
+*/
+int getIdByName(String conv, bool type);
+
+/**
+* Fonction qui permet de recevoir les messages clients
+*/
+void receive();
+
+/**
+* Renvoi les informations associées à un salon
+* @param idSalon
+*/
+void infoSalon(int idSalon);
+
+/**
+* Renvoi un tableau d'idSalon qui sont autorisées à l'utilisateur
+* @param iduser
+*/
+int getSalon(int iduser);
+
+/**
+* Renvoi la liste d'utilisateur sur le salon
+* @param idSalon
+*/
+int getUsers(idSalon);
+
+/**
+* Connecte l'utilisateur à un salon
+* @param idUser
+* @param idSalon
+*/
+String connection(int idUser, int idSalon);
