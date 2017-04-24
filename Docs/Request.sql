@@ -50,9 +50,9 @@ WHERE idAdmin='X'
 
 -- Est-ce que l'utilisateur 'X' à un mot de passe 'Y' ?
 
-SELECT userName
+SELECT idUser
 FROM Utilisateur
-WHERE idUser='X' and userPassword='Y'
+WHERE userName='X' and userPassword='Y'
 
 -- Récupération de la liste de relation d'un utilisateur 'X'
 
