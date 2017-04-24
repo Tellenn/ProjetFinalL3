@@ -86,6 +86,7 @@ void createField(int idEvent, String nameField);
 * Pour un événement donné, récupère la valeur du nom du champ passé en paramètre
 * @param idEvent	id de l’événement
 * @param nameField	nom du champ dont on récupère la valeur
+* @return		la valeur du champ passé en paramètre
 */
 String getField(int idEvent, String nameField);
 
