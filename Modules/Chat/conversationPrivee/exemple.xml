@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<chat>
+	<message id="1" emetteur="2" date="21/01/2017-08:00">
+		Bonjour! Ca va?
+	</message>
+	<message id="2" emetteur="1" date="21/01/2017-09:00">
+		Bien et toi?
+	</message>
+	<message id="3" emetteur="2" date="22/01/2017-08:00">
+		Bien, merci. Fort utile cet outil!
+	</message>
+</chat>
