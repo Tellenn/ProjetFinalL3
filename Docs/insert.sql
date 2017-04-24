@@ -9,7 +9,7 @@
 INSERT INTO Utilisateur VALUES (1,'Kyllian','miage');
 INSERT INTO Utilisateur VALUES (2,'Ibrahima','miage');
 INSERT INTO Utilisateur VALUES (3,'Carine','miage');
-INSERT INTO Utilisateur VALUES (4,'Antoine','miage');
+INSERT INTO Utilisateur VALUES (4,'antoine','miage');
 INSERT INTO Utilisateur VALUES (5,'Quentin','miage');
 
 -- Admin(idAdmin)
