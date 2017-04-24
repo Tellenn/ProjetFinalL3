@@ -12,7 +12,7 @@ WHERE iduser='X'
 
 -- Récupération des clients d'un salon 'Y'
 
-SELECT isuser
+SELECT iduser
 FROM droitSalons
 WHERE idsalon='Y'
 
