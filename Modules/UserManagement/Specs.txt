@@ -1,0 +1,67 @@
+/*
+*
+* @param iduser
+*/
+void deleteUser(int iduser);
+
+/*
+*
+* @param userName
+* @param userPassword
+*/
+void addUser(String userName, String userPassword);
+
+/*
+*
+* @param idUser
+*/
+void addAdmin(int idUser);
+
+/*
+*
+* @param idAdmin
+*/
+void deleteAdmin(int idAdmin);
+
+/*
+*
+* @param idUser
+*/
+void creatRelation(int idUser);
+
+/*
+*
+* @param idElem
+*/
+void updateAttribut(int idElem);
+
+/*
+*
+* @param idElem
+*/
+void deleteAttribut(int idElem);
+
+/*
+*
+* @param idUser
+*/
+void deleteRelation(int idUser);
+
+/*
+*
+* @param idUser
+*/
+void editRelation(int idUser);
+
+/*
+*
+* @param idUser
+*/
+void editfUserInformation(int idUser);
+
+/*
+*
+* @param idElem
+* @param nomAttribut
+*/
+void editAttribut(int idElem, String nomAttribut);
