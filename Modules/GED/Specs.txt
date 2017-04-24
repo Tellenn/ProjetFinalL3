@@ -1,0 +1,129 @@
+/**
+* 
+* @param nomDoc	
+* @param typeDoc
+* @param chemin	
+*/
+void addDoc(String nomDoc, String typeDoc, String chemin);
+
+/**
+* 
+* @param nomDoc	
+* @param chemin	
+*/
+void deleteDoc(String nomDoc, String chemin);
+
+/**
+* 
+* @param nomDoc	
+* @param nomUser
+* @param chemin	
+*/
+void shareDoc(String nomDoc, String nomUser, String chemin);
+
+/**
+* 
+* @param nomFolder	
+* @param nomUser
+* @param chemin
+*/
+void shareFolder(String nomFolder, String nomUser, String chemin);
+
+/**
+* 
+* @param nomUser
+* @param nomDoc
+* @param chemin
+*/
+void deleteAccessDoc(String nomUser, String nomDoc, String chemin);
+
+/**
+* 
+* @param nomUser
+* @param nomFolder
+* @param chemin
+*/
+void deleteAccessFolder(String nomUser, String nomFolder, String chemin);
+
+/**
+* 
+* @param nomFolder
+* @param chemin
+*/
+void createFolder(String nomFolder, String chemin);
+
+/**
+* 
+* @param chemin
+* @param nomFolder
+*/
+void deleteFolder(String nomFolder, String chemin);
+
+/**
+* 
+* @param nomFolder
+*/
+void infoFolder(String nomFolder);
+
+/**
+* 
+* @param nomDoc
+* @return	id du doc passé en paramètre
+*/
+int getIdDoc(String nomDoc);
+
+/**
+* 
+* @param nomFolder
+* @return	id du dossier passé en paramètre
+*/
+int getIdFolder(String nomFolder);
+
+/**
+* 
+* @param nomDoc
+* @return	type du document passé en paramètre
+*/
+String getTypeDoc(String nomDoc);
+
+/**
+* 
+* @param nomDoc
+* @return	chemin du document passé en paramètre
+*/
+String getCheminDoc(String nomDoc);
+
+/**
+* 
+* @param nomFolder
+* @return	chemin du dossier passé en paramètre
+*/
+String getCheminFolder(String nomFolder);
+
+/**
+* 
+* @param nomFolder
+* @return	???
+*/
+String getAccessFolder(String nomFolder);
+
+/**
+* 
+* @param nomDoc
+* @return	???
+*/
+String getAccessDoc(String nomDoc);
+
+/**
+* 
+* @param nomFolder
+* @return	???
+*/
+String getRacineFolder(String nomFolder);
+
+/**
+* 
+* @param nomFolder
+* @return	???
+*/
+String getFilsFolder(String nomFolder);
