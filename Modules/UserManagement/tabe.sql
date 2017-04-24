@@ -1,4 +1,4 @@
-reate table user(
+create table user(
                    iduser number primary key check (iduser>0),
                    username varchar not null,
                    userpassword varchar not null)
