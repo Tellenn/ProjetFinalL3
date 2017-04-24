@@ -76,19 +76,20 @@ WHERE idUser1='X' and idUser2='Y'
 
 -- Trigger pour éviter le doublon d'ami
 
-create trigger trg_relation
+create or replace trigger trg_relation
 before INSERT OR UPDATE on relation
 for each row
 declare 
 	id number;
 BEGIN 
-	select nvl(iduser1,0) into id  
-	from relation 
+	select nvl(iduser1,0) into id
+	from relation
 	where iduser1=:new.iduser2 and iduser2=:new.iduser1; 
 	if(id=0) then
-		raise_application_error(-20100,‘Ces personnes sont déjà en relation!’);
-	END IF;
-END;
+		raise_application_error(-20100,'Ces personnes sont déjà en relation!');
+	End if;
+End;
+/
 
 
 ----------------------------------
