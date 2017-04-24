@@ -33,7 +33,7 @@ WHERE iduser='X'
 
 SELECT iduser
 FROM Participant
-WHERE iduser='Y'
+WHERE idEvenement='Y'
 
 
 ----------------------------------
