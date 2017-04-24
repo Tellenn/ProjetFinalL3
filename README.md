@@ -14,13 +14,13 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 
 - RMI : 
 	- ~~Chat à au moins deux utilisateurs~~ _Fait par Carine et Antoine_
-	- Envoi de fichier _Antoine s'en occupe_
+	- Envoi de fichier
 - Base de donnée :
-	- Lister les requètes de consultation et modification des bases _Kyllian s'en occupe_
+	- Lister les requètes de consultation et modification des bases
 - XML : 
-	- Faire un parser qui parcours les trois documents qui existent _Antoine & Ibrahima s'en occupe_
+	- Faire un parser qui parcours les trois documents qui existent _Ibrahima à commencer_
 - Specs : 
-	- Faire les specs pour chaque fonction qui existe dans des fichiers _Quentin s'en occupe_
+	- Faire les specs pour chaque fonction qui existe dans des fichiers 
 
 
 # TODO LIST :
