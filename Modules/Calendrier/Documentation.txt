@@ -33,5 +33,5 @@ Partie Serveur :
 	{Récupère la valeur du champ pour un événement}
 	- setField(int idEvent, String nameField, String valueField)
 	{Fixe la valeur du champ pour un événement donné}
-	- deleteField(String nameField)
+	- deleteField(int idEvent, String nameField)
 	{Supprime un champ selon son nom}

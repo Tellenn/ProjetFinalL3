@@ -1,0 +1,105 @@
+//Méthodes côté Client
+/**
+* Envoi l’ordre au serveur de créer un nouvel événement
+* @param dateDebut	date de début de l’événement
+* @param dateFin	date de fin de l’événement
+* @param libelle	libelle de l’événement
+*/
+createEventOrder(date dateDebut, date dateFin, String libelle);
+
+/**
+* Envoi l’ordre au serveur de modifier l’événement identifié par idEvent
+* @param idEvent	id de l’événement à mettre à jour
+* @param dateDebut	nouvelle date de début de l’événement
+* @param dateFin	nouvelle date de fin de l’événement
+* @param libelle	nouveau libellé de l’événement
+*/
+updateEventOrder(int idEvent, date dateDebut, date dateFin, String libelle);
+
+/**
+* Envoi l’ordre au serveur de supprimer l’événement identifié par idEvent
+* @param idEvent	id de l’événement à supprimer
+*/
+deleteEventOrder(int idEvent);
+
+/**
+* Envoi l’ordre au serveur d’ajouter un participant (selon idParticipant) à l’événement identifié par idEvent
+* @param idEvent	id de l’événement
+* @param idParticipant	id du participant à ajouter à l’événement
+*/
+addParticipantOrder(int idEvent, int idParticipant);
+
+/**
+* Envoi l’ordre au serveur de supprimer un participant (selon son idParticipant) à un événement (identifié par idEvent)
+* @param idEvent	id de l’événement
+* @param idParticipant	id du participant
+*/
+deleteParticipantOrder(int idEvent, int idParticipant);
+
+
+//Méthodes côté Serveur
+/**
+* Crée un événement à la fois dans la base de données et dans le fichier xml
+* @param dateDebut	date de début de l’événement
+* @param dateFin	date de fin de l’événement
+* @param libelle	libelle de l’événement 
+*/
+createEvent(date dateDebut, date dateFin, String libelle);
+
+/**
+* Mets à jour un événement dans le fichier xml
+* @param idEvent	id de l’événement à mettre à jour
+* @param dateDebut	nouvelle date de début de l’événement
+* @param dateFin	nouvelle date de fin de l’événement
+* @param libelle	nouveau libellé de l’événement
+*/
+updateEvent(int idEvent, date dateDebut, date dateFin, String libelle);
+
+/**
+* Supprimer un événement à la fois de la base de données et dans le fichier xml
+* @param idEvent	id de l’événement à supprimer
+*/
+deleteEvent(int idEvent);
+
+/**
+* Ajoute un participant à un événement : dans la BD ajoute un n-uplet dans la table Participant
+* @param idEvent	id de l’événement
+* @param idParticipant	id du participant
+*/
+addParticipant(int idEvent, int idParticipant);
+
+/**
+* Supprime un participant à un événement : dans la BD supprimer le n-uplet correspondant dans la table Participant
+* @param idEvent	id de l’événement
+* @param idParticipant	id du participant
+*/
+deleteParticipant(int idEvent, int idParticipant);
+
+/**
+* Ajoute un nouveau champ dans le fichier xml pour un événement donné
+* @param idEvent	id de l’événement
+* @param nameField	nom du champ à ajouter
+*/
+createField(int idEvent, String nameField);
+
+/**
+* Pour un événement donné, récupère la valeur du nom du champ passé en paramètre
+* @param idEvent	id de l’événement
+* @param nameField	nom du champ dont on récupère la valeur
+*/
+getField(int idEvent, String nameField);
+
+/**
+* Pour un événement donné, on met à jour la valeur d’un champ
+* @param idEvent	id de l’événement
+* @param nameField	nom du champ à mettre à jour
+* @param valueField	nouvelle valeur du champ
+*/
+setField(int idEvent, String nameField, String valueField);
+
+/**
+* Pour un événement donnée, supprimer un champ
+* @param idEvent	id de l’événement
+* @param nameField	nom du champ à supprimer
+*/
+deleteField(int idEvent String nameField);
