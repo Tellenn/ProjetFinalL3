@@ -6,11 +6,11 @@
 
 
 -- Utilisateur(iduser,userName,userPassword)
-INSERT INTO Utilisateur VALUES (1,'Kyllian','MIAGE');
-INSERT INTO Utilisateur VALUES (2,'Ibrahima','MIAGE');
-INSERT INTO Utilisateur VALUES (3,'Carine','MIAGE');
-INSERT INTO Utilisateur VALUES (4,'Antoine','MIAGE');
-INSERT INTO Utilisateur VALUES (5,'Quentin','MIAGE');
+INSERT INTO Utilisateur VALUES (1,'Kyllian','miage');
+INSERT INTO Utilisateur VALUES (2,'Ibrahima','miage');
+INSERT INTO Utilisateur VALUES (3,'Carine','miage');
+INSERT INTO Utilisateur VALUES (4,'Antoine','miage');
+INSERT INTO Utilisateur VALUES (5,'Quentin','miage');
 
 -- Admin(idAdmin)
 INSERT INTO Admin VALUES (1);
