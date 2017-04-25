@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<chat>
+	<message date="21/01/2017" emetteur="2" heure="08:00:00" id="1">
+		Bonjour! Ca va?
+	</message>
+	<message date="21/01/2017" emetteur="1" heure="09:00:00" id="2">
+		Bien et toi?
+	</message>
+	<message date="22/01/2017" emetteur="2" heure="08:00:00" id="3">
+		Bien, merci. Fort utile cet outil!
+	</message>
+	<message date="24/04/2017" emetteur="1" heure="17:38:46" id="4">okkkkkkkkkkkkkkk
+	</message>
+	<message date="24/04/2017" emetteur="1" heure="17:43:04" id="5">charroan
+		a réussi à se connecter.</message>
+	<message date="24/04/2017" emetteur="1" heure="17:43:19" id="6">Ok
+		ca devrait fonctionner correctement</message>
+</chat>

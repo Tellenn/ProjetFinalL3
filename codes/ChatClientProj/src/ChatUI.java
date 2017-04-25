@@ -7,50 +7,63 @@ import java.rmi.Naming;
 import java.util.*;
 
 public class ChatUI {
-	private ChatClient client;
-	private ChatServerInt server;
-
+	private 				ChatClient 		client;
+	private 				ChatServerInt 	server;
+	private static final 	String 			ip 		= "152.77.82.223";
+	
 	public void doConnect() {
-		if (connect.getText().equals("Connect")) {
-			if (name.getText().length() < 2) {
+		if (connect.getText().equals("Connexion")) {
+			if (login.getText().length() < 2) {
 				// il faut que le nom ait plus de 2 caractères
-				JOptionPane.showMessageDialog(frame, "Tu as besoin d'un pseudo.");
+				JOptionPane.showMessageDialog(frame, "Format du mot de login impossible");
 				return;
 			}
-			if (ip.getText().length() < 2) {
+			if (mdp.getText().length() < 2) {
 				//il faut que le champ ne soit pas vide
-				JOptionPane.showMessageDialog(frame, "Tu as besoin d'une IP.");
+				JOptionPane.showMessageDialog(frame, "Format du mot de passe impossible");
 				return;
 			}
 			try {
-				client = new ChatClient(name.getText());
+				//ip.getText()
+				client = new ChatClient(login.getText());
 				client.setGUI(this);
-				server = (ChatServerInt) Naming.lookup("rmi://" + ip.getText() + "/myabc");
-				server.login(client);
-				updateUsers(server.getConnected());
-				connect.setText("Disconnect");
+				server = (ChatServerInt) Naming.lookup("rmi://" + ip + "/myabc");
+
+				if(server.login(client)){
+					updateUsers(server.getConnected());
+					connect.setText("Déconnexion");
+				}else{
+					System.out.println("else");
+					JOptionPane.showMessageDialog(frame, "Identification impossible, Veuillez écrire un login ou mot de passe correct");
+					return;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(frame, "ERROR, Connexion impossible....");
 			}
-		} else {
-			updateUsers(null);
-			connect.setText("Connecté");
+		}		
+		else {	updateUsers(null);
+			if (connect.getText().equals("Déconnexion")) {
+				connect.setText("Connexion");
+				
+			}
+			//connect.setText("Connecté ");
 			// Better to implement Logout ....
 		}
 	}
 
 	public void sendText() {
-		if (connect.getText().equals("Connect")) {
+		if (connect.getText().equals("Connexion")) {
 			JOptionPane.showMessageDialog(frame, "You need to connect first.");
 			return;
 		}
 		String st = tf.getText();
-		st = "[" + name.getText() + "] " + st;
-		tf.setText("");
+		st = "[" + login.getText() + "] " + st;
+		
 		// Remove if you are going to implement for remote invocation
 		try {
-			server.publish(st);
+			server.publish(st,1);
+			tf.setText("");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,26 +94,26 @@ public class ChatUI {
 
 	// User Interface code.
 	public ChatUI() {
-		frame = new JFrame("Group Chat");
+		frame = new JFrame("Groupe Chat");
 		JPanel main = new JPanel();
 		JPanel top = new JPanel();
 		JPanel cn = new JPanel();
 		JPanel bottom = new JPanel();
-		ip = new JTextField();
+		mdp = new JPasswordField();
 		tf = new JTextField();
-		name = new JTextField();
+		login = new JTextField();
 		tx = new JTextArea();
-		connect = new JButton("Connect");
-		JButton bt = new JButton("Send");
+		connect = new JButton("Connexion");
+		JButton bt = new JButton("Envoyer");
 		lst = new JList();
 		main.setLayout(new BorderLayout(5, 5));
 		top.setLayout(new GridLayout(1, 0, 5, 5));
 		cn.setLayout(new BorderLayout(5, 5));
 		bottom.setLayout(new BorderLayout(5, 5));
-		top.add(new JLabel("Your name: "));
-		top.add(name);
-		top.add(new JLabel("Server Address: "));
-		top.add(ip);
+		top.add(new JLabel("Login: "));
+		top.add(login);
+		top.add(new JLabel("Mot de passe: "));
+		top.add(mdp);
 		top.add(connect);
 		cn.add(new JScrollPane(tx), BorderLayout.CENTER);
 		cn.add(lst, BorderLayout.EAST);
@@ -133,7 +146,7 @@ public class ChatUI {
 	}
 
 	JTextArea tx;
-	JTextField tf, ip, name;
+	JTextField tf, mdp, login;
 	JButton connect;
 	JList lst;
 	JFrame frame;
