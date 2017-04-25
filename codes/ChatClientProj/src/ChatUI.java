@@ -62,7 +62,7 @@ public class ChatUI {
 		
 		// Remove if you are going to implement for remote invocation
 		try {
-			server.publish(st,1);
+			server.publish(st,3);
 			tf.setText("");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class ChatUI {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Hello World !");
+		System.out.println("[System] Chat on.");
 		ChatUI c = new ChatUI();
 	}
 

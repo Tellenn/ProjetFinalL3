@@ -1,5 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><chat>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<chat>
 	<message date="21/01/2017" emetteur="2" heure="08:00:00" id="1">
 		Bonjour! Ca va?
 	</message>
-<message date="24/04/2017" emetteur="1" heure="18:02:33" id="2">oktest</message><message date="24/04/2017" emetteur="1" heure="18:03:57" id="3">[amina] zez</message><message date="25/04/2017" emetteur="1" heure="08:44:25" id="4">[charroan] coucou</message><message date="25/04/2017" emetteur="1" heure="08:44:27" id="5">[charroan] ca va?</message><message date="25/04/2017" emetteur="1" heure="08:44:33" id="6">[charroan] tout va bien Carine?</message></chat>
+	<message date="24/04/2017" emetteur="1" heure="18:02:33" id="2">oktest
+	</message>
+	<message date="24/04/2017" emetteur="1" heure="18:03:57" id="3">[amina]
+		zez</message>
+	<message date="25/04/2017" emetteur="1" heure="08:44:25" id="4">[charroan]
+		coucou</message>
+	<message date="25/04/2017" emetteur="1" heure="08:44:27" id="5">[charroan]
+		ca va?</message>
+	<message date="25/04/2017" emetteur="1" heure="08:44:33" id="6">[charroan]
+		tout va bien Carine?</message>
+</chat>

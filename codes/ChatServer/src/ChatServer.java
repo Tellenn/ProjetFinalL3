@@ -14,7 +14,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 	private static final String dbUrl = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
 	private static final String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
 	private static final String login = "charroan";
-	private static final String mdp = "zezezeze";
+	private static final String mdp = "Aclf2016";
 	private Statement stmt;
 
 	public ChatServer() throws RemoteException {
@@ -73,7 +73,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		}
 		// *** On met à jour la conversation
 		// !!!!! Mettre le bon id2
-		ConversationPrivee c = new ConversationPrivee(id,2);
+		ConversationPrivee c = new ConversationPrivee(id,3);
 		c.ajouterMessage(id, s);
 	}
 
