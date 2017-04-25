@@ -14,7 +14,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 	private static final String dbUrl = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
 	private static final String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
 	private static final String login = "charroan";
-	private static final String mdp = "Aclf2016";
+	private static final String mdp = "zezezeze";
 	private Statement stmt;
 
 	public ChatServer() throws RemoteException {
