@@ -37,11 +37,8 @@ public class ConversationPrivee {
 						System.out.println("else" + monFichier.getAbsolutePath());
 						doc =  p.newDocument();
 						Element chat = doc.createElement("chat");
-						System.out.println("else2");
 						doc.appendChild(chat);
-						System.out.println("else3");
 					}
-					System.out.println("zezeze");
 		           //System.out.println("[INFO] Nous avons " + doc.getElementsByTagName("message").getLength() + " message(s) pour cette conversation");
 	
 		           // ajouterMessage(1, "test 1 vers 2");
@@ -132,7 +129,7 @@ public class ConversationPrivee {
 			        }
 	}
 
-
+	// Enregistre le document doc
 	private void save() {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer;
@@ -149,7 +146,7 @@ public class ConversationPrivee {
 		
 	}
 
-
+	// ajoute un message au document doc
 	public void ajouterMessage(int i, String text) {
 		Element message = doc.createElement("message");
 		message.setAttribute("id", Integer.toString(doc.getElementsByTagName("message").getLength()+1));

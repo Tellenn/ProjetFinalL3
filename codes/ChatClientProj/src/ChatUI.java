@@ -99,6 +99,14 @@ public class ChatUI {
 		JPanel top = new JPanel();
 		JPanel cn = new JPanel();
 		JPanel bottom = new JPanel();
+		//	JList list = new JList(new DefaultListModel<String>());
+//		west.add(new JScrollPane(tx), BorderLayout.WEST);
+	//	DefaultListModel<String> model = (DefaultListModel<String>) list.getModel();
+	//	model.addElement("Antoine");
+	//	model.addElement("Carine");
+	//	list.setModel(model);
+		
+		
 		mdp = new JPasswordField();
 		tf = new JTextField();
 		login = new JTextField();
@@ -116,9 +124,10 @@ public class ChatUI {
 		top.add(mdp);
 		top.add(connect);
 		cn.add(new JScrollPane(tx), BorderLayout.CENTER);
-		cn.add(lst, BorderLayout.EAST);
+		cn.add(lst, BorderLayout.WEST);
 		bottom.add(tf, BorderLayout.CENTER);
 		bottom.add(bt, BorderLayout.EAST);
+		
 		main.add(top, BorderLayout.NORTH);
 		main.add(cn, BorderLayout.CENTER);
 		main.add(bottom, BorderLayout.SOUTH);
