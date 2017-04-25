@@ -112,7 +112,6 @@ public class Utilisateur {
 		 		     //Affichage d'une personne
 		            String id = personne.getAttribute("id");
 		            if (id.compareTo(Integer.toString(idUser))==0){
-		            	System.out.println(i);
 		            	System.out.println("\n*************PROFIL************");
 		            	
 		            	Element nom = (Element) personne.getElementsByTagName("nom").item(0);
@@ -197,7 +196,152 @@ public class Utilisateur {
 	    Element node = doc.createElement(nom);
 	    node.appendChild(doc.createTextNode(value));
 	    return node;
-	}  
+	} 
+	
+	 public static void modifierProfil(int idUser, String nom, String prenom) throws SQLException {
+	    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+			Statement stmt = conn.createStatement();
+	    	File inputFile = new File("Exemple.xml");
+	    	
+	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder dBuilder = null;
+			try {
+				dBuilder = dbFactory.newDocumentBuilder();
+			} catch (ParserConfigurationException e) {
+				e.printStackTrace();
+			}
+	        Document doc = null;
+			try {
+				doc = dBuilder.parse(inputFile);
+			} catch (SAXException | IOException e) {
+				e.printStackTrace();
+			}
+
+	        Element racine = doc.getDocumentElement();
+
+	        NodeList racineNoeuds = racine.getChildNodes();
+	 	    int nbRacineNoeuds = racineNoeuds.getLength();
+	 	    
+		    for (int i = 0; i<nbRacineNoeuds; i++) {
+		    	if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+		    		Element personne = (Element) racineNoeuds.item(i);
+		    		
+		 		     //Affichage d'une personne
+		            String id = personne.getAttribute("id");
+		            if (id.compareTo(Integer.toString(idUser))==0){
+				        racine.setTextContent(nom);
+				        racine.setTextContent(prenom);
+		            }
+		    	}
+		    }
+
+	 	    // writing xml file
+	 	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	 	    Transformer transformer = null;
+			try {
+				transformer = transformerFactory.newTransformer();
+			} catch (TransformerConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	 	    DOMSource source = new DOMSource(doc);
+	 	     File outputFile = new File("Exemple.xml");
+	 	    StreamResult result = new StreamResult(outputFile );
+	 	    // creating output stream
+	 	    try {
+				transformer.transform(source, result);
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	 	   stmt.close();
+	    }
+	 
+	 public static void modifierUsername(int idUser , String userName) throws SQLException{
+		    
+         Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+
+         Statement stmt = conn.createStatement();
+         String rqt = "update Utilisateur set username ='" + userName + "' WHERE idUser = " + idUser ;
+         int i = stmt.executeUpdate(rqt);
+         stmt.close();
+         System.out.println("nb mise à jour" + i);
+ 	 
+	 };
+	 
+	 public static void modifierPassword(int idUser , String password) throws SQLException{
+		    
+         Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+
+         Statement stmt = conn.createStatement();
+         String rqt = "update Utilisateur set userpassword ='" + password + "' WHERE idUser = " + idUser ;
+         int i = stmt.executeUpdate(rqt);
+         stmt.close();
+         System.out.println("nb mise à jour" + i);
+ 	 
+	 };
+ 
+	 public static void supprimerUser(int idUser) throws SQLException{
+		    
+	     Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+	
+	     Statement stmt = conn.createStatement();
+	     String rqt = "delete from Utilisateur WHERE idUser=" + idUser ;
+	     int i = stmt.executeUpdate(rqt);
+	  
+	     System.out.println("nb mise à jour" + i);
+	     File inputFile = new File("Exemple.xml");
+	    	
+	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	    DocumentBuilder dBuilder = null;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		Document doc = null;
+		try {
+			doc = dBuilder.parse(inputFile);
+		} catch (SAXException | IOException e) {
+			e.printStackTrace();
+		}
+
+	    Element racine = doc.getDocumentElement();
+	    NodeList racineNoeuds = racine.getChildNodes();
+	 	int nbRacineNoeuds = racineNoeuds.getLength();
+	 	for (int j = 0; j<nbRacineNoeuds; j++) {
+		    	if(racineNoeuds.item(j).getNodeType() == Node.ELEMENT_NODE) {
+		    		Element personne = (Element) racineNoeuds.item(j);
+		    		
+		 		     //suppression d'une personne
+		            String id = personne.getAttribute("id");
+		            if (id.compareTo(Integer.toString(idUser))==0){
+		            	// à faire
+		            }
+		    	}
+		    }
+
+	 	    // writing xml file
+	 	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	 	    Transformer transformer = null;
+			try {
+				transformer = transformerFactory.newTransformer();
+			} catch (TransformerConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	 	    DOMSource source = new DOMSource(doc);
+	 	     File outputFile = new File("Exemple.xml");
+	 	    StreamResult result = new StreamResult(outputFile );
+	 	    // creating output stream
+	 	    try {
+				transformer.transform(source, result);
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	 	   stmt.close();
+	    }
 		    
 }	
 
