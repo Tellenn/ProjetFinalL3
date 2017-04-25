@@ -1,5 +1,7 @@
+/* PARTIE SERVEUR */
+
 /**
-* 
+* Ajoute un document à la GED
 * @param nomDoc	
 * @param typeDoc
 * @param chemin	
@@ -7,14 +9,14 @@
 void addDoc(String nomDoc, String typeDoc, String chemin);
 
 /**
-* 
+* Supprime un document à la GED
 * @param nomDoc	
 * @param chemin	
 */
 void deleteDoc(String nomDoc, String chemin);
 
 /**
-* 
+* Ajoute un utilisateur un droit sur un fichier
 * @param nomDoc	
 * @param nomUser
 * @param chemin	
@@ -22,7 +24,7 @@ void deleteDoc(String nomDoc, String chemin);
 void shareDoc(String nomDoc, String nomUser, String chemin);
 
 /**
-* 
+* Ajoute un utilisateur un droit sur un dossier
 * @param nomFolder	
 * @param nomUser
 * @param chemin
@@ -30,7 +32,7 @@ void shareDoc(String nomDoc, String nomUser, String chemin);
 void shareFolder(String nomFolder, String nomUser, String chemin);
 
 /**
-* 
+* Supprime le droit d'accès à un fichier, pour un utilisateur
 * @param nomUser
 * @param nomDoc
 * @param chemin
@@ -38,7 +40,7 @@ void shareFolder(String nomFolder, String nomUser, String chemin);
 void deleteAccessDoc(String nomUser, String nomDoc, String chemin);
 
 /**
-* 
+* Supprime le droit d'accès à un dossier, pour un utilisateur
 * @param nomUser
 * @param nomFolder
 * @param chemin
@@ -46,27 +48,27 @@ void deleteAccessDoc(String nomUser, String nomDoc, String chemin);
 void deleteAccessFolder(String nomUser, String nomFolder, String chemin);
 
 /**
-* 
+* Créer un dossier dans l'architecture GED
 * @param nomFolder
 * @param chemin
 */
 void createFolder(String nomFolder, String chemin);
 
 /**
-* 
+* Supprime un dossier vide dans l'architecture
 * @param chemin
 * @param nomFolder
 */
 void deleteFolder(String nomFolder, String chemin);
 
 /**
-* 
+* Renvoi les information du dossier contenue dans le XML
 * @param nomFolder
 */
 void infoFolder(String nomFolder);
 
 /**
-* 
+* Renvoi l'id du dossier contenu dans le XML
 * @param nomDoc
 * @return	id du doc passé en paramètre
 */
