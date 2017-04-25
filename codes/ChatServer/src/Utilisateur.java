@@ -30,7 +30,7 @@ public class Utilisateur {
 	     */
 	    public static void ajouterUtilisateur(int idUser , String userName, String userPassword) throws SQLException{
 	    
-	            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "aminca", "Carine1909");
+	            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 
 	            Statement stmt = conn.createStatement();
 	            String rqt = "insert into Utilisateur values (" + idUser + "," + "'"+userName+"'" + "," + "'"+userPassword+"'" +")";
@@ -46,7 +46,7 @@ public class Utilisateur {
 	     */
 	    public static int calcul_idUser() throws SQLException{
 		    int idUser = 0;
-		    Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "aminca", "Carine1909");
+		    Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 		    Statement stmt = conn.createStatement();
 		    ResultSet rs = stmt.executeQuery("SELECT max(idUser) FROM Utilisateur");
 		    while (rs.next()) {
@@ -65,7 +65,7 @@ public class Utilisateur {
 	    public static int rechercheUtilisateur(String userName) throws SQLException{
 	        String idUser;
 	        
-	        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "aminca", "Carine1909");
+	        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 		    Statement stmt = conn.createStatement();
 	        ResultSet rs = stmt.executeQuery("SELECT idUser FROM Utilisateur WHERE lower(username) = lower('" + userName + "')");
 	        if (!rs.next()) {
@@ -82,7 +82,7 @@ public class Utilisateur {
 	    
 	    
 	    public static void chargerProfil(int idUser) throws SQLException {
-	    	 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "aminca", "Carine1909");
+	    	 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 			 Statement stmt = conn.createStatement();
 	    	File inputFile = new File("Exemple.xml");
 	    	
@@ -117,13 +117,13 @@ public class Utilisateur {
 		            	
 		            	Element nom = (Element) personne.getElementsByTagName("nom").item(0);
 		     		    Element prenom = (Element) personne.getElementsByTagName("prenom").item(0);
-		     		    Element birthday = (Element) personne.getElementsByTagName("birthday").item(0);
+		     		    //Element birthday = (Element) personne.getElementsByTagName("birthday").item(0);
 		     		    //Element placeOfBirth = (Element) personne.getElementsByTagName("placeOfBirth").item(0);
 		     		   
 		    		    //Affichage du nom et du prénom
 		    		    System.out.println("nom : " + nom.getTextContent());
 		    		    System.out.println("prénom : " + prenom.getTextContent());
-		    		    System.out.println("anniversaire : " + birthday.getTextContent());
+		    		    //System.out.println("anniversaire : " + birthday.getTextContent());
 		    		    //System.out.println("Place of birth : " + placeOfBirth.getTextContent());
 		            	 
 		            }
@@ -133,7 +133,7 @@ public class Utilisateur {
 	    }
 	    
 	    public static void ajouterProfil(int idUser, String nom, String prenom) throws SQLException {
-	    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "aminca", "Carine1909");
+	    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 			Statement stmt = conn.createStatement();
 	    	File inputFile = new File("Exemple.xml");
 	    	
