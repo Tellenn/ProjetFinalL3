@@ -14,9 +14,9 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 
 - RMI : 
 	- ~~Chat à au moins deux utilisateurs~~ _Fait par Carine et Antoine_
-	- Envoi de fichier
+	- ~~Envoi de fichier~~ _Kyllian_
 - Base de donnée :
-	- Lister les requètes de consultation et modification des bases
+	- ~~Lister les requètes de consultation et modification des bases~~ _Kyllian_
 - XML : 
 	- Faire un parser qui parcours les trois documents qui existent _Ibrahima à commencer_
 - Specs : 
@@ -38,13 +38,14 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - GED :
 	- ~~BD~~ _Carine_
 	- ~~XML~~ _Kyllian_
-	- CLIENT _Kyllian_
-	- SERVEUR
+	- CLIENT _Ibrahima & Kyllian_
+	- SERVEUR _Ibrahima & Kyllian_
+	
 	
 - Gestion utilisateur :
 	- ~~BD~~ _Ibrahima_
 	- ~~XML~~ _Ibrahima_
-	- CLIENT _Ibrahima & Carine_
+	- CLIENT _Carine_
 	- SERVEUR _Ibrahima & Carine_
 	
 - Chat :
