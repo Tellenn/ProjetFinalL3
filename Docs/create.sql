@@ -55,6 +55,7 @@ CREATE TABLE DroitSalons
 CREATE TABLE Evenement
 (
     idEvenement 	INTEGER PRIMARY KEY,
+    libelle			DATE,
     dateDebut		DATE,
     dateFin			DATE
 );
