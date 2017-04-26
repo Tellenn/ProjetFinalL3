@@ -46,7 +46,7 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 	- ~~BD~~ _Ibrahima_
 	- ~~XML~~ _Ibrahima_
 	- CLIENT _Carine_
-	- SERVEUR _Ibrahima & Carine_
+	- SERVEUR _Carine_
 	
 - Chat :
 	- ~~BD~~ _Kyllian_
