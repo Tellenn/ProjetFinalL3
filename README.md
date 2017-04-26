@@ -30,7 +30,7 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 # TODO LIST :
 
 - Gestion de projet :
-	- Recherches sur RMI _Carine_
+	- ~~Recherches sur RMI~~ _Carine_
 	- ~~Cahier des Charges~~ _Antoine_
 	- ~~Planning prévisionnel~~ _Quentin_
 	- ~~Représentation des classes~~ _Kyllian a fait un travail nul_
@@ -45,14 +45,18 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - Gestion utilisateur :
 	- ~~BD~~ _Ibrahima_
 	- ~~XML~~ _Ibrahima_
-	- CLIENT _Carine_
-	- SERVEUR _Carine_
+	- ~~CLIENT~~ _Carine championne_
+	- ~~SERVEUR~~ _Carine championne_
 	
 - Chat :
 	- ~~BD~~ _Kyllian_
 	- ~~XML~~ _Kyllian_
 	- CLIENT _Antoine_
-	- SERVEUR
+		- Salons
+		- Messagerie privée
+	- SERVEUR _Antoine_
+		- Salons
+		- Messagerie privée
 	
 - Calendrier :
 	- ~~BD~~ _Quentin_
