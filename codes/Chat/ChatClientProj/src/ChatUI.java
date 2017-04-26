@@ -157,6 +157,7 @@ public class ChatUI {
 					System.out.println("Chargement de la conversation de " + client.getName() + " id " + client.getId()
 							+ " avec " + server.getClient(evt.getFirstIndex()).getName() + " id "
 							+ server.getClient(evt.getFirstIndex()).getId());
+					tx.setText("");//reset
 					uploadText(server.getClient(evt.getFirstIndex()).getId());
 					// tx.setText("");//reset
 

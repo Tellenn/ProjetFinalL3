@@ -47,7 +47,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 				System.out.println("Connexion accepté pour "+rset.getString(1)+ "id "+a.getId());
 				a.tell("Connexion acceptée.");
 				v.add(a);
-				//return Integer.valueOf(rset.getString(1));
+				return Integer.valueOf(rset.getString(1));
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -75,10 +75,6 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		c.ajouterMessage(id, s);
 	}
 
-	
-	
-	
-
 	public Vector getConnected() throws RemoteException {
 		return v;
 	}
@@ -89,6 +85,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 	
 	public void uploadConversation(ChatClientInt a, int idPersonne2)throws RemoteException{
 		ConversationPrivee c = new ConversationPrivee(a.getId(),idPersonne2);
+		System.out.print(c.toString());
 		a.tell(c.toString());
 	}
 

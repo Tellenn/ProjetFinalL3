@@ -3,6 +3,8 @@ package chat;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TreeMap;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -155,14 +157,13 @@ public class ConversationPrivee {
 	    save();
 	}
 	
-	@Override
+
 	public String toString(){
 		String conversation="";
 		NodeList messages = doc.getElementsByTagName("message");
 		for(int i = 0; i < messages.getLength(); i++){
-			conversation += messages.item(i).getNodeValue() + "\n";
-		}
-		
+			conversation += messages.item(i).getTextContent()+"\n" ;
+		}		
 		return conversation;
 	}
 }

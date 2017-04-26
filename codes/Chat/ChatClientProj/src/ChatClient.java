@@ -8,7 +8,7 @@ public class ChatClient  extends UnicastRemoteObject implements ChatClientInt{
 	private ChatUI ui;	
 	public ChatClient (String n) throws RemoteException {
 		name=n;
-		}
+	}
 	
 	public void tell(String st) throws RemoteException{
 		System.out.println(st);
