@@ -12,7 +12,7 @@ import java.util.*;
 public class ChatUI {
 	private ChatClient client;
 	private ChatServerInt server;
-	private static final String ip = "152.77.82.231";
+	private static final String ip = "152.77.82.252";
 	// private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer,
 	// Integer>();
 
@@ -63,12 +63,24 @@ public class ChatUI {
 			JOptionPane.showMessageDialog(frame, "You need to connect first.");
 			return;
 		}
+		
 		String st = tf.getText();
 		st = "[" + login.getText() + "] " + st;
 
 		// Remove if you are going to implement for remote invocation
 		try {
-			server.publish(st, 3);
+			System.out.println("11");
+			if(client.getIdConversationPrivee()!=-1){
+				System.out.println("22");
+				server.publishPrivate(st, client.getId(), client.getIdConversationPrivee());
+			}else{
+				if(client.getNumSalon()!=-1){
+					server.publish(st, client.getId());
+				}else{
+					System.out.println("333");
+					// erreur
+				}
+			}		
 			tf.setText("");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,13 +91,12 @@ public class ChatUI {
 		tx.setText(tx.getText() + "\n" + st);
 	}
 
-	public void updateUsers(Vector v) {
+	public void updateUsers(TreeMap<Integer, ChatClientInt> v) {
 		DefaultListModel listModel = new DefaultListModel();
 		if (v != null)
-			for (int i = 0; i < v.size(); i++) {
+			for (ChatClientInt item : v.values()) {
 				try {
-					String tmp = ((ChatClientInt) v.get(i)).getName();
-					listModel.addElement(tmp);
+					listModel.addElement(item.getName());
 					// placesDansListe.put(i, tmp.getId());
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -113,6 +124,7 @@ public class ChatUI {
 		tx = new JTextArea();
 		connect = new JButton("Connexion");
 		JButton bt = new JButton("Envoyer");
+		bt.setEnabled(false);
 		lst = new JList();
 		main.setLayout(new BorderLayout(5, 5));
 		top.setLayout(new GridLayout(1, 0, 5, 5));
@@ -141,7 +153,7 @@ public class ChatUI {
 			}
 		});
 		bt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				sendText();
 			}
 		});
@@ -154,11 +166,13 @@ public class ChatUI {
 		lst.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent evt) {
 				try {
+					bt.setEnabled(true);
+					client.setIdConversationPrivee(server.getClient(evt.getFirstIndex()).getId());
 					System.out.println("Chargement de la conversation de " + client.getName() + " id " + client.getId()
 							+ " avec " + server.getClient(evt.getFirstIndex()).getName() + " id "
 							+ server.getClient(evt.getFirstIndex()).getId());
 					tx.setText("");//reset
-					uploadText(server.getClient(evt.getFirstIndex()).getId());
+					uploadText(client.getIdConversationPrivee());
 					// tx.setText("");//reset
 
 				} catch (RemoteException e) {

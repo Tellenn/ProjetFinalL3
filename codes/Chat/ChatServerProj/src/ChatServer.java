@@ -10,7 +10,8 @@ import java.sql.*;
 
 public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 
-	private Vector v = new Vector();
+	private TreeMap<Integer, ChatClientInt> p = new TreeMap<Integer, ChatClientInt>();
+
 	private static final String dbUrl = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
 	private static final String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
 	private static final String login = "charroan";
@@ -46,7 +47,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 			while (rset.next()) {
 				System.out.println("Connexion accepté pour "+rset.getString(1)+ "id "+a.getId());
 				a.tell("Connexion acceptée.");
-				v.add(a);
+				p.put(a.getId(), a);
 				return Integer.valueOf(rset.getString(1));
 			}
 		} catch (SQLException e) {
@@ -58,12 +59,11 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 
 	// Le serveur recoit un message d'un client et le transmet à tous les utilisateurs connectés
 	public void publish(String s, int id) throws RemoteException {
+		// TODO: A reprendre
 		// *** On envoie à tous les utilisateurs conecté le message
-		for (int i = 0; i < v.size(); i++) {
-			try {				
-				ChatClientInt chatClient = (ChatClientInt) v.get(i);
-				chatClient.tell(s);
-				
+		for (ChatClientInt item : p.values()) {
+			try {		
+				item.tell(s);
 			} catch (Exception e) {
 				// problem with the client not connected.
 				// Better to remove it
@@ -74,13 +74,40 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		ConversationPrivee c = new ConversationPrivee(id,3);
 		c.ajouterMessage(id, s);
 	}
-
-	public Vector getConnected() throws RemoteException {
-		return v;
+	
+	// Conversation privee
+	// Le serveur recoit un message d'un client et le transmet à id2
+	public void publishPrivate(String s, int id1, int id2 ) throws RemoteException {
+		// *** On envoie à l'utilisateur conecté le message	
+		System.out.println("toto1");
+		//System.out.println(p.get(id1).getName());
+		try {
+			System.out.println("toto");
+			p.get(id1).tell(s);				
+		}catch (Exception e) {
+			// si l'utilisateur n'est pas connecté
+			System.out.println("bugg");
+		}	
+		try {
+			System.out.println("toto2");
+			p.get(id2).tell(s);				
+		}catch (Exception e) {
+			// si l'utilisateur n'est pas connecté
+			System.out.println("bugg2");
+		}
+		// *** On met à jour la conversation
+		ConversationPrivee c = new ConversationPrivee(id1,id2);
+		System.out.println("koko");
+		c.ajouterMessage(id1, s);
+		System.out.println("lolo");
 	}
 
-	public ChatClientInt getClient(int i) throws RemoteException{
-		return (ChatClientInt)v.get(i);
+	public TreeMap<Integer, ChatClientInt> getConnected() throws RemoteException {
+		return p;
+	}
+
+	public ChatClientInt getClient(int id) throws RemoteException{
+		return (ChatClientInt)p.get(id);
 	}
 	
 	public void uploadConversation(ChatClientInt a, int idPersonne2)throws RemoteException{
