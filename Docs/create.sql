@@ -54,7 +54,9 @@ CREATE TABLE DroitSalons
 --Table Evenement
 CREATE TABLE Evenement
 (
-    idEvenement 	INTEGER PRIMARY KEY
+    idEvenement 	INTEGER PRIMARY KEY,
+    dateDebut		DATE,
+    dateFin			DATE
 );
 --Table Participant
 CREATE TABLE Participant
