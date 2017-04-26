@@ -70,12 +70,17 @@ CREATE TABLE Participant
 );
 --Table Dossier
 CREATE TABLE Dossier(
-    idDossier		INTEGER PRIMARY KEY
+    idDossier		INTEGER PRIMARY KEY,
+	nomDossier VARCHAR2(50)
 );
 --Table Fichier
 CREATE TABLE Fichier
 (
-    idFichier 		INTEGER PRIMARY KEY
+    idFichier 		INTEGER PRIMARY KEY,
+	nomFichier	VARCHAR2(50),
+	proprio		INTEGER,
+	description VARCHAR2(200),
+	dateDepot	date
 );
 --Table DossierDansDossier
 CREATE TABLE DossierDansDossier
