@@ -41,11 +41,11 @@ INSERT INTO DroitSalons VALUES(5,1);
 
 --Evenement(idEvenement)
 
-INSERT INTO Evenement VALUES(1);
-INSERT INTO Evenement VALUES(2);
-INSERT INTO Evenement VALUES(3);
-INSERT INTO Evenement VALUES(4);
-INSERT INTO Evenement VALUES(5);
+INSERT INTO Evenement VALUES(1, 'Reunion du conseil d adrministration', '27-APR-17', '27-APR-17');
+INSERT INTO Evenement VALUES(2, 'Reunion audit projet KICQA', '28-APR-17', '28-APR-17');
+INSERT INTO Evenement VALUES(3, 'Demo projet KICQA', '04-MAY-17', '04-MAY-17');
+INSERT INTO Evenement VALUES(4, 'Recette projet KICQA', '05-MAY-17', '05-MAY-17');
+INSERT INTO Evenement VALUES(5, 'Formation incendie et securite', '10-MAY-17', '10-MAY-17');
 
 --Participant(idSalons,idUser)
 INSERT INTO Participant VALUES(1,1);
