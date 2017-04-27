@@ -81,20 +81,22 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		// *** On envoie à l'utilisateur conecté le message	
 		//System.out.println(p.get(id1).getName());			
 		
-		System.out.println("id1:"+id1+" id2:"+id2 );
+		System.out.println("[System]publishPrivate(id1:"+id1+" id2:"+id2+")");
 		// *** On met à jour la conversation
 		ConversationPrivee c = new ConversationPrivee(id1,id2);
-		c.ajouterMessage(id1, s);
-		System.out.println("buugg");
+		c.ajouterMessage(id1, s);	
+		TreeMap<String, String> t =new TreeMap<String, String>(c.getLastMessage());
+		t.put("nom", p.get(Integer.valueOf(t.get("emetteur"))).getName());
 		try {
-			p.get(id1).tell(c.getLastMessage());				
+			//si l'utilisateur est connecté, il sera avertit			
+			p.get(id1).tell(t);				
 		}catch (Exception e) {
-			// si l'utilisateur n'est pas connecté	
-			System.out.println("[System] ERREUR: PublishPrivate" + e);
+			System.out.println("[System]ERREUR: client non connecté");
+			// sinon l'utilisateur n'est pas connecté
 		}
 		try {
 			//si l'utilisateur est connecté, il sera avertit
-			p.get(id2).tell(c.getLastMessage());				
+			if(id1!=id2)p.get(id2).tell(t);				
 		}catch (Exception e) {
 			// sinon l'utilisateur n'est pas connecté, on rattrape l'erreur et on fait rien		
 		}
@@ -125,7 +127,6 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 
 		for(int i = 0; i<tt.size(); i++){
 			tt.get(i).put("nom", p.get(Integer.valueOf(tt.get(i).get("emetteur"))).getName());
-			System.out.println("[System] tototo");
 			a.tell(tt.get(i));
 		}
 	}

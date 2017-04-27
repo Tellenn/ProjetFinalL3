@@ -173,7 +173,7 @@ public class ConversationPrivee {
 	public TreeMap<String, String> getMessage(int i){
 		TreeMap<String, String> t = new TreeMap<String, String>();
 		NodeList messages = doc.getElementsByTagName("message");
-		Element message = (Element) messages.item(i);
+		Element message = (Element) messages.item(i-1);
 			
 		t.put("id", message.getAttribute("id"));
 		t.put("emetteur", message.getAttribute("emetteur"));
@@ -190,7 +190,8 @@ public class ConversationPrivee {
 		
 		for (int i =0; i< messages.getLength(); i++){
 			t = new TreeMap<String, String>();
-			Element message = (Element) messages.item(i);			
+			Element message = (Element) messages.item(i);	
+			
 			t.put("id", message.getAttribute("id"));
 			t.put("emetteur", message.getAttribute("emetteur"));
 			t.put("date", message.getAttribute("date"));

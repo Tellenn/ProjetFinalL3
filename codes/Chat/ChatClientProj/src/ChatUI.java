@@ -10,10 +10,10 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public class ChatUI {
-	private ChatClient 		client;
-	private ChatServerInt 	server;
+	private ChatClient client;
+	private ChatServerInt server;
 	private static final String ip = "152.77.82.210";
-	private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer,Integer>();
+	private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer, Integer>();
 
 	public void doConnect() {
 		if (connect.getText().equals("Connexion")) {
@@ -35,12 +35,12 @@ public class ChatUI {
 				int id = server.login(client, login.getText(), mdp.getText());
 				if (id != -1) {
 					updateUsers(server.getConnected());
-					System.out.println("id ======="+id);
+					System.out.println("Mon id client est " + id);
 					client.setId(id);
 					connect.setText("Déconnexion");
 				} else {
-					System.out.println("else");
-					JOptionPane.showMessageDialog(frame,"Identification impossible, Veuillez écrire un login ou mot de passe correct");
+					JOptionPane.showMessageDialog(frame,
+							"Identification impossible, Veuillez écrire un login ou mot de passe correct");
 					return;
 				}
 			} catch (Exception e) {
@@ -62,26 +62,31 @@ public class ChatUI {
 			JOptionPane.showMessageDialog(frame, "You need to connect first.");
 			return;
 		}
-		
+
 		String st = tf.getText();
-		//st = "[" + login.getText() + "] " + st;
+		// st = "[" + login.getText() + "] " + st;
 
 		// Remove if you are going to implement for remote invocation
-			if(client.getIdConversationPrivee()!=-1){
-				try {server.publishPrivate(st, client.getId(), client.getIdConversationPrivee());
-				} catch (Exception e) {System.out.println(e);
+		if (client.getIdConversationPrivee() != -1) {
+			try {
+				server.publishPrivate(st, client.getId(), client.getIdConversationPrivee());
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		} else {
+			if (client.getNumSalon() != -1) {
+				try {
+					server.publish(st, client.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			}else{
-				if(client.getNumSalon()!=-1){
-					try {server.publish(st, client.getId());
-					} catch (Exception e) {e.printStackTrace();}
-				}else{
-					System.out.println("[System] ERROR: Pas normal d'être là");
-					// erreur
-				}
-			}		
-			tf.setText("");
-		
+			} else {
+				System.out.println("[System] ERROR: Pas normal d'être là");
+				// erreur
+			}
+		}
+		tf.setText("");
+
 	}
 
 	public void writeMsg(String st) {
@@ -94,7 +99,7 @@ public class ChatUI {
 			for (ChatClientInt item : v.values()) {
 				try {
 					listModel.addElement(item.getName());
-					 placesDansListe.put(listModel.getSize()-1, item.getId());
+					placesDansListe.put(listModel.getSize() - 1, item.getId());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -117,8 +122,10 @@ public class ChatUI {
 
 		mdp = new JPasswordField();
 		tf = new JTextField();
+		tf.setEnabled(false);
 		login = new JTextField();
 		tx = new JTextArea();
+
 		connect = new JButton("Connexion");
 		JButton bt = new JButton("Envoyer");
 		bt.setEnabled(false);
@@ -150,7 +157,7 @@ public class ChatUI {
 			}
 		});
 		bt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				sendText();
 			}
 		});
@@ -162,20 +169,23 @@ public class ChatUI {
 
 		lst.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent evt) {
-				try {
-					bt.setEnabled(true);				
-					client.setIdConversationPrivee(server.getClient(placesDansListe.get(evt.getFirstIndex())).getId());
-					
-					System.out.println("Chargement de la conversation de " + client.getName() + " id " + client.getId()
-							+ " avec " + server.getClient(placesDansListe.get(evt.getFirstIndex())).getName() + " id "
-							+ server.getClient(placesDansListe.get(evt.getFirstIndex())).getId());
-					
-					tx.setText("");//reset
-					uploadText(client.getIdConversationPrivee());
-					// tx.setText("");//reset
+				System.out.println("[CHAT UI] J'ai été appelé");
+				if (!lst.getValueIsAdjusting()) {
+					System.out.println("[CHAT UI] J'ai été appelé 2");
+					try {
+						tf.setEnabled(true);
+						bt.setEnabled(true);
+						client.setIdConversationPrivee(
+								server.getClient(placesDansListe.get(lst.getSelectedIndex())).getId());
 
-				} catch (RemoteException e) {
-					e.printStackTrace();
+						System.out.println("[CHAT UI]Chargement de la conversation de " + client.getName() + " id "
+								+ client.getId() + " avec "
+								+ server.getClient(placesDansListe.get(lst.getSelectedIndex())).getName() + " id "
+								+ server.getClient(placesDansListe.get(lst.getSelectedIndex())).getId());
+
+						tx.setText("");// reset
+						uploadText(client.getIdConversationPrivee());
+					} catch (RemoteException e) {}
 				}
 			}
 		});
@@ -186,8 +196,8 @@ public class ChatUI {
 	}
 
 	protected void uploadText(int idPersonne2) throws RemoteException {
-		//tx.setText()
-		server.uploadConversation(client, idPersonne2);//reset
+		// tx.setText()
+		server.uploadConversation(client, idPersonne2);// reset
 	}
 
 	JTextArea tx;
