@@ -62,26 +62,26 @@ INSERT INTO Participant VALUES(5,1);
 
 --Fichier(idFichier,nomFichier,proprio,	description, dateDepot)
 
-INSERT INTO Fichier VALUES(1);
-INSERT INTO Fichier VALUES(2);
-INSERT INTO Fichier VALUES(3);
-INSERT INTO Fichier VALUES(4);
-INSERT INTO Fichier VALUES(5);
+INSERT INTO Fichier VALUES(1,'Archi',null,null,null);
+INSERT INTO Fichier VALUES(2,'Regle du pole',1,'Regle de depot sur RH pour Carine',null);
+INSERT INTO Fichier VALUES(3,'Poubelle',1,'Ne sert a rien, comme Antoine',null);
+INSERT INTO Fichier VALUES(4,'Fiche de paie n 87',2,'Fiche de paie de Quentin Blondel',null);
+INSERT INTO Fichier VALUES(5,'Ibrahima.jpg',4,'Photo d\'un génie',null);
 
 --Dossier(idDossier,nomDossier)
 
-INSERT INTO Dossier VALUES(1);
-INSERT INTO Dossier VALUES(2);
-INSERT INTO Dossier VALUES(3);
-INSERT INTO Dossier VALUES(4);
-INSERT INTO Dossier VALUES(5);
+INSERT INTO Dossier VALUES(1,'Racine');
+INSERT INTO Dossier VALUES(2,'RH');
+INSERT INTO Dossier VALUES(3,'GED');
+INSERT INTO Dossier VALUES(4,'Paie');
+INSERT INTO Dossier VALUES(5,'Employe');
 
 --DossierDansDossier(idDossierFils,idDossierPere)
 
 INSERT INTO DossierDansDossier VALUES(2,1);
 INSERT INTO DossierDansDossier VALUES(3,1);
 INSERT INTO DossierDansDossier VALUES(4,2);
-INSERT INTO DossierDansDossier VALUES(5,5);
+INSERT INTO DossierDansDossier VALUES(5,2);
 
 --FichierDansDossier(idFichier,idDossier)
 
