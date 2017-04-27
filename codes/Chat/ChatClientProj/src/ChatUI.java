@@ -10,9 +10,9 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public class ChatUI {
-	private ChatClient client;
-	private ChatServerInt server;
-	private static final String ip = "152.77.82.208";
+	private ChatClient 		client;
+	private ChatServerInt 	server;
+	private static final String ip = "152.77.82.210";
 	private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer,Integer>();
 
 	public void doConnect() {

@@ -85,11 +85,18 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		// *** On met à jour la conversation
 		ConversationPrivee c = new ConversationPrivee(id1,id2);
 		c.ajouterMessage(id1, s);
+		System.out.println("buugg");
 		try {
+			p.get(id1).tell(c.getLastMessage());				
+		}catch (Exception e) {
+			// si l'utilisateur n'est pas connecté	
+			System.out.println("[System] ERREUR: PublishPrivate" + e);
+		}
+		try {
+			//si l'utilisateur est connecté, il sera avertit
 			p.get(id2).tell(c.getLastMessage());				
 		}catch (Exception e) {
-			// si l'utilisateur n'est pas connecté
-			System.out.println(e);
+			// sinon l'utilisateur n'est pas connecté, on rattrape l'erreur et on fait rien		
 		}
 	}
 
@@ -116,7 +123,11 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		ConversationPrivee c = new ConversationPrivee(a.getId(),idPersonne2);
 		List<TreeMap<String, String>> tt =new ArrayList<TreeMap<String, String>>(c.getMessages());
 
-		for(int i = 0; i<tt.size(); i++)a.tell(tt.get(i));
+		for(int i = 0; i<tt.size(); i++){
+			tt.get(i).put("nom", p.get(Integer.valueOf(tt.get(i).get("emetteur"))).getName());
+			System.out.println("[System] tototo");
+			a.tell(tt.get(i));
+		}
 	}
 
 	

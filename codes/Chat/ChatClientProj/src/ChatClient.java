@@ -20,7 +20,8 @@ public class ChatClient  extends UnicastRemoteObject implements ChatClientInt{
 	}
 	
 	public void tell(TreeMap<String, String> st) throws RemoteException{
-		ui.writeMsg(st.get("date") + ":" + st.get("text"));
+		System.out.println("[System] tototo");
+		ui.writeMsg(st.get("date") + " " + st.get("heure")+ ":"+"["+st.get("nom")+"]"+st.get("text"));
 	}
 	
 	public String getName() throws RemoteException{
