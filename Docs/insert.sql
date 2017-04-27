@@ -60,7 +60,7 @@ INSERT INTO Participant VALUES(4,5);
 INSERT INTO Participant VALUES(4,4);
 INSERT INTO Participant VALUES(5,1);
 
---Fichier(idFichier)
+--Fichier(idFichier,nomFichier,proprio,	description, dateDepot)
 
 INSERT INTO Fichier VALUES(1);
 INSERT INTO Fichier VALUES(2);
@@ -68,7 +68,7 @@ INSERT INTO Fichier VALUES(3);
 INSERT INTO Fichier VALUES(4);
 INSERT INTO Fichier VALUES(5);
 
---Dossier(idDossier)
+--Dossier(idDossier,nomDossier)
 
 INSERT INTO Dossier VALUES(1);
 INSERT INTO Dossier VALUES(2);
