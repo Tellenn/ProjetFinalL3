@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,10 +31,10 @@ public class Utilisateur {
      */
     public static void commit() throws SQLException {
        
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("commit");
-            st.close();
+    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("commit");
+        st.close();
        
     };
    
@@ -102,21 +103,9 @@ public class Utilisateur {
 	    public static void chargerProfil(int idUser) throws SQLException {
 	    	 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 			 Statement stmt = conn.createStatement();
-	    	File inputFile = new File("Exemple.xml");
-	    	
-	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder dBuilder = null;
-			try {
-				dBuilder = dbFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			}
-	        Document doc = null;
-			try {
-				doc = dBuilder.parse(inputFile);
-			} catch (SAXException | IOException e) {
-				e.printStackTrace();
-			}
+			 Document doc = null;
+			 doc =parser("Exemple.xml", doc);
+
  
 	        Element racine = doc.getDocumentElement();
 
@@ -134,15 +123,14 @@ public class Utilisateur {
 		            	
 		            	Element nom = (Element) personne.getElementsByTagName("nom").item(0);
 		     		    Element prenom = (Element) personne.getElementsByTagName("prenom").item(0);
-		     		    //Element birthday = (Element) personne.getElementsByTagName("birthday").item(0);
-		     		    //Element placeOfBirth = (Element) personne.getElementsByTagName("placeOfBirth").item(0);
 		     		   
 		    		    //Affichage du nom et du prénom
 		    		    System.out.println("nom : " + nom.getTextContent());
 		    		    System.out.println("prénom : " + prenom.getTextContent());
-		    		    //System.out.println("anniversaire : " + birthday.getTextContent());
-		    		    //System.out.println("Place of birth : " + placeOfBirth.getTextContent());
-		            	 
+		    		    for(int j=2; j<personne.getChildNodes().getLength(); j++){
+			    			Node noeudEnPlus = personne.getChildNodes().item(j);
+			    			System.out.println(noeudEnPlus.getNodeName() + ": "+noeudEnPlus.getTextContent());	
+			    		}	            	 
 		            }
 		    	}
 		    }
@@ -152,21 +140,9 @@ public class Utilisateur {
 	    public static void ajouterProfil(int idUser, String nom, String prenom) throws SQLException {
 	    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 			Statement stmt = conn.createStatement();
-	    	File inputFile = new File("Exemple.xml");
-	    	
-	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder dBuilder = null;
-			try {
-				dBuilder = dbFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			}
-	        Document doc = null;
-			try {
-				doc = dBuilder.parse(inputFile);
-			} catch (SAXException | IOException e) {
-				e.printStackTrace();
-			}
+			 Document doc = null;
+			 doc =parser("Exemple.xml", doc);
+
  
 	        Element racine = doc.getDocumentElement();
 
@@ -174,25 +150,7 @@ public class Utilisateur {
 	        racine.appendChild(getUser(doc, idUser, nom, prenom));
 	        
 
-	 	    // writing xml file
-	 	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-	 	    Transformer transformer = null;
-			try {
-				transformer = transformerFactory.newTransformer();
-			} catch (TransformerConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	 	    DOMSource source = new DOMSource(doc);
-	 	     File outputFile = new File("Exemple.xml");
-	 	    StreamResult result = new StreamResult(outputFile );
-	 	    // creating output stream
-	 	    try {
-				transformer.transform(source, result);
-			} catch (TransformerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        save(doc);
 	 	   stmt.close();
 	    }
 		    
@@ -216,33 +174,26 @@ public class Utilisateur {
 	    return node;
 	} 
 	
-	 public static void modifierProfil(int idUser, String nom, String prenom) throws SQLException {
-	    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
-			Statement stmt = conn.createStatement();
-	    	File inputFile = new File("Exemple.xml");
-	    	
-	    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder dBuilder = null;
-			try {
-				dBuilder = dbFactory.newDocumentBuilder();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			}
-	        Document doc = null;
-			try {
-				doc = dBuilder.parse(inputFile);
-			} catch (SAXException | IOException e) {
-				e.printStackTrace();
-			}
+	 public static void modifierProfil(int idUser) throws SQLException {
+		 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+		Statement stmt = conn.createStatement();
+		 Document doc = null;
+		 doc =parser("Exemple.xml", doc);
 
 	        Element racine = doc.getDocumentElement();
 
 	        NodeList racineNoeuds = racine.getChildNodes();
 	 	    int nbRacineNoeuds = racineNoeuds.getLength();
+	 	    Scanner sc = new Scanner(System.in);
+	 	    System.out.println("Modification du Profil: nom? ");
+	 	    String nom = sc.nextLine();
+	 	    System.out.println("Modification du Profil: prénom? ");
+	 	    String prenom = sc.nextLine();
 	 	    
 		    for (int i = 0; i<nbRacineNoeuds; i++) {
 		    	if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
 		    		Element personne = (Element) racineNoeuds.item(i);
+		    		
 		    		Node nomNoeud = personne.getChildNodes().item(0);
 		    		Node prenomNoeud = personne.getChildNodes().item(1);
 		 		     //Affichage d'une personne
@@ -250,29 +201,17 @@ public class Utilisateur {
 		            if (id.compareTo(Integer.toString(idUser))==0){
 				        nomNoeud.setTextContent(nom);
 				        prenomNoeud.setTextContent(prenom);
+				        for(int j=2; j<personne.getChildNodes().getLength(); j++){
+			    			Node noeudEnPlus = personne.getChildNodes().item(j);
+			    			System.out.println("Modification du Profil: " + noeudEnPlus.getNodeName() );
+			    			String rep = sc.nextLine();
+			    			noeudEnPlus.setTextContent(rep);
+			    		}
 		            }
 		    	}
 		    }
 
-	 	    // writing xml file
-	 	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-	 	    Transformer transformer = null;
-			try {
-				transformer = transformerFactory.newTransformer();
-			} catch (TransformerConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	 	    DOMSource source = new DOMSource(doc);
-	 	     File outputFile = new File("Exemple.xml");
-	 	    StreamResult result = new StreamResult(outputFile );
-	 	    // creating output stream
-	 	    try {
-				transformer.transform(source, result);
-			} catch (TransformerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		    save(doc);
 	 	   stmt.close();
 	    }
 	 
@@ -310,21 +249,10 @@ public class Utilisateur {
 	     int i = stmt.executeUpdate(rqt);
 	  
 	     System.out.println("nb mise à jour" + i);
-	     File inputFile = new File("Exemple.xml");
-	    	
-	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	    DocumentBuilder dBuilder = null;
-		try {
-			dBuilder = dbFactory.newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-		Document doc = null;
-		try {
-			doc = dBuilder.parse(inputFile);
-		} catch (SAXException | IOException e) {
-			e.printStackTrace();
-		}
+	     Document doc = null;
+		 doc =parser("Exemple.xml", doc);
+
+
 
         NodeList list= doc.getElementsByTagName("user"); 
         int i1=list.getLength();
@@ -340,7 +268,83 @@ public class Utilisateur {
           } 
        } 
 
-	 	    // writing xml file
+        save(doc);
+	 	stmt.close();
+	 	commit();
+	 }
+
+	 
+	 public static void ajouterChamp(String champ, int idUser, String content) throws SQLException {
+		 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+		 Statement stmt = conn.createStatement();
+		 Document doc = null;
+		 doc =parser("Exemple.xml", doc);
+
+
+
+	        Element racine = doc.getDocumentElement();
+
+	        NodeList racineNoeuds = racine.getChildNodes();
+	 	    int nbRacineNoeuds = racineNoeuds.getLength();
+	 	    
+		    for (int i = 0; i<nbRacineNoeuds; i++) {
+		    	if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+		    		Element personne = (Element) racineNoeuds.item(i);
+		    		//Affichage d'une personne
+		            String id = personne.getAttribute("id");
+		            if (id.compareTo(Integer.toString(idUser))==0){
+		            	//personne.appendChild(ajoutDansUser(doc,champ,content));
+		            	personne.appendChild(ajoutDansUserElements(doc,champ,content));
+		            }
+	        
+		    	}
+		    }
+		        
+		    save(doc);
+	 	   stmt.close();
+	    }
+	 
+		// utility method to create text node
+    	private static Node ajoutDansUserElements(Document doc, String champ, String content) {
+    	    Element node = doc.createElement(champ);
+    	    node.appendChild(doc.createTextNode(content));
+    	    return node;
+    	} 
+    	
+   	 public static void supprimerChamp(String champ, int idUser) throws SQLException {
+   		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
+		Statement stmt = conn.createStatement();	
+		Document doc = null;
+		 doc =parser("Exemple.xml", doc);
+
+
+		 Element racine = doc.getDocumentElement();
+
+	        NodeList racineNoeuds = racine.getChildNodes();
+	 	    int nbRacineNoeuds = racineNoeuds.getLength();
+	 	    
+		    for (int i = 0; i<nbRacineNoeuds; i++) {
+		    	if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+		    		Element personne = (Element) racineNoeuds.item(i);
+		    		//Affichage d'une personne
+		            String id = personne.getAttribute("id");
+		            if (id.compareTo(Integer.toString(idUser))==0){
+		            	NodeList champElements =doc.getElementsByTagName(champ);
+		            	Node champElt = champElements.item(0);
+		            	personne.removeChild(champElt);
+		            	
+		            }
+        	 
+             
+          } 
+       } 
+
+        save(doc);
+	 	   stmt.close();
+	 	  commit();
+	    }
+   	 public static void save(Document doc){
+   	// writing xml file
 	 	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	 	    Transformer transformer = null;
 			try {
@@ -358,11 +362,29 @@ public class Utilisateur {
 			} catch (TransformerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-	 	   stmt.close();
-	 	  commit();
-	    }
-		    
+			}	 
+   	 }
+   	 
+   	public static Document parser(String file, Document doc) throws SQLException{
+   		
+    	File inputFile = new File(file);
+    	
+    	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = null;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			doc = dBuilder.parse(inputFile);
+		} catch (SAXException | IOException e) {
+			e.printStackTrace();
+		}
+		return doc;
+   	}
+	
 }	
 
 

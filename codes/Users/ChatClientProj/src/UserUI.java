@@ -119,8 +119,8 @@ public class UserUI {
 		cn.setLayout(new BorderLayout(5, 5));
 		bottom.setLayout(new BorderLayout(5, 5));
 		top.add(new JLabel("Login: "));
-		login.setText("aminca");
-		mdp.setText("toto123");
+		login.setText("charroca");
+		mdp.setText("toto");
 		top.add(login);
 		top.add(new JLabel("Mot de passe: "));
 		top.add(mdp);

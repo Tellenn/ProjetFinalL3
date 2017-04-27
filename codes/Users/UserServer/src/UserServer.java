@@ -1,11 +1,12 @@
-import java.rmi.*;
+import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.*;
-
-
-import oracle.net.aso.a;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+import java.util.Vector;
 
 public class UserServer extends UnicastRemoteObject implements UserServerInt {
 
@@ -31,8 +32,7 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 	}
 
 		public boolean login(UserClientInt a) throws RemoteException, SQLException{	
-		//System.out.println(a.getName() + "  got connected....");	
-		////////////////////////////////////////
+		
          Connection conn;
          Statement stmt;
          ResultSet rset;
@@ -65,7 +65,8 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 		                 System.out.println("Tapez 2 pour modifier votre profil");
 		                 System.out.println("Tapez 3 pour modifier vos données");
 		                 System.out.println("Tapez 4 pour supprimer vos données et votre profil");
-		                 System.out.println("Tapez 'exit' pour quitter");
+		                 System.out.println("Tapez 5 pour ajouter un champ");
+		                 System.out.println("Tapez 6 pour supprimer un champ");
 		                 System.out.println("-----------------------------------------");
 
 		                 System.out.print(">");
@@ -78,11 +79,8 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 					        
 				          	////////////////////////////////////////
 				             case "2":
-				            	 System.out.println("Modification du Profil: nom? ");
-					        	 String nom = sc.nextLine();
-					        	 System.out.println("Modification du Profil: prénom? ");
-					        	 String prenom = sc.nextLine();
-					        	 Utilisateur.modifierProfil(idUser, nom, prenom);
+				            	 
+					        	 Utilisateur.modifierProfil(idUser);
 					        	 System.out.println("Modification du Profil done ");
 					        	 Utilisateur.chargerProfil(idUser);
 					        	 break;
@@ -104,6 +102,21 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 								Utilisateur.supprimerUser(idUser);
 					        	System.out.println("Suppression du Profil done ");
 					        	break;
+					        ////////////////////////////////////////
+							case "5":
+								System.out.println("Quelle est le champ que vous voulez ajouter? ");
+					        	String champ = sc.nextLine();
+					        	System.out.println("et son content? ");
+					        	String content = sc.nextLine();
+								Utilisateur.ajouterChamp(champ, idUser, content);
+					        	System.out.println("ajout du champ done ");
+					        	break;
+						        ////////////////////////////////////////
+							case "6":
+								System.out.println("Quelle est le champ que vous voulez supprimer ");
+								champ = sc.nextLine();
+						        Utilisateur.supprimerChamp(champ, idUser);
+						        break;
 				         }
 			            
 		        	 }
@@ -139,11 +152,11 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 			        	
 			         }
 		
-  	////////////////////////////////////////
-  	a.tell("You have Connected successfully.");
-	///publish(a.getName()+ " has just connected.",idUser);
-  	v.add(a);
-	return true;
+	  	////////////////////////////////////////
+	  	a.tell("You have Connected successfully.");
+		///publish(a.getName()+ " has just connected.",idUser);
+	  	v.add(a);
+		return true;
   	}	
 
 
