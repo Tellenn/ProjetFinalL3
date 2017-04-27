@@ -23,8 +23,9 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
     
 	public boolean sendData(String filename, byte[] data, int len) throws RemoteException{
         try{
-        	File f=new File(filename);
+        	File f=new File("GED/"+filename);
         	f.createNewFile();
+        	
         	FileOutputStream out=new FileOutputStream(f,true);
         	out.write(data,0,len);
         	out.flush();
@@ -32,7 +33,7 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
         	System.out.println("Done writing data...");
         }catch(Exception e){
         	e.printStackTrace();
-        }
+        }  
 		return true;
 	}
 }
