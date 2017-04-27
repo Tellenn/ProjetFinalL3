@@ -17,7 +17,7 @@ DROP TABLE Fichier CASCADE CONSTRAINTS;
 CREATE TABLE Utilisateur
 (
 	idUser 			INTEGER PRIMARY KEY,
-	userName		VARCHAR2(20) NOT NULL,
+	userName		VARCHAR2(20) NOT NULL unique,
 	userPassword	VARCHAR2(20) NOT NULL,
 	CONSTRAINT ck_User_idUser CHECK (idUser>0)
 );
@@ -54,10 +54,7 @@ CREATE TABLE DroitSalons
 --Table Evenement
 CREATE TABLE Evenement
 (
-    idEvenement 	INTEGER PRIMARY KEY,
-    libelle			VARCHAR2(50),
-    dateDebut		DATE,
-    dateFin			DATE
+    idEvenement 	INTEGER PRIMARY KEY
 );
 --Table Participant
 CREATE TABLE Participant
@@ -70,17 +67,12 @@ CREATE TABLE Participant
 );
 --Table Dossier
 CREATE TABLE Dossier(
-    idDossier		INTEGER PRIMARY KEY,
-	nomDossier VARCHAR2(50)
+    idDossier		INTEGER PRIMARY KEY
 );
 --Table Fichier
 CREATE TABLE Fichier
 (
-    idFichier 		INTEGER PRIMARY KEY,
-	nomFichier	VARCHAR2(50),
-	proprio		INTEGER,
-	description VARCHAR2(200),
-	dateDepot	date
+    idFichier 		INTEGER PRIMARY KEY
 );
 --Table DossierDansDossier
 CREATE TABLE DossierDansDossier

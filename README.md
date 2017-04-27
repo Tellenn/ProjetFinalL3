@@ -4,11 +4,6 @@
 
 [La liste des choses à faire pendant les vacances](https://github.com/Tellenn/ProjetFinalL3#holiday-work-)
 
-Concernant les XML : Il faudra parser les schémas pour ajouter un element de type :
-```{xml}
- <xs:element name="nom" type="xs:string"/>
-```
-à la fin du document avant de fermer le schéma
 
 # Holiday work : 
 
@@ -18,19 +13,19 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - Base de donnée :
 	- ~~Lister les requètes de consultation et modification des bases~~ _Kyllian_
 - XML : 
-	- Faire un parser qui parcours les trois documents qui existent _Ibrahima à commencer_
+	- ~~Faire un parser qui parcours les trois documents qui existent~~ _Ibrahima_
 - Specs : 
-	- Faire les specs pour chaque fonction qui existe dans des fichiers
-		- Calendrier : fait (_Quentin_), à voir pour compléter avec les post/pré-conditions
-		- GED : commencé (_Quentin_), à compléter...
-		- UserManagement : commencé (_Quentin_), à compléter...
-		- Chat : commencé (_Quentin_), à compléter...
+	- ~~Faire les specs pour chaque fonction qui existe dans des fichiers~~
+		- ~~Calendrier~~ _Quentin_
+		- ~~GED : commencé~~ _Quentin_
+		- ~~UserManagement~~ _Quentin_
+		- ~~Chat~~ _Quentin_
 
 
 # TODO LIST :
 
 - Gestion de projet :
-	- Recherches sur RMI _Carine_
+	- ~~Recherches sur RMI~~ _Carine_
 	- ~~Cahier des Charges~~ _Antoine_
 	- ~~Planning prévisionnel~~ _Quentin_
 	- ~~Représentation des classes~~ _Kyllian a fait un travail nul_
@@ -45,14 +40,18 @@ Concernant les XML : Il faudra parser les schémas pour ajouter un element de ty
 - Gestion utilisateur :
 	- ~~BD~~ _Ibrahima_
 	- ~~XML~~ _Ibrahima_
-	- CLIENT _Carine_
-	- SERVEUR _Carine_
+	- ~~CLIENT~~ _Carine championne_
+	- ~~SERVEUR~~ _Carine championne_
 	
 - Chat :
 	- ~~BD~~ _Kyllian_
 	- ~~XML~~ _Kyllian_
 	- CLIENT _Antoine_
-	- SERVEUR
+		- Salons
+		- Messagerie privée
+	- SERVEUR _Antoine_
+		- Salons
+		- Messagerie privée
 	
 - Calendrier :
 	- ~~BD~~ _Quentin_
