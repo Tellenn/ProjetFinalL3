@@ -2,7 +2,9 @@ package chat;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,6 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class ConversationPrivee {
@@ -22,9 +25,9 @@ public class ConversationPrivee {
 	private String nomFichier;
 	
 	public ConversationPrivee(int id1 , int id2) {
-			System.out.println("Begin");
-			nomFichier = id1 + "-" + id2 + ".xml";
-			System.out.println("111111");		
+			System.out.println("Begin conversation privée");
+			if(id1<=id2)nomFichier = id1 + "-" + id2 + ".xml";	
+			else nomFichier = id2 + "-" + id1 + ".xml";
 		        try {
 		            // analyse du document
 		            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -165,5 +168,43 @@ public class ConversationPrivee {
 			conversation += messages.item(i).getTextContent()+"\n" ;
 		}		
 		return conversation;
+	}
+	
+	// on retourne un treemap, au moins le développeur aura le choix de faire ce qu'il veut avec toutes les infos
+	public TreeMap<String, String> getMessage(int i){
+		TreeMap<String, String> t = new TreeMap<String, String>();
+		NodeList messages = doc.getElementsByTagName("message");
+		Element message = (Element) messages.item(i);
+			
+		t.put("id", message.getAttribute("id"));
+		t.put("emetteur", message.getAttribute("emetteur"));
+		t.put("date", message.getAttribute("date"));
+		t.put("heure", message.getAttribute("heure"));
+		t.put("text", message.getTextContent());
+		return t;
+	}
+	
+	public List<TreeMap<String, String>> getMessages(){
+		List<TreeMap<String, String>> tt = new ArrayList<TreeMap<String, String>>();
+		TreeMap<String, String> t;
+		NodeList messages = doc.getElementsByTagName("message");
+		
+		for (int i =0; i< messages.getLength(); i++){
+			t = new TreeMap<String, String>();
+			Element message = (Element) messages.item(i);			
+			t.put("id", message.getAttribute("id"));
+			t.put("emetteur", message.getAttribute("emetteur"));
+			t.put("date", message.getAttribute("date"));
+			t.put("heure", message.getAttribute("heure"));
+			t.put("text", message.getTextContent());
+			tt.add(t);
+		}
+		return tt;
+	}
+	
+	// on retourne un treemap, au moins le développeur aura le choix de faire ce qu'il veut avec toutes les infos
+	public TreeMap<String, String> getLastMessage(){
+		NodeList messages = doc.getElementsByTagName("message");		
+		return new TreeMap<String, String>(getMessage(messages.getLength()));
 	}
 }

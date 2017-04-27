@@ -12,10 +12,10 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 
 	private TreeMap<Integer, ChatClientInt> p = new TreeMap<Integer, ChatClientInt>();
 
-	private static final String dbUrl = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-	private static final String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
-	private static final String login = "charroan";
-	private static final String mdp = "Aclf2016";
+	private static final String dbUrl 		= "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
+	private static final String jdbcDriver 	= "oracle.jdbc.driver.OracleDriver";
+	private static final String login 		= "charroan";
+	private static final String mdp 		= "Aclf2016";
 	private Statement stmt;
 
 	public ChatServer() throws RemoteException {
@@ -43,10 +43,10 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 			}
 			// Vérifie les données de connexion
 			rset = stmt.executeQuery("Select idUser from Utilisateur where username='" + login + "' AND userPassword='"+mdp +"'");
-			System.out.println("C");
 			while (rset.next()) {
 				System.out.println("Connexion accepté pour "+rset.getString(1)+ "id "+a.getId());
-				a.tell("Connexion acceptée.");
+				a.tell("Connexion acceptée. ");
+				a.setId(Integer.valueOf(rset.getString(1)));
 				p.put(a.getId(), a);
 				return Integer.valueOf(rset.getString(1));
 			}
@@ -79,27 +79,18 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 	// Le serveur recoit un message d'un client et le transmet à id2
 	public void publishPrivate(String s, int id1, int id2 ) throws RemoteException {
 		// *** On envoie à l'utilisateur conecté le message	
-		System.out.println("toto1");
-		//System.out.println(p.get(id1).getName());
-		try {
-			System.out.println("toto");
-			p.get(id1).tell(s);				
-		}catch (Exception e) {
-			// si l'utilisateur n'est pas connecté
-			System.out.println("bugg");
-		}	
-		try {
-			System.out.println("toto2");
-			p.get(id2).tell(s);				
-		}catch (Exception e) {
-			// si l'utilisateur n'est pas connecté
-			System.out.println("bugg2");
-		}
+		//System.out.println(p.get(id1).getName());			
+		
+		System.out.println("id1:"+id1+" id2:"+id2 );
 		// *** On met à jour la conversation
 		ConversationPrivee c = new ConversationPrivee(id1,id2);
-		System.out.println("koko");
 		c.ajouterMessage(id1, s);
-		System.out.println("lolo");
+		try {
+			p.get(id2).tell(c.getLastMessage());				
+		}catch (Exception e) {
+			// si l'utilisateur n'est pas connecté
+			System.out.println(e);
+		}
 	}
 
 	public TreeMap<Integer, ChatClientInt> getConnected() throws RemoteException {
@@ -110,10 +101,22 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		return (ChatClientInt)p.get(id);
 	}
 	
+	public void afficherIdClients() throws RemoteException{
+		for (ChatClientInt item : p.values()) {
+			try {		
+				System.out.print(item.getId());
+			} catch (Exception e) {
+				// problem with the client not connected.
+				// Better to remove it
+			}
+		}
+	}
+	
 	public void uploadConversation(ChatClientInt a, int idPersonne2)throws RemoteException{
 		ConversationPrivee c = new ConversationPrivee(a.getId(),idPersonne2);
-		System.out.print(c.toString());
-		a.tell(c.toString());
+		List<TreeMap<String, String>> tt =new ArrayList<TreeMap<String, String>>(c.getMessages());
+
+		for(int i = 0; i<tt.size(); i++)a.tell(tt.get(i));
 	}
 
 	

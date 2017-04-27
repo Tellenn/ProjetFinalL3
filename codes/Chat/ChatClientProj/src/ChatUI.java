@@ -12,15 +12,14 @@ import java.util.*;
 public class ChatUI {
 	private ChatClient client;
 	private ChatServerInt server;
-	private static final String ip = "152.77.82.252";
-	// private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer,
-	// Integer>();
+	private static final String ip = "152.77.82.208";
+	private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer,Integer>();
 
 	public void doConnect() {
 		if (connect.getText().equals("Connexion")) {
 			if (login.getText().length() < 2) {
 				// il faut que le nom ait plus de 2 caractères
-				JOptionPane.showMessageDialog(frame, "Format du mot de login impossible");
+				JOptionPane.showMessageDialog(frame, "Format du login impossible");
 				return;
 			}
 			if (mdp.getText().length() < 2) {
@@ -36,12 +35,12 @@ public class ChatUI {
 				int id = server.login(client, login.getText(), mdp.getText());
 				if (id != -1) {
 					updateUsers(server.getConnected());
+					System.out.println("id ======="+id);
 					client.setId(id);
 					connect.setText("Déconnexion");
 				} else {
 					System.out.println("else");
-					JOptionPane.showMessageDialog(frame,
-							"Identification impossible, Veuillez écrire un login ou mot de passe correct");
+					JOptionPane.showMessageDialog(frame,"Identification impossible, Veuillez écrire un login ou mot de passe correct");
 					return;
 				}
 			} catch (Exception e) {
@@ -65,26 +64,24 @@ public class ChatUI {
 		}
 		
 		String st = tf.getText();
-		st = "[" + login.getText() + "] " + st;
+		//st = "[" + login.getText() + "] " + st;
 
 		// Remove if you are going to implement for remote invocation
-		try {
-			System.out.println("11");
 			if(client.getIdConversationPrivee()!=-1){
-				System.out.println("22");
-				server.publishPrivate(st, client.getId(), client.getIdConversationPrivee());
+				try {server.publishPrivate(st, client.getId(), client.getIdConversationPrivee());
+				} catch (Exception e) {System.out.println(e);
+				}
 			}else{
 				if(client.getNumSalon()!=-1){
-					server.publish(st, client.getId());
+					try {server.publish(st, client.getId());
+					} catch (Exception e) {e.printStackTrace();}
 				}else{
-					System.out.println("333");
+					System.out.println("[System] ERROR: Pas normal d'être là");
 					// erreur
 				}
 			}		
 			tf.setText("");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	public void writeMsg(String st) {
@@ -97,7 +94,7 @@ public class ChatUI {
 			for (ChatClientInt item : v.values()) {
 				try {
 					listModel.addElement(item.getName());
-					// placesDansListe.put(i, tmp.getId());
+					 placesDansListe.put(listModel.getSize()-1, item.getId());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -166,11 +163,13 @@ public class ChatUI {
 		lst.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent evt) {
 				try {
-					bt.setEnabled(true);
-					client.setIdConversationPrivee(server.getClient(evt.getFirstIndex()).getId());
+					bt.setEnabled(true);				
+					client.setIdConversationPrivee(server.getClient(placesDansListe.get(evt.getFirstIndex())).getId());
+					
 					System.out.println("Chargement de la conversation de " + client.getName() + " id " + client.getId()
-							+ " avec " + server.getClient(evt.getFirstIndex()).getName() + " id "
-							+ server.getClient(evt.getFirstIndex()).getId());
+							+ " avec " + server.getClient(placesDansListe.get(evt.getFirstIndex())).getName() + " id "
+							+ server.getClient(placesDansListe.get(evt.getFirstIndex())).getId());
+					
 					tx.setText("");//reset
 					uploadText(client.getIdConversationPrivee());
 					// tx.setText("");//reset
