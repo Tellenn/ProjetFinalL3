@@ -20,11 +20,11 @@ INSERT INTO Relation VALUES(5,1);
 INSERT INTO Relation VALUES(5,3);
 
 --Salons(idSalons)
-INSERT INTO Salon VALUES(1);
-INSERT INTO Salon VALUES(2);
-INSERT INTO Salon VALUES(3);
-INSERT INTO Salon VALUES(4);
-INSERT INTO Salon VALUES(5);
+INSERT INTO Salon VALUES(1, "Comptabilité");
+INSERT INTO Salon VALUES(2, "RH");
+INSERT INTO Salon VALUES(3, "Direction");
+INSERT INTO Salon VALUES(4, "Chaine de montage 1");
+INSERT INTO Salon VALUES(5, "Chaine de montage 2");
 
 --DroitSalons(idSalons,idUser)
 INSERT INTO DroitSalon VALUES(1,1);
