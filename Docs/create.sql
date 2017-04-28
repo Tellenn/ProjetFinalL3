@@ -30,14 +30,7 @@ CREATE TABLE Admin
 );
 --Table Relation
 CREATE TABLE Relation
-(CREATE TABLE DroitSalon
 (
-	idSalon 		INTEGER,
-    idUser 			INTEGER,
-    CONSTRAINT pk_DroitSalon PRIMARY KEY (idSalon, idUser),
-    CONSTRAINT fk_DroitSalon_idSalon FOREIGN KEY (idSalon) REFERENCES salon(idSalon),
-    CONSTRAINT fk_DroitSalon_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
-);
     idUser1 		INTEGER,
     idUser2 		INTEGER,
     CONSTRAINT pk_Relation PRIMARY KEY(iduser1,iduser2),
@@ -52,7 +45,7 @@ CREATE TABLE Salon
 --Table DroitSalons
 CREATE TABLE DroitSalon
 (
-	idSalon 		INTEGER,
+    idSalon 			INTEGER,
     idUser 			INTEGER,
     CONSTRAINT pk_DroitSalon PRIMARY KEY (idSalon, idUser),
     CONSTRAINT fk_DroitSalon_idSalon FOREIGN KEY (idSalon) REFERENCES salon(idSalon),
