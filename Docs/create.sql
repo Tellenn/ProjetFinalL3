@@ -40,7 +40,8 @@ CREATE TABLE Relation
 --Table Salons
 CREATE TABLE Salon
 (
-    idSalon 		INTEGER PRIMARY KEY
+    idSalon 		INTEGER PRIMARY KEY,
+	name		VARCHAR2(20) NOT NULL
 );
 --Table DroitSalons
 CREATE TABLE DroitSalon
