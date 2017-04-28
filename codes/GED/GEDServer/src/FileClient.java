@@ -23,7 +23,7 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
     
 	public boolean receiveData(String filename, byte[] data, int len) throws RemoteException{
         try{
-        	//A modifier pour pouvoir changer le lieu d'écriture
+        	//A modifier pour pouvoir changer le lieu d'ï¿½criture
         	File f=new File("GED/"+filename);
         	f.createNewFile();
         	
@@ -39,8 +39,21 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
 	}
 
 	@Override
-	public boolean sendData() throws RemoteException {
-		// TODO Auto-generated method stub
+
+	public boolean sendData(FileServerInt server, String path, String file) throws RemoteException {
+		try{
+			 File f1=new File(path+file);			 
+			 FileInputStream in=new FileInputStream(f1);			 				 
+			 byte [] mydata=new byte[1024*1024];						
+			 int mylen=in.read(mydata);
+			 while(mylen>0){
+				 server.receiveData(mydata, mylen);	 
+				 mylen=in.read(mydata);	
+			 }
+		 }catch(Exception e){
+			 e.printStackTrace();
+			 
+		 }
 		return false;
 	}
 }

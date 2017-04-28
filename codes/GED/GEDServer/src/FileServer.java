@@ -107,19 +107,16 @@ public class FileServer  extends UnicastRemoteObject implements FileServerInt {
 		return false;
 	}
 
-	@Override
-	public boolean receiveData(String filename, byte[] data, int len) throws RemoteException {
-		//this.AjoutDoc(file,"RH");
-		 try{
-	        	//A modifier pour pouvoir changer le lieu d'écriture
-	        	File f=new File("GED/"+filename);
-	        	f.createNewFile();
-	        	
-	        	FileOutputStream out=new FileOutputStream(f,true);
-	        	out.write(data,0,len);
-	        	out.flush();
-	        	out.close();
-	        	System.out.println("Done writing data...");
+	public boolean receiveData(byte[] data, int len) throws RemoteException {
+		try{
+			File f=new File("GED/"+file);
+		    f.createNewFile();
+		    FileOutputStream out=new FileOutputStream(f,true);
+	        out.write(data,0,len);
+	        out.flush();
+	        out.close();
+	        System.out.println("Done writing data...");
+	        //this.AjoutDoc(file,"RH");
 	        }catch(Exception e){
 	        	e.printStackTrace();
 	        }  
