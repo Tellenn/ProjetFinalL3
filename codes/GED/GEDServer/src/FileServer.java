@@ -41,18 +41,7 @@ public class FileServer  extends UnicastRemoteObject implements FileServerInt {
 		this.path=path;
 	}
 	
-	public boolean login(FileClientInt c, int order) throws RemoteException{
-		switch(order){
-		case 1 :
-			try{
-				sendData(c);
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		return true;
-	}
+
     public static void commit() throws SQLException {
         
     	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "perrink", "Kalayoda1");
@@ -90,14 +79,14 @@ public class FileServer  extends UnicastRemoteObject implements FileServerInt {
 	}
 
 	@Override
-	public boolean sendData(FileClientInt c) throws RemoteException {
+	public boolean sendData(FileClientInt c,String cible) throws RemoteException {
 		try{
 			 File f1=new File(path+file);			 
 			 FileInputStream in=new FileInputStream(f1);			 				 
 			 byte [] mydata=new byte[1024*1024];						
 			 int mylen=in.read(mydata);
 			 while(mylen>0){
-				 c.receiveData(f1.getName(), mydata, mylen);	 
+				 c.receiveData(f1.getName(), mydata, mylen,cible);	 
 				 mylen=in.read(mydata);	
 			 }
 		 }catch(Exception e){

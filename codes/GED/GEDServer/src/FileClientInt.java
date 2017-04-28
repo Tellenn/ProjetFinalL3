@@ -3,7 +3,7 @@ import java.rmi.RemoteException;
  
 public interface FileClientInt extends Remote{
  
-	public boolean receiveData(String filename, byte[] data, int len) throws RemoteException;
+	public boolean receiveData(String filename, byte[] data, int len, String cible) throws RemoteException;
 	
 	public boolean sendData(FileServerInt server, String path, String file) throws RemoteException;
 	
