@@ -38,12 +38,12 @@ CREATE TABLE Relation
     CONSTRAINT fk_Relation_idUser2 FOREIGN KEY (idUser2) REFERENCES Utilisateur(idUser)
 );
 --Table Salons
-CREATE TABLE Salons
+CREATE TABLE Salon
 (
     idSalon 		INTEGER PRIMARY KEY
 );
 --Table DroitSalons
-CREATE TABLE DroitSalons
+CREATE TABLE DroitSalon
 (
 	idSalon 		INTEGER,
     idUser 			INTEGER,
