@@ -47,9 +47,9 @@ CREATE TABLE DroitSalon
 (
 	idSalon 		INTEGER,
     idUser 			INTEGER,
-    CONSTRAINT pk_DroitSalons PRIMARY KEY (idSalon, idUser),
-    CONSTRAINT fk_DroitSalons_idSalon FOREIGN KEY (idSalon) REFERENCES salons(idSalon),
-    CONSTRAINT fk_DroitSalons_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+    CONSTRAINT pk_DroitSalon PRIMARY KEY (idSalon, idUser),
+    CONSTRAINT fk_DroitSalon_idSalon FOREIGN KEY (idSalon) REFERENCES salons(idSalon),
+    CONSTRAINT fk_DroitSalon_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
 );
 --Table Evenement
 CREATE TABLE Evenement
