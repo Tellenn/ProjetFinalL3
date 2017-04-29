@@ -1,4 +1,5 @@
 import java.rmi.RemoteException;
+import user.Utilisateur;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class UserServer extends UnicastRemoteObject implements UserServerInt {
-
+	Utilisateur user = new Utilisateur();
 	private Vector v = new Vector();
 	private static final String dbUrl = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
 	private static final String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
@@ -31,142 +32,123 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 
 	}
 
-		public boolean login(UserClientInt a) throws RemoteException, SQLException{	
+		public int login(UserClientInt a, String login, String mdp) throws RemoteException{	
+			
+			ResultSet rset;
+			try {
+				rset = stmt.executeQuery("Select idUser from Utilisateur where username='" + login + "' AND userPassword='"+mdp +"'");
+				while (rset.next()) {
+					a.tell("Connexion acceptée. ");
+					a.setId(Integer.valueOf(rset.getString(1)));
+					System.out.println("Connexion accepté pour "+login+ " id: "+a.getId()+ " password : "+ mdp);
+					return Integer.valueOf(rset.getString(1));
+				}
+				stmt.close();
+				
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+				
+		  	a.tell("You have Connected successfully.");
+			///publish(a.getName()+ " has just connected.",idUser);
+		  	v.add(a);
+			return -1;
+		}	
 		
-         Connection conn;
-         Statement stmt;
-         ResultSet rset;
-         int resultat = 1;
-         String Rep ="";
-         System.out.println("    ******************************");
-         System.out.println("    *  Gestion des utilisateurs  *");
-         System.out.println("    ******************************");
-         System.out.println("------------------ MENU -----------------");
-         System.out.println("Tapez 1 pour se connecter");
-         System.out.println("Tapez 2 pour s'ajouter dans la base de données");
-         System.out.println("-----------------------------------------");
-         Scanner sc = new Scanner(System.in);
-         Rep = sc.nextLine();
-
-         switch (Rep) {
-         	case "1":
-         		
-         		int idUser = Utilisateur.rechercheUtilisateur(a.getName());
-		        if (idUser != 0){
-		        	 System.out.println("Profil existe ");
-		        	 while(Rep.compareTo("exit") != 0){
-
-		                 System.out.println("    ******************************");
-		                 System.out.println("    *  Gestion des utilisateurs  *");
-		                 System.out.println("    ******************************");
-
-		                 System.out.println("------------------ MENU -----------------");
-		                 System.out.println("Tapez 1 pour charger votre profil");
-		                 System.out.println("Tapez 2 pour modifier votre profil");
-		                 System.out.println("Tapez 3 pour modifier vos données");
-		                 System.out.println("Tapez 4 pour supprimer vos données et votre profil");
-		                 System.out.println("Tapez 5 pour ajouter un champ");
-		                 System.out.println("Tapez 6 pour supprimer un champ");
-		                 System.out.println("-----------------------------------------");
-
-		                 System.out.print(">");
-		                 Rep = sc.nextLine();
-
-			             switch (Rep) {
-			                 case "1":
-						         Utilisateur.chargerProfil(idUser);
-						         break;					         
-					        
-				          	////////////////////////////////////////
-				             case "2":
-				            	 
-					        	 Utilisateur.modifierProfil(idUser);
-					        	 System.out.println("Modification du Profil done ");
-					        	 Utilisateur.chargerProfil(idUser);
-					        	 break;
-					        	 
-							////////////////////////////////////////
-							case "3":
-								System.out.println("Modification des données: login? ");
-					        	String userName = sc.nextLine();
-					        	System.out.println("Modification des données: password? ");
-					        	String mdp = sc.nextLine();
-					        	Utilisateur.modifierUsername(idUser, userName);
-					        	System.out.println("Modification de login done ");
-					        	Utilisateur.modifierPassword(idUser, mdp);
-					        	System.out.println("Modification de password done ");
-								break;
-								
-							////////////////////////////////////////
-							case "4":
-								Utilisateur.supprimerUser(idUser);
-					        	System.out.println("Suppression du Profil done ");
-					        	break;
-					        ////////////////////////////////////////
-							case "5":
-								System.out.println("Quelle est le champ que vous voulez ajouter? ");
-					        	String champ = sc.nextLine();
-					        	System.out.println("et son content? ");
-					        	String content = sc.nextLine();
-								Utilisateur.ajouterChamp(champ, idUser, content);
-					        	System.out.println("ajout du champ done ");
-					        	break;
-						        ////////////////////////////////////////
-							case "6":
-								System.out.println("Quelle est le champ que vous voulez supprimer ");
-								champ = sc.nextLine();
-						        Utilisateur.supprimerChamp(champ, idUser);
-						        break;
-				         }
-			            
-		        	 }
-		        }else{
-			       System.out.println("Vous n'avez pas de profil.");		        	 
-		        }
-			             //////////////////////////////////////////////////////////////////////////////////////
-		             case "2":
-	                     
-			        	 System.out.println("Vous n'avez pas de profil, voulez vous créer un? (O ou N)");
-			        	
-			        	  Rep = sc.nextLine();
-				        	 if (Rep.compareTo("O") == 0){
-				        		 System.out.println("Veuillez choisir un username");
-				        		 String username = sc.nextLine();
-				        		 System.out.println("Veuillez choisir un mot de passe");
-				        		 String password = sc.nextLine();
-				        		 idUser = Utilisateur.calcul_idUser();
-				        		 Utilisateur.ajouterUtilisateur(idUser, username, password);
-				        		 
-				        		 System.out.println("Veuillez entrer votre nom");
-				        		 String nom = sc.nextLine();
-				        		 System.out.println("Veuillez entrer votre prénom");
-				        		 String prenom = sc.nextLine();	        		 
-				        		 Utilisateur.ajouterProfil(idUser, nom, prenom);
-				        		 Utilisateur.chargerProfil(idUser);
-				        		 
-			        	 }else{
-			        		 System.out.println("Connexion impossible");
-			        		 return false;
-			        	 }
-			        	break;
-			        	
-			         }
+		public void ajoutDeRelation(UserClientInt a, int idUser2) throws RemoteException{	
+			int idUser1 = user.rechercheUtilisateur(a.getName());
+			System.out.println("idUser1: " +idUser1 );
+			Utilisateur user = new Utilisateur();
+			user.ajouterRelation(idUser1, idUser2);
+		}
 		
-	  	////////////////////////////////////////
-	  	a.tell("You have Connected successfully.");
-		///publish(a.getName()+ " has just connected.",idUser);
-	  	v.add(a);
-		return true;
-  	}	
-
-
-	private void updateXML(String s) {
-		// TODO Auto-generated method stub
+		public void suppressiontDeRelation(UserClientInt a, int idUser2) throws RemoteException{	
+			int idUser1 = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.supprimerRelation(idUser1, idUser2);
+		}
 		
-	}
+		public void chargementProfil(UserClientInt a) throws RemoteException{	
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.chargerProfil(idUser);
+		}
+		
+		public void modificationProfil(UserClientInt a) throws RemoteException{	
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.modifierProfil(idUser);
+		}
+		
+		public void modificationProfilParChamp(UserClientInt a,String champ, String content) throws RemoteException{	
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.modifierProfilParChamp(idUser, champ, content);
+		}
+		
+		public void modificationUsername(UserClientInt a,String userName) throws RemoteException{	
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.modifierUsername(idUser, userName);
+		}
+		
+		public void modificationPassword(UserClientInt a,String password) throws RemoteException{	
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.modifierPassword(idUser, password);
+		}
+		
+		public void ajoutUser(UserClientInt a, String userName, String userPassword) throws RemoteException{
+			Utilisateur user = new Utilisateur();
+			int idUser = user.calcul_idUser();
+			user.ajouterUtilisateur(idUser, userName, userPassword);
+			a.setId(idUser);
+			a.setName(userName);
+			v.add(a);
+		}
+		
+		public void suppressionUser(UserClientInt a) throws RemoteException{	
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.supprimerUser(idUser);
+			v.remove(a);
+		}
+		
+		public void ajoutChamp(String champ) throws RemoteException{
+			Utilisateur user = new Utilisateur();
+			user.ajouterChamp(champ);
+		}
+		
+		public void ajoutChamp(UserClientInt a, String champ, String content) throws RemoteException{
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.ajouterChamp(champ, idUser, content);
+		}
+		
+		public void suppressionChamp(String champ) throws RemoteException{
+			Utilisateur user = new Utilisateur();
+			user.supprimerChamp(champ);
+		}
+		
+		public void suppressionChamp(UserClientInt a, String champ) throws RemoteException{
+			int idUser = user.rechercheUtilisateur(a.getName());
+			Utilisateur user = new Utilisateur();
+			user.supprimerChamp(champ, idUser);
+		}
+
+
 
 	public Vector getConnected() throws RemoteException {
 		return v;
 	}
+
+	@Override
+	public void publish(String s, int id) throws RemoteException {
+		
+		
+	}
+
 }
 	
