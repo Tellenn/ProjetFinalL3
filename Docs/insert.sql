@@ -41,7 +41,7 @@ INSERT INTO DroitSalon VALUES(5,1);
 
 --Evenement(idEvenement)
 
-INSERT INTO Evenement VALUES(1, 5, 'Reunion du conseil d adrministration', '27-APR-17', '27-APR-17');
+INSERT INTO Evenement VALUES(1, 5, 'Reunion du conseil d administration', '27-APR-17', '27-APR-17');
 INSERT INTO Evenement VALUES(2, 5, 'Reunion audit projet KICQA', '28-APR-17', '28-APR-17');
 INSERT INTO Evenement VALUES(3, 5, 'Demo projet KICQA', '04-MAY-17', '04-MAY-17');
 INSERT INTO Evenement VALUES(4, 5, 'Recette projet KICQA', '05-MAY-17', '05-MAY-17');
