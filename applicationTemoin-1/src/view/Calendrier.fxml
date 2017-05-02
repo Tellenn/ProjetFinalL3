@@ -23,7 +23,7 @@
                   <Font name="TeXGyreTermesMath-Regular" size="24.0" />
                </font>
             </Text>
-            <Button contentDisplay="CENTER" layoutX="254.0" layoutY="68.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
+            <Button contentDisplay="CENTER" layoutX="254.0" layoutY="68.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
                <font>
                   <Font size="14.0" />
                </font>
@@ -31,7 +31,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button contentDisplay="CENTER" layoutX="131.0" layoutY="68.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CALENDRIER">
+            <Button contentDisplay="CENTER" layoutX="131.0" layoutY="68.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 15px 15px 0px 0px;" text="CALENDRIER">
                <font>
                   <Font size="14.0" />
                </font>
