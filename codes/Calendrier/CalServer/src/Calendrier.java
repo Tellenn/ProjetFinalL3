@@ -38,14 +38,17 @@ public class Calendrier {
 		}
 	}
 	
+	/**
+	* Affiche les événements en fonction de l'idUser
+	* @param idUser
+	**/
 	public static void afficher(int idUser) throws SQLException{
 		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "blondelq", "634714qB");
 	    Statement stmt = conn.createStatement();
 		try {
 			
-	        //ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, to_date(dateDebut, 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'), to_date(dateFin, 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American') FROM Evenement");
-	        ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, dateDebut, dateFin FROM Evenement WHERE idUser = " + idUser + "ORDER BY idEvenement");
-	        while(rs.next()){
+	        ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, dateDebut, dateFin FROM Evenement WHERE idUser = " + idUser + " OR idEvenement IN (SELECT idEvenement FROM Participant WHERE idUser = " + idUser + ")");
+			while(rs.next()){
 	            System.out.print("id : "+rs.getInt(1) + " libelle : "+rs.getString(2) + " dateD : "+rs.getString(3) + " dateF : "+rs.getString(4) + "\n");
 	        }
 	        stmt.close();
