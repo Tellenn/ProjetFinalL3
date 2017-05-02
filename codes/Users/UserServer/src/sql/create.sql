@@ -24,8 +24,8 @@ CREATE TABLE Utilisateur
 --Table Admin
 CREATE TABLE Admin
 (
-	idAdmin 		INTEGER PRIMARY KEY,
-   	CONSTRAINT ck_Admin_idAdmin CHECK (idAdmin>0),
+	idUser 		INTEGER PRIMARY KEY,
+   	CONSTRAINT ck_Admin_idAdmin CHECK (idUser>0),
    	CONSTRAINT fk_Admin_idAdmin FOREIGN KEY (idAdmin) REFERENCES Utilisateur(idUser)
 );
 --Table Relation
