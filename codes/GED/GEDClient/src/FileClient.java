@@ -16,11 +16,22 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
 		super();
 		name=n;
 	}
- 
+	/**
+	 * Permet de retrouver le nom du client
+	 * @return le nom du client
+	 */
 	public String getName() throws RemoteException{
 		return name;
 	}
     
+	/**
+	 * Permet au client de recevoir des données
+	 * @param filename nom du fichier transferé
+	 * @param data un buffer
+	 * @param len la taille du buffer
+	 * @param cible le chemin où le fichier sera
+	 * @return true si le fichier a bien été transféré
+	 */
 	public boolean receiveData(String filename, byte[] data, int len, String cible) throws RemoteException{
         try{
         	//A modifier pour pouvoir changer le lieu d'�criture
@@ -38,8 +49,13 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
 		return true;
 	}
 
-	@Override
-
+	/**
+	 * Permet au clien d'envoyer un fichier
+	 * @param server l'interface du serveur au quel on va envoyer le fichier
+	 * @param path le chemin du fichier à transferer
+	 * @param file nom du fichier a transfer
+	 * @return true si le fichier à bien été transféré
+	 */
 	public boolean sendData(FileServerInt server, String path, String file) throws RemoteException {
 		try{
 			 File f1=new File(path+file);			 
