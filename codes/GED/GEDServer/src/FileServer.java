@@ -54,24 +54,15 @@ public class FileServer  extends UnicastRemoteObject implements FileServerInt {
 	public boolean AjoutDoc(String nomDoc, String chemin) throws SQLException{
 		boolean bool = true;
 		ResultSet res;
-		System.out.println("Requète 1 début");
 		res=stmt.executeQuery("select max(idFichier) from Fichier");
-		System.out.println("Requète 1 fin");
 		res.next();
-		System.out.println("Resultat : "+res.getInt(1));
 		int idfichier=1+res.getInt(1);
-		System.out.println("Début de la requete 2");
 		stmt.executeUpdate("INSERT INTO Fichier VALUES("+idfichier+",'"+nomDoc+"',1,'ma tronche',"+null+")");
-		System.out.println("Requète 2 fin");
 		String[] dossiers=chemin.split("/");
-		System.out.println("Requète 3 début");
 		res=stmt.executeQuery("select idDossier from Dossier where nomDossier='"+dossiers[dossiers.length-1]+"'");
-		System.out.println("Requète 3 fin");
 		res.next();
 		int idpere = res.getInt(1);
-		System.out.println("Resultat reqete 3 = "+idpere+". Début de la requète 4");
 		stmt.executeUpdate("INSERT INTO FichierDansDossier VALUES("+idfichier+","+idpere+")");
-		System.out.println("Requète 4 fin");
 		commit();
 		
 		

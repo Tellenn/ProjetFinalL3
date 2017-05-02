@@ -3,6 +3,10 @@ import java.util.Scanner;
 
 public class StartServer {
 
+	/**
+	 * Permet de demarer le serveur GED
+	 * @param ipServ l'ip du serveur qui sera également utilisé par les clients
+	 */
 	public static void start(String ipServ) {
 		System.out.println("Serveur démarré");
 		try{
