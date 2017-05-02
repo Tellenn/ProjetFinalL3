@@ -9,7 +9,7 @@ import java.util.*;
 public class UserUI {
 	private 				UserClient 		client;
 	private 				UserServerInt 	server;
-	private static final 	String 			ip 		= "152.77.82.242";
+	private static final 	String 			ip 		= "152.77.82.30";
 	
 	public void doConnect() {
 		if (connect.getText().equals("Connexion")) {
@@ -100,7 +100,7 @@ public class UserUI {
 		JPanel cn = new JPanel();
 		JPanel bottom = new JPanel();
 		//	JList list = new JList(new DefaultListModel<String>());
-//		west.add(new JScrollPane(tx), BorderLayout.WEST);
+	//		west.add(new JScrollPane(tx), BorderLayout.WEST);
 	//	DefaultListModel<String> model = (DefaultListModel<String>) list.getModel();
 	//	model.addElement("Antoine");
 	//	model.addElement("Carine");
@@ -119,8 +119,8 @@ public class UserUI {
 		cn.setLayout(new BorderLayout(5, 5));
 		bottom.setLayout(new BorderLayout(5, 5));
 		top.add(new JLabel("Login: "));
-		login.setText("charroca");
-		mdp.setText("toto");
+		login.setText("charroan");
+		mdp.setText("toto123");
 		top.add(login);
 		top.add(new JLabel("Mot de passe: "));
 		top.add(mdp);
@@ -134,6 +134,7 @@ public class UserUI {
 		main.add(cn, BorderLayout.CENTER);
 		main.add(bottom, BorderLayout.SOUTH);
 		main.setBorder(new EmptyBorder(10, 10, 10, 10));
+		
 		// Events
 		connect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

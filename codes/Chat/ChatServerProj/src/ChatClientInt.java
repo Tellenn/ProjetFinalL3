@@ -1,5 +1,5 @@
-
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.TreeMap;
  
 public interface ChatClientInt extends Remote{	
@@ -12,4 +12,6 @@ public interface ChatClientInt extends Remote{
 	public void 	setNumSalon(int numSalon)						 throws RemoteException ;
 	public int 		getIdConversationPrivee()						 throws RemoteException ;
 	public void 	setIdConversationPrivee(int idConversationPrivee)throws RemoteException ;
+	public String 	getNomSalon(int id) 						 	 throws RemoteException ;
+	public void 	addSalon(int idSalon,String nomSalon) 			 throws RemoteException ;
 }

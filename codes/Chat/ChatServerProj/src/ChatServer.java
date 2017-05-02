@@ -4,6 +4,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 import chat.ConversationPrivee;
+import chat.ConversationSalon;
 import oracle.net.aso.a;
 
 import java.sql.*;
@@ -16,7 +17,7 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 	private static final String jdbcDriver 	= "oracle.jdbc.driver.OracleDriver";
 	private static final String login 		= "charroan";
 	private static final String mdp 		= "Aclf2016";
-	private Statement stmt;
+	private Statement 	 stmt;
 
 	public ChatServer() throws RemoteException {
 		Connection conn;
@@ -129,6 +130,24 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 			tt.get(i).put("nom", p.get(Integer.valueOf(tt.get(i).get("emetteur"))).getName());
 			a.tell(tt.get(i));
 		}
+	}
+	
+	public void uploadSalon	(ChatClientInt a) throws RemoteException {
+		ResultSet rset;
+		String NameSalon; 
+		TreeMap<Integer, String> tt =new TreeMap<Integer, String>();
+			try {
+				rset = stmt.executeQuery("Select IdSalon from droitUtilisateur where idUser=" + a.getId());	
+			
+				while (rset.next()) {
+					System.out.println("Salon "+rset.getString(1)+ " avec iduser= "+a.getId());
+					ConversationSalon c = new ConversationSalon(a.getId());
+					a.addSalon(Integer.valueOf(rset.getString(1)), c.getNameSalon());				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	

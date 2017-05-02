@@ -1,5 +1,7 @@
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class ChatClient extends UnicastRemoteObject implements ChatClientInt {
@@ -9,6 +11,7 @@ public class ChatClient extends UnicastRemoteObject implements ChatClientInt {
 	private ChatUI ui;
 	private int numSalon = -1;
 	private int idConversationPrivee = -1;
+	private TreeMap<Integer, String> salons = new TreeMap<>();
 
 	public ChatClient(String n) throws RemoteException {
 		name = n;
@@ -57,4 +60,19 @@ public class ChatClient extends UnicastRemoteObject implements ChatClientInt {
 		ui = t;
 	}
 
+	public String getNomSalon(int id) throws RemoteException {
+		return salons.get(id);
+	}
+	
+	public TreeMap<Integer, String> getSalons() throws RemoteException {
+		return salons;
+	}
+		
+	/*public Collection<Integer> getIdSalon() throws RemoteException {
+		return salons.;
+	}*/
+
+	public void addSalon(int idSalon,String nomSalon) throws RemoteException {
+		salons.put(idSalon,nomSalon);
+	}
 }

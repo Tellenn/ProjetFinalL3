@@ -8,4 +8,5 @@ public interface ChatServerInt extends Remote{
 	public TreeMap<Integer, ChatClientInt> 		getConnected		() 											throws RemoteException ;
 	public ChatClientInt 						getClient			(int i) 									throws RemoteException ;
 	public void 								uploadConversation	(ChatClientInt a, int idPersonne2)			throws RemoteException ;
+	public void 								uploadSalon			(ChatClientInt a)							throws RemoteException ;
 }

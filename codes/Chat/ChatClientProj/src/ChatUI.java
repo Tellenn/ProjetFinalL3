@@ -3,6 +3,8 @@ import javax.swing.border.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.w3c.dom.Element;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.rmi.Naming;
@@ -12,8 +14,9 @@ import java.util.*;
 public class ChatUI {
 	private ChatClient client;
 	private ChatServerInt server;
-	private static final String ip = "152.77.82.210";
-	private HashMap<Integer, Integer> placesDansListe = new HashMap<Integer, Integer>();
+	private static final String ip = "152.77.82.32";
+	private TreeMap<Integer, Integer> placesUsersDansListe = new TreeMap<Integer, Integer>();
+	private TreeMap<Integer, Integer> placesSalonsDansListe = new TreeMap<Integer, Integer>();
 
 	public void doConnect() {
 		if (connect.getText().equals("Connexion")) {
@@ -38,6 +41,10 @@ public class ChatUI {
 					System.out.println("Mon id client est " + id);
 					client.setId(id);
 					connect.setText("Déconnexion");
+					//chargement des salons accessibles
+					server.uploadSalon(client);
+					updateSalonsListe();
+					
 				} else {
 					JOptionPane.showMessageDialog(frame,
 							"Identification impossible, Veuillez écrire un login ou mot de passe correct");
@@ -46,7 +53,7 @@ public class ChatUI {
 			} catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(frame, "ERROR, Connexion impossible....");
-			}
+			}//Integer
 		} else {
 			updateUsers(null);
 			if (connect.getText().equals("Déconnexion")) {
@@ -92,26 +99,45 @@ public class ChatUI {
 	public void writeMsg(String st) {
 		tx.setText(tx.getText() + "\n" + st);
 	}
-
+// ================================================================================================== //
+// Mise à jour
 	public void updateUsers(TreeMap<Integer, ChatClientInt> v) {
 		DefaultListModel listModel = new DefaultListModel();
-		if (v != null)
+		if (v != null){
 			for (ChatClientInt item : v.values()) {
 				try {
 					listModel.addElement(item.getName());
-					placesDansListe.put(listModel.getSize() - 1, item.getId());
+					placesUsersDansListe.put(listModel.getSize() - 1, item.getId());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+		}
 		lst.setModel(listModel);
 	}
-
+	
+	protected void updateSalonsListe() throws RemoteException {
+	/*	TreeMap<Integer, String> pl = new TreeMap<Integer, String>(client.getSalons());
+		DefaultListModel listModel = new DefaultListModel();
+		for(int i =0; i<client.getNbSalons(); i++){	
+				try {
+					listModel.addElement(client.getName());
+					placesUsersDansListe.put(listModel.getSize() - 1, item.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			lst.setModel(listModel);
+		}*/
+	}
+// ================================================================================================== //
+// ============================================== MAIN ============================================== //
+// ================================================================================================== //
 	public static void main(String[] args) {
 		System.out.println("[System] Chat on.");
 		ChatUI c = new ChatUI();
 	}
-
+	//a.tell("Connexion acceptée. ");
 	// User Interface code.
 	public ChatUI() {
 		frame = new JFrame("Groupe Chat");
@@ -130,6 +156,7 @@ public class ChatUI {
 		JButton bt = new JButton("Envoyer");
 		bt.setEnabled(false);
 		lst = new JList();
+		lstSalon = new JList();
 		main.setLayout(new BorderLayout(5, 5));
 		top.setLayout(new GridLayout(1, 0, 5, 5));
 		cn.setLayout(new BorderLayout(5, 5));
@@ -176,12 +203,12 @@ public class ChatUI {
 						tf.setEnabled(true);
 						bt.setEnabled(true);
 						client.setIdConversationPrivee(
-								server.getClient(placesDansListe.get(lst.getSelectedIndex())).getId());
+								server.getClient(placesUsersDansListe.get(lst.getSelectedIndex())).getId());
 
 						System.out.println("[CHAT UI]Chargement de la conversation de " + client.getName() + " id "
 								+ client.getId() + " avec "
-								+ server.getClient(placesDansListe.get(lst.getSelectedIndex())).getName() + " id "
-								+ server.getClient(placesDansListe.get(lst.getSelectedIndex())).getId());
+								+ server.getClient(placesUsersDansListe.get(lst.getSelectedIndex())).getName() + " id "
+								+ server.getClient(placesUsersDansListe.get(lst.getSelectedIndex())).getId());
 
 						tx.setText("");// reset
 						uploadText(client.getIdConversationPrivee());
@@ -189,7 +216,26 @@ public class ChatUI {
 				}
 			}
 		});
+		lstSalon.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent evt) {
+				System.out.println("[CHAT UI-SALON] J'ai été appelé");
+				if (!lst.getValueIsAdjusting()) {
+					System.out.println("[CHAT UI] J'ai été appelé 2");
+					try {
+						tf.setEnabled(true);
+						bt.setEnabled(true);
+						client.setNumSalon(
+								server.getClient(placesUsersDansListe.get(lst.getSelectedIndex())).getId());
 
+						System.out.println("[CHAT UI]Chargement du chat de "+ server.getClient(placesUsersDansListe.get(lst.getSelectedIndex())).getName() + " id "
+								+ server.getClient(placesUsersDansListe.get(lst.getSelectedIndex())).getId());
+
+						tx.setText("");// reset
+						uploadText(client.getIdConversationPrivee());
+					} catch (RemoteException e) {}
+				}
+			}
+		});
 		frame.setContentPane(main);
 		frame.setSize(600, 600);
 		frame.setVisible(true);
@@ -200,9 +246,10 @@ public class ChatUI {
 		server.uploadConversation(client, idPersonne2);// reset
 	}
 
+	
 	JTextArea tx;
 	JTextField tf, mdp, login;
 	JButton connect;
-	JList lst;
+	JList lst, lstSalon;
 	JFrame frame;
 }
