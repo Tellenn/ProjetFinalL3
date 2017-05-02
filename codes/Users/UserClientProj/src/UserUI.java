@@ -9,7 +9,7 @@ import java.util.*;
 public class UserUI {
 	private 				UserClient 		client;
 	private 				UserServerInt 	server;
-	private static final 	String 			ip 		= "152.77.82.30";
+	private static final 	String 			ip 		= "152.77.82.33";
 	
 	public void doConnect() {
 		if (connect.getText().equals("Connexion")) {
@@ -32,11 +32,11 @@ public class UserUI {
 				int id = server.login(client, login.getText(), mdp.getText());
 				if (id != -1) {
 					updateUsers(server.getConnected());
-					System.out.println("id ======="+id);
+					//System.out.println("id ======="+id);
 					client.setId(id);
 					connect.setText("Déconnexion");
 				} else {
-					System.out.println("else");
+					//System.out.println("else");
 					JOptionPane.showMessageDialog(frame,"Identification impossible, Veuillez écrire un login ou mot de passe correct");
 					return;
 				}
@@ -55,26 +55,26 @@ public class UserUI {
 		}
 	}
 
-	public void sendText() {
-		if (connect.getText().equals("Connexion")) {
-			JOptionPane.showMessageDialog(frame, "You need to connect first.");
-			return;
-		}
-		String st = tf.getText();
-		st = "[" + login.getText() + "] " + st;
+	//public void sendText() {
+		//if (connect.getText().equals("Connexion")) {
+			//JOptionPane.showMessageDialog(frame, "You need to connect first.");
+		//	return;
+	//	}
+		//String st = tf.getText();
+		//st = "[" + login.getText() + "] " + st;
 		
 		// Remove if you are going to implement for remote invocation
-		try {
-			server.publish(st,3);
-			tf.setText("");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	//	try {
+		//	server.publish(st,3);
+			//tf.setText("");
+		//} catch (Exception e) {
+			//e.printStackTrace();
+	//	}
+//	}
 
-	public void writeMsg(String st) {
-		tx.setText(tx.getText() + "\n" + st);
-	}
+	//public void writeMsg(String st) {
+		//tx.setText(tx.getText() + "\n" + st);
+	//}
 
 	public void updateUsers(Vector v) {
 		DefaultListModel listModel = new DefaultListModel();
@@ -115,7 +115,7 @@ public class UserUI {
 		login = new JTextField();
 		tx = new JTextArea();
 		connect = new JButton("Connexion");
-		JButton bt = new JButton("Envoyer");
+		//JButton bt = new JButton("Envoyer");
 		lst = new JList();
 		main.setLayout(new BorderLayout(5, 5));
 		top.setLayout(new GridLayout(1, 0, 5, 5));
@@ -131,28 +131,28 @@ public class UserUI {
 		cn.add(new JScrollPane(tx), BorderLayout.CENTER);
 		cn.add(lst, BorderLayout.WEST);
 		bottom.add(tf, BorderLayout.CENTER);
-		bottom.add(bt, BorderLayout.EAST);
+		//bottom.add(bt, BorderLayout.EAST);
 		
 		main.add(top, BorderLayout.NORTH);
 		main.add(cn, BorderLayout.CENTER);
 		main.add(bottom, BorderLayout.SOUTH);
-		main.setBorder(new EmptyBorder(10, 10, 10, 10));
+		//main.setBorder(new EmptyBorder(10, 10, 10, 10));
 		// Events
-		connect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				doConnect();
-			}
-		});
-		bt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sendText();
-			}
-		});
-		tf.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sendText();
-			}
-		});
+		//connect.addActionListener(new ActionListener() {
+			//public void actionPerformed(ActionEvent e) {
+				//doConnect();
+			//}
+		//});
+		//bt.addActionListener(new ActionListener() {
+			//public void actionPerformed(ActionEvent e) {
+				//sendText();
+			//}
+		//});
+		//tf.addActionListener(new ActionListener() {
+			//public void actionPerformed(ActionEvent e) {
+				//sendText();
+			//}
+		//});
 
 		frame.setContentPane(main);
 		frame.setSize(600, 600);

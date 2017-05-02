@@ -1,13 +1,13 @@
 import java.rmi.RemoteException;
-import user.Utilisateur;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 import java.util.Vector;
+
+import user.Utilisateur;
 
 public class UserServer extends UnicastRemoteObject implements UserServerInt {
 	Utilisateur user = new Utilisateur();
