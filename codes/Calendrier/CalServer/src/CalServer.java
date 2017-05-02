@@ -54,7 +54,7 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
         Scanner sc = new Scanner(System.in);
         Rep = sc.nextLine();
         
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
 //		Date dateDebut = null;
 //		Date dateFin = null;
 		String dateDebut;
@@ -62,12 +62,16 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
         String libelle;
 		int idEvent;
 		int idPart;
+		int idUser;
 		
         switch (Rep) {
         	case "1":
         		System.out.println("-----------------------------------------");
         		System.out.println("	  Création d'un nouvel évènement	 ");
         		System.out.println("-----------------------------------------");
+        		System.out.println("Votre id ?");
+	        	idUser = Integer.parseInt(sc.nextLine());
+        		
         		System.out.println("Libelle de l'evenement ?");
 	        	libelle = sc.nextLine();
 	        	
@@ -87,7 +91,8 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
 //			    }
 	        	dateFin = sc.nextLine();
 	        	
-	        	Calendrier.createEvent(libelle, dateDebut, dateFin);
+	        	Calendrier.createEvent(idUser, libelle, dateDebut, dateFin);
+        		//Calendrier.afficher();
         		break;
         	
         	case "2":
@@ -118,6 +123,7 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
 	        	
 			    Calendrier.updateEvent(idEvent, libelle, dateDebut, dateFin);
 			    break;
+			    
         	case "3":
         		System.out.println("-----------------------------------------");
         		System.out.println("	    Supression d'un évènement	     ");
@@ -127,6 +133,7 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
         		
         		Calendrier.deleteEvent(idEvent);
         		break;
+        		
 			case "4":
 				System.out.println("-----------------------------------------");
         		System.out.println("  Ajouter un participant à un évènement  ");
@@ -138,6 +145,7 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
         		
         		Calendrier.addParticipant(idEvent, idPart);
 				break;
+				
 			case "5":
 				System.out.println("-----------------------------------------");
         		System.out.println(" Supprimer un participant à un évènement ");
@@ -148,6 +156,15 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
         		idPart = Integer.parseInt(sc.nextLine());
         		
         		Calendrier.deleteParticipant(idEvent, idPart);
+				break;
+				
+			case "0":
+				System.out.println("-----------------------------------------");
+        		System.out.println(" 		  Afficher les événements		 ");
+        		System.out.println("-----------------------------------------");
+				System.out.println("Votre id ?");
+	        	idUser = Integer.parseInt(sc.nextLine());
+				Calendrier.afficher(idUser);
 				break;
         }
 		

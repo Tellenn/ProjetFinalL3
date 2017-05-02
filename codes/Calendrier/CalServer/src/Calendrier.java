@@ -20,6 +20,42 @@ public class Calendrier {
 //    
 // };
 	
+	public static void insert() throws SQLException{
+		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "blondelq", "634714qB");
+	    Statement stmt = conn.createStatement();
+		try {
+			
+			ResultSet rs = stmt.executeQuery("select max(idEvenement) from Evenement");
+	        rs.next();
+	        int idEvent = rs.getInt(1) + 1;
+			
+	        stmt.executeQuery("INSERT INTO Evenement VALUES (9, 'test', to_date('27-APR-17 14:00:00', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'), to_date('27-APR-17 15:00:00', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'))");
+			stmt.executeQuery("commit");
+	        stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void afficher(int idUser) throws SQLException{
+		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "blondelq", "634714qB");
+	    Statement stmt = conn.createStatement();
+		try {
+			
+	        //ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, to_date(dateDebut, 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'), to_date(dateFin, 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American') FROM Evenement");
+	        ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, dateDebut, dateFin FROM Evenement WHERE idUser = " + idUser + "ORDER BY idEvenement");
+	        while(rs.next()){
+	            System.out.print("id : "+rs.getInt(1) + " libelle : "+rs.getString(2) + " dateD : "+rs.getString(3) + " dateF : "+rs.getString(4) + "\n");
+	        }
+	        stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	* Crée un événement à la fois dans la base de données et dans le fichier xml
 	* @param dateDebut	date de début de l’événement
@@ -27,7 +63,7 @@ public class Calendrier {
 	* @param libelle	libelle de l’événement 
 	* @throws SQLException 
 	*/
-	public static void createEvent(String libelle, String dateDebut, String dateFin) throws SQLException{
+	public static void createEvent(int idUser, String libelle, String dateDebut, String dateFin) throws SQLException{
 
 		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "blondelq", "634714qB");
 	    Statement stmt = conn.createStatement();
@@ -37,12 +73,9 @@ public class Calendrier {
 	        rs.next();
 	        int idEvent = rs.getInt(1) + 1;
 			
-			stmt.executeQuery("INSERT INTO Evenement VALUES (" + idEvent + ", '" + libelle + "', '" + dateDebut + "', '" + dateFin +"')");
-			//stmt.executeQuery("INSERT INTO Evenement VALUES (" + idEvent + ", 'test', '27-APR-17', '28-APR-17')");
-			
-			//stmt.executeQuery("INSERT INTO Test VALUES (1, 1)");
+			stmt.executeQuery("INSERT INTO Evenement VALUES (" + idEvent + ", " + idUser + ", '" + libelle + "', to_date('" + dateDebut + "', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'), to_date('" + dateFin + "', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'))");
 			stmt.executeQuery("commit");
-         stmt.close();
+	        stmt.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +96,7 @@ public class Calendrier {
 		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "blondelq", "634714qB");
 	    Statement stmt = conn.createStatement();
 		try {
-			stmt.executeQuery("UPDATE Evenement SET libelle = '" + libelle + "', dateDebut = '" + dateDebut + "', dateFin = '" + dateFin + "' WHERE idEvenement = " + idEvent);
+			stmt.executeQuery("UPDATE Evenement SET libelle = '" + libelle + "', dateDebut = to_date('" + dateDebut + "', 'DD-Mon-YY', 'nls_date_language = American'), dateFin = to_date('" + dateFin + "', 'DD-Mon-YY', 'nls_date_language = American') WHERE idEvenement = " + idEvent);
 			stmt.executeQuery("commit");
          stmt.close();
 
@@ -141,7 +174,7 @@ public class Calendrier {
 //	* @param idEvent	id de l’événement
 //	* @param nameField	nom du champ à ajouter
 //	*/
-//	public void createField(int idEvent, String nameField){
+//	public static void createField(String nameField){
 //		
 //	}
 //
@@ -151,7 +184,7 @@ public class Calendrier {
 //	* @param nameField	nom du champ dont on récupère la valeur
 //	* @return		la valeur du champ passé en paramètre
 //	*/
-//	public String getField(int idEvent, String nameField){
+//	public static String getField(int idEvent, String nameField){
 //		
 //	}
 //
@@ -161,7 +194,7 @@ public class Calendrier {
 //	* @param nameField	nom du champ à mettre à jour
 //	* @param valueField	nouvelle valeur du champ
 //	*/
-//	public void setField(int idEvent, String nameField, String valueField){
+//	public static void setField(int idEvent, String nameField, String valueField){
 //		
 //	}
 //
@@ -170,7 +203,7 @@ public class Calendrier {
 //	* @param idEvent	id de l’événement
 //	* @param nameField	nom du champ à supprimer
 //	*/
-//	public void deleteField(int idEvent String nameField){
+//	public static void deleteField(int idEvent String nameField){
 //		
 //	}
 	

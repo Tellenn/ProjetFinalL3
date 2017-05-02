@@ -9,7 +9,7 @@ import java.util.*;
 public class CalUI {
 	private 				CalClient 		client;
 	private 				CalServerInt 	server;
-	private static final 	String 			ip 		= "152.77.82.209";
+	private static final 	String 			ip 		= "172.20.10.5";
 	
 	public void doConnect() {
 		if (connect.getText().equals("Connexion")) {

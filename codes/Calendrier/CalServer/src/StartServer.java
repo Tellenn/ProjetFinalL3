@@ -8,7 +8,7 @@ public class StartServer {
 			 	java.rmi.registry.LocateRegistry.createRegistry(1099);
 			 	
 				CalServerInt b=new CalServer();	
-				Naming.rebind("rmi://152.77.82.209/myabc", b);
+				Naming.rebind("rmi://172.20.10.5/myabc", b);
 				System.out.println("[System] User Server is ready.");
 			}catch (Exception e) {
 					System.out.println("User Server failed: " + e);
