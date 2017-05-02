@@ -1,9 +1,11 @@
-
 import java.rmi.*;
 import java.sql.SQLException;
-import java.util.*;
- 
-public interface CalServerInt extends Remote{	
-	public boolean login (CalClientInt a)throws RemoteException, SQLException ;
-	public Vector getConnected() throws RemoteException ;
+
+public interface CalServerInt extends Remote{
+	public void afficher(int idUser) throws SQLException, RemoteException;
+	public void createEvent(int idUser, String libelle, String dateDebut, String dateFin) throws SQLException, RemoteException;
+	public void updateEvent(int idEvent, String libelle, String dateDebut, String dateFin) throws SQLException, RemoteException;
+	public void deleteEvent(int idEvent) throws SQLException, RemoteException;
+	public void addParticipant(int idEvent, int idParticipant) throws SQLException, RemoteException;
+	public void deleteParticipant(int idEvent, int idParticipant) throws SQLException, RemoteException;
 }

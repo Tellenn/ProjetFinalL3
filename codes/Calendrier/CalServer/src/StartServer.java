@@ -1,17 +1,21 @@
-import java.rmi.*;
-import java.rmi.server.*;
- 
+import java.rmi.Naming;
+
 public class StartServer {
-	public static void main(String[] args) {
-		try {
-				//System.setSecurityManager(new RMISecurityManager());
-			 	java.rmi.registry.LocateRegistry.createRegistry(1099);
-			 	
-				CalServerInt b=new CalServer();	
-				Naming.rebind("rmi://172.20.10.5/myabc", b);
-				System.out.println("[System] User Server is ready.");
-			}catch (Exception e) {
-					System.out.println("User Server failed: " + e);
-			}
+
+	/**
+	 * Demarrage server
+	 */
+	public static void start(String ipServ) {
+		System.out.println("Demarage du serveur");
+		try{
+			java.rmi.registry.LocateRegistry.createRegistry(1099);
+			System.out.println("Port ok");
+			CalServer cal=new CalServer();
+			System.out.println("Création serveur ok");
+			Naming.rebind("rmi://152.77.82.30/abc", cal);//"+ipServ+"
+			System.out.println("Le serveur est pret a opérer");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }

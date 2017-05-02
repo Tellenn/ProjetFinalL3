@@ -5,15 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.Vector;
 
 public class CalServer extends UnicastRemoteObject implements CalServerInt {
 
-	private Vector v = new Vector();
 	private static final String dbUrl = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
 	private static final String jdbcDriver = "oracle.jdbc.driver.OracleDriver";
 	private static final String login = "blondelq";
@@ -34,154 +28,138 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
 
 	}
 	
-	public boolean login(CalClientInt a) throws RemoteException, SQLException{	
-		
-        Connection conn;
-        Statement stmt;
-        ResultSet rset;
-        int resultat = 1;
-        String Rep ="";
-        System.out.println("-----------------------------------------");
-        System.out.println("      		  	Calendrier	     		 ");
-        System.out.println("-----------------------------------------");
-        System.out.println("------------------ MENU -----------------");
-        System.out.println("Tapez 1 pour créer un évènement");
-        System.out.println("Tapez 2 pour modifier un évènement");
-        System.out.println("Tapez 3 pour supprimer un évènement");
-        System.out.println("Tapez 4 ajouter un participant à un évènement");
-        System.out.println("Tapez 5 supprimer un participant à un évènement");
-        System.out.println("-----------------------------------------");
-        Scanner sc = new Scanner(System.in);
-        Rep = sc.nextLine();
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
-//		Date dateDebut = null;
-//		Date dateFin = null;
-		String dateDebut;
-		String dateFin;
-        String libelle;
-		int idEvent;
-		int idPart;
-		int idUser;
-		
-        switch (Rep) {
-        	case "1":
-        		System.out.println("-----------------------------------------");
-        		System.out.println("	  Création d'un nouvel évènement	 ");
-        		System.out.println("-----------------------------------------");
-        		System.out.println("Votre id ?");
-	        	idUser = Integer.parseInt(sc.nextLine());
-        		
-        		System.out.println("Libelle de l'evenement ?");
-	        	libelle = sc.nextLine();
-	        	
-	        	System.out.println("Date de debut de l'evenement ?");
-//	        	try{
-//	        	dateDebut = formatter.parse(sc.nextLine());
-//		        } catch (ParseException e) {
-//			    	e.printStackTrace();
-//			    }
-	        	dateDebut = sc.nextLine();
-	        	
-	        	System.out.println("Date de fin de l'evenement ?");
-//			    try{
-//			    	dateFin = formatter.parse(sc.nextLine());
-//			    } catch (ParseException e) {
-//			    	e.printStackTrace();
-//			    }
-	        	dateFin = sc.nextLine();
-	        	
-	        	Calendrier.createEvent(idUser, libelle, dateDebut, dateFin);
-        		//Calendrier.afficher();
-        		break;
-        	
-        	case "2":
-        		System.out.println("-----------------------------------------");
-        		System.out.println("	    Modification d'un évènement	     ");
-        		System.out.println("-----------------------------------------");
-        		System.out.println("id de l'evenement à modifier?");
-        		idEvent = Integer.parseInt(sc.nextLine());
-        		
-        		System.out.println("Libelle de l'evenement ?");
-	        	libelle = sc.nextLine();
-	        	
-	        	System.out.println("Date de debut de l'evenement ?");
-//	        	try{
-//	        	dateDebut = formatter.parse(sc.nextLine());
-//		        } catch (ParseException e) {
-//			    	e.printStackTrace();
-//			    }
-	        	dateDebut = sc.nextLine();
-	        	
-	        	System.out.println("Date de fin de l'evenement ?");
-//			    try{
-//			    	dateFin = formatter.parse(sc.nextLine());
-//			    } catch (ParseException e) {
-//			    	e.printStackTrace();
-//			    }
-	        	dateFin = sc.nextLine();
-	        	
-			    Calendrier.updateEvent(idEvent, libelle, dateDebut, dateFin);
-			    break;
-			    
-        	case "3":
-        		System.out.println("-----------------------------------------");
-        		System.out.println("	    Supression d'un évènement	     ");
-        		System.out.println("-----------------------------------------");
-        		System.out.println("id de l'evenement à supprimer?");
-        		idEvent = Integer.parseInt(sc.nextLine());
-        		
-        		Calendrier.deleteEvent(idEvent);
-        		break;
-        		
-			case "4":
-				System.out.println("-----------------------------------------");
-        		System.out.println("  Ajouter un participant à un évènement  ");
-        		System.out.println("-----------------------------------------");
-        		System.out.println("id de l'evenement ?");
-        		idEvent = Integer.parseInt(sc.nextLine());
-        		System.out.println("id du participant ?");
-        		idPart = Integer.parseInt(sc.nextLine());
-        		
-        		Calendrier.addParticipant(idEvent, idPart);
-				break;
-				
-			case "5":
-				System.out.println("-----------------------------------------");
-        		System.out.println(" Supprimer un participant à un évènement ");
-        		System.out.println("-----------------------------------------");
-        		System.out.println("id de l'evenement ?");
-        		idEvent = Integer.parseInt(sc.nextLine());
-        		System.out.println("id du participant ?");
-        		idPart = Integer.parseInt(sc.nextLine());
-        		
-        		Calendrier.deleteParticipant(idEvent, idPart);
-				break;
-				
-			case "0":
-				System.out.println("-----------------------------------------");
-        		System.out.println(" 		  Afficher les événements		 ");
-        		System.out.println("-----------------------------------------");
-				System.out.println("Votre id ?");
-	        	idUser = Integer.parseInt(sc.nextLine());
-				Calendrier.afficher(idUser);
-				break;
-        }
-		
-	  	////////////////////////////////////////
-	  	a.tell("You have Connected successfully.");
-		///publish(a.getName()+ " has just connected.",idUser);
-	  	v.add(a);
-		return true;
- 	}
+	/**
+	* Affiche les événements en fonction de l'idUser
+	* @param idUser : id de l'utilisateur
+	* @throws SQLException
+	**/
+	public void afficher(int idUser) throws SQLException, RemoteException{
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			
+	        ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, dateDebut, dateFin FROM Evenement WHERE idUser = " + idUser + " OR idEvenement IN (SELECT idEvenement FROM Participant WHERE idUser = " + idUser + ")");
+			while(rs.next()){
+	            System.out.print("id : "+rs.getInt(1) + " libelle : "+rs.getString(2) + " dateD : "+rs.getString(3) + " dateF : "+rs.getString(4) + "\n");
+	        }
+	        stmt.close();
 
-	private void updateXML(String s) {
-		// TODO Auto-generated method stub
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
-	public Vector getConnected() throws RemoteException {
-		return v;
-	}
-}
 	
+	/**
+	* Crée un événement dans la base de données
+	* @param dateDebut : date de début de l’événement
+	* @param dateFin : date de fin de l’événement
+	* @param libelle : libelle de l’événement 
+	* @throws SQLException 
+	*/
+	public void createEvent(int idUser, String libelle, String dateDebut, String dateFin) throws SQLException, RemoteException{
+
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			
+			ResultSet rs = stmt.executeQuery("SELECT MAX(idEvenement) FROM Evenement");
+	        rs.next();
+	        int idEvent = rs.getInt(1) + 1;
+			
+			stmt.executeQuery("INSERT INTO Evenement VALUES (" + idEvent + ", " + idUser + ", '" + libelle + "', to_date('" + dateDebut + "', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'), to_date('" + dateFin + "', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'))");
+			stmt.executeQuery("COMMIT");
+	        stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/**
+	* Met à jour un événement dans la BDD
+	* @param idEvent : id de l’événement à mettre à jour
+	* @param dateDebut : nouvelle date de début de l’événement
+	* @param dateFin : nouvelle date de fin de l’événement
+	* @param libelle : nouveau libellé de l’événement
+	* @throws SQLException
+	*/
+	public void updateEvent(int idEvent, String libelle, String dateDebut, String dateFin) throws SQLException, RemoteException{
+		
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			stmt.executeQuery("UPDATE Evenement SET libelle = '" + libelle + "', dateDebut = to_date('" + dateDebut + "', 'DD-Mon-YY', 'nls_date_language = American'), dateFin = to_date('" + dateFin + "', 'DD-Mon-YY', 'nls_date_language = American') WHERE idEvenement = " + idEvent);
+			stmt.executeQuery("COMMIT");
+         stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/**
+	* Supprimer un événement de la base de données
+	* @param idEvent : id de l’événement à supprimer
+	* @throws SQLException
+	*/
+	public void deleteEvent(int idEvent) throws SQLException, RemoteException{
+		
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			stmt.executeQuery("DELETE FROM Participant WHERE idEvenement = " + idEvent);
+			stmt.executeQuery("DELETE FROM Evenement WHERE idEvenement = " + idEvent);
+			stmt.executeQuery("COMMIT");
+         stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/**
+	* Ajoute un participant à un événement : dans la BD ajoute un n-uplet dans la table Participant
+	* @param idEvent : id de l’événement
+	* @param idParticipant : id du participant
+	* @throws SQLException
+	*/
+	public void addParticipant(int idEvent, int idParticipant) throws SQLException, RemoteException{
+		
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			stmt.executeQuery("INSERT INTO Participant (idEvenement, idUser) VALUES (" + idEvent + ", " + idParticipant +")");
+			stmt.executeQuery("COMMIT");
+         stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/**
+	* Supprime un participant à un événement : dans la BD supprimer le n-uplet correspondant dans la table Participant
+	* @param idEvent : id de l’événement
+	* @param idParticipant : id du participant
+	* @throws SQLException
+	*/
+	public void deleteParticipant(int idEvent, int idParticipant) throws SQLException, RemoteException{
+		
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			stmt.executeQuery("DELETE FROM Participant WHERE idEvenement = " + idEvent + " AND idUser = " + idParticipant);
+			stmt.executeQuery("COMMIT");
+         stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}
