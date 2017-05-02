@@ -22,13 +22,13 @@
       <Pane prefHeight="96.0" prefWidth="606.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2b3239" height="66.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="606.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1c40f" height="34.0" layoutY="63.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="606.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1c40f" height="34.0" layoutY="63.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.5" width="606.0" />
             <Text fill="#979696" layoutX="263.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KICQA" textAlignment="CENTER" wrappingWidth="80.7294921875">
                <font>
                   <Font name="TeXGyreTermesMath-Regular" size="24.0" />
                </font>
             </Text>
-            <Button contentDisplay="CENTER" layoutX="254.0" layoutY="68.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
+            <Button contentDisplay="CENTER" layoutX="263.0" layoutY="66.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
                <font>
                   <Font size="14.0" />
                </font>
@@ -36,7 +36,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button contentDisplay="CENTER" layoutX="131.0" layoutY="68.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: white; -fx-background-radius: 15px 15px 0px 0px;" text="CALENDRIER">
+            <Button contentDisplay="CENTER" layoutX="139.0" layoutY="66.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: white; -fx-background-radius: 15px 15px 0px 0px;" text="CALENDRIER">
                <font>
                   <Font size="14.0" />
                </font>
@@ -44,7 +44,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button contentDisplay="CENTER" layoutX="6.0" layoutY="68.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
+            <Button contentDisplay="CENTER" layoutX="14.0" layoutY="66.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
                <font>
                   <Font size="14.0" />
                </font>
