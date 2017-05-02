@@ -38,23 +38,25 @@ CREATE TABLE Relation
     CONSTRAINT fk_Relation_idUser2 FOREIGN KEY (idUser2) REFERENCES Utilisateur(idUser)
 );
 --Table Salons
-CREATE TABLE Salons
+CREATE TABLE Salon
 (
-    idSalon 		INTEGER PRIMARY KEY
+    idSalon 		INTEGER PRIMARY KEY,
+	name		VARCHAR2(20) NOT NULL
 );
 --Table DroitSalons
-CREATE TABLE DroitSalons
+CREATE TABLE DroitSalon
 (
-	idSalon 		INTEGER,
+    idSalon 			INTEGER,
     idUser 			INTEGER,
-    CONSTRAINT pk_DroitSalons PRIMARY KEY (idSalon, idUser),
-    CONSTRAINT fk_DroitSalons_idSalon FOREIGN KEY (idSalon) REFERENCES salons(idSalon),
-    CONSTRAINT fk_DroitSalons_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+    CONSTRAINT pk_DroitSalon PRIMARY KEY (idSalon, idUser),
+    CONSTRAINT fk_DroitSalon_idSalon FOREIGN KEY (idSalon) REFERENCES salon(idSalon),
+    CONSTRAINT fk_DroitSalon_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
 );
 --Table Evenement
 CREATE TABLE Evenement
 (
     idEvenement 	INTEGER PRIMARY KEY,
+    idUser 			INTEGER, 
     libelle			VARCHAR2(50),
     dateDebut		DATE,
     dateFin			DATE

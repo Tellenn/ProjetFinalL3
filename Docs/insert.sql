@@ -20,32 +20,32 @@ INSERT INTO Relation VALUES(5,1);
 INSERT INTO Relation VALUES(5,3);
 
 --Salons(idSalons)
-INSERT INTO Salons VALUES(1);
-INSERT INTO Salons VALUES(2);
-INSERT INTO Salons VALUES(3);
-INSERT INTO Salons VALUES(4);
-INSERT INTO Salons VALUES(5);
+INSERT INTO Salon VALUES(1,'Comptabilité');
+INSERT INTO Salon VALUES(2,'RH');
+INSERT INTO Salon VALUES(3,'Direction');
+INSERT INTO Salon VALUES(4,'Chaine de montage 1');
+INSERT INTO Salon VALUES(5,'Chaine de montage 2');
 
 --DroitSalons(idSalons,idUser)
-INSERT INTO DroitSalons VALUES(1,1);
-INSERT INTO DroitSalons VALUES(1,2);
-INSERT INTO DroitSalons VALUES(1,3);
-INSERT INTO DroitSalons VALUES(1,4);
-INSERT INTO DroitSalons VALUES(1,5);
-INSERT INTO DroitSalons VALUES(2,2);
-INSERT INTO DroitSalons VALUES(2,3);
-INSERT INTO DroitSalons VALUES(3,3);
-INSERT INTO DroitSalons VALUES(4,5);
-INSERT INTO DroitSalons VALUES(4,4);
-INSERT INTO DroitSalons VALUES(5,1);
+INSERT INTO DroitSalon VALUES(1,1);
+INSERT INTO DroitSalon VALUES(1,2);
+INSERT INTO DroitSalon VALUES(1,3);
+INSERT INTO DroitSalon VALUES(1,4);
+INSERT INTO DroitSalon VALUES(1,5);
+INSERT INTO DroitSalon VALUES(2,2);
+INSERT INTO DroitSalon VALUES(2,3);
+INSERT INTO DroitSalon VALUES(3,3);
+INSERT INTO DroitSalon VALUES(4,5);
+INSERT INTO DroitSalon VALUES(4,4);
+INSERT INTO DroitSalon VALUES(5,1);
 
 --Evenement(idEvenement)
 
-INSERT INTO Evenement VALUES(1, 'Reunion du conseil d adrministration', '27-APR-17', '27-APR-17');
-INSERT INTO Evenement VALUES(2, 'Reunion audit projet KICQA', '28-APR-17', '28-APR-17');
-INSERT INTO Evenement VALUES(3, 'Demo projet KICQA', '04-MAY-17', '04-MAY-17');
-INSERT INTO Evenement VALUES(4, 'Recette projet KICQA', '05-MAY-17', '05-MAY-17');
-INSERT INTO Evenement VALUES(5, 'Formation incendie et securite', '10-MAY-17', '10-MAY-17');
+INSERT INTO Evenement VALUES(1, 5, 'Reunion du conseil d adrministration', '27-APR-17', '27-APR-17');
+INSERT INTO Evenement VALUES(2, 5, 'Reunion audit projet KICQA', '28-APR-17', '28-APR-17');
+INSERT INTO Evenement VALUES(3, 5, 'Demo projet KICQA', '04-MAY-17', '04-MAY-17');
+INSERT INTO Evenement VALUES(4, 5, 'Recette projet KICQA', '05-MAY-17', '05-MAY-17');
+INSERT INTO Evenement VALUES(5, 5, 'Formation incendie et securite', '10-MAY-17', '10-MAY-17');
 
 --Participant(idSalons,idUser)
 INSERT INTO Participant VALUES(1,1);
