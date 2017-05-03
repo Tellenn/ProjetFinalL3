@@ -9,6 +9,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 public class Client {
+
 	///////////////////////////
 	///						///
 	///		PARTIE CHAT		///
@@ -23,8 +24,6 @@ public class Client {
 	 * @param ip: l'ip du serveur
 	 * @throws RemoteException 
 	 */
-	public Client() {}
-
 	public void connectChat (String ip) throws RemoteException{
 		serverChat = null;
 		try {
@@ -100,46 +99,47 @@ public class Client {
 	///////////////////////////
 	
 	private static 			UserClient 		client;
-	private 				UserServerInt 	server;
-	private static final 	String 			ip 		= "152.77.82.56";
+	private static 				UserServerInt 	server;
+	private static final 	String 			ip 		= "127.0.0.1";
 	
-	public void doConnect(String login, String mdp) {
+	public int doConnect(String login, String mdp) {
 
 		if (login.length() < 2) {
 			// il faut que le nom ait plus de 2 caractères
 			System.out.println( "Format du mot de login impossible");
-			return;
+			return 0;
 		}
 		if (mdp.length() < 2) {
 			//il faut que le champ ne soit pas vide
 			System.out.println(  "Format du mot de passe impossible");
-			return;
+			return 0;
 		}
 		try {
 			//ip.getText()
 			client = new UserClient(login,mdp);
-			client.setGUI(this);
-			server = (UserServerInt) Naming.lookup("rmi://" + ip + "/myabc");
+			server = (UserServerInt) Naming.lookup("rmi://" + ip + "/user");
 
 			int id = server.login(client, login, mdp);
 			if (id != -1) {
 				System.out.println("id ======="+id);
 				client.setId(id);
+				return 1;
 			} else {
 				System.out.println("Identification impossible, Veuillez écrire un login ou mot de passe correct");
-				return;
+				return 0;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println( "ERROR, Connexion impossible....");
 		}
+		return 0;
 
 	}
 
 
-	public void ajoutUtilisateur(){
+	public void ajoutUtilisateur(String username, String password){
 		try {
-			server.ajoutUser(client, client.getName(), client.getMdp());
+			server.ajoutUser(client, username, password);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
