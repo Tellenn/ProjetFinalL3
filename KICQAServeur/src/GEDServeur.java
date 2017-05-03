@@ -140,7 +140,6 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 	 * @param chemin
 	 * @throws java.rmi.RemoteException
 	 */
-	@Override
 	public void deleteDoc(int iddoc, String chemin) throws RemoteException {
 
 		String sql = "delete from Fichier where idFichier=" + iddoc;//TODO ON DELETE CASCADE dans la table
