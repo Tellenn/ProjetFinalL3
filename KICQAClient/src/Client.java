@@ -3,16 +3,93 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.IdentityHashMap;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
-public class Client {
+public abstract class Client {
+	///////////////////////////
+	///						///
+	///		PARTIE CHAT		///
+	///						///
+	///////////////////////////
+	// TODO: connecter et créer objet
+	private static 			ChatClient 		clientChat;
+	private 				ChatServerInt 	serverChat;
+	
+	
+	/**
+	 * Permet de démarer un serveur
+	 * @param ipServ l'ip du serveur
+	 * @return l'interface serveur pour effectuer les autres action
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
+	 */
+	public void connectChat (String ip) throws RemoteException{
+		serverChat = null;
+		try {
+			serverChat = (ChatServerInt) Naming.lookup("rmi://" + ip + "/abc");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendTextPrivate(String text, int idRecepteur) {			
+		try {
+			serverChat.publishPrivate(text, client.getId(), idRecepteur);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
+	}
+	
+	// Message de salon
+	 /* public void sendTextSalon(String text, int idRecepteur) {	
+		if (client.getIdConversationPrivee() != -1) {
+			try {
+				server.publishPrivate(st, client.getId(), idRecepteur);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		} else {
+			if (client.getNumSalon() != -1) {
+				try {
+					server.publish(st, client.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("[System] ERROR: Pas normal d'être là");
+				// erreur
+			}
+		}
+		tf.setText("");
+	}*/
+	
+	public void addSalon(String text, int idRecepteur) {			
+		try {
+			serverChat.publishPrivate(text, client.getId(), idRecepteur);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
+	}
+	
+	// ecrit le message dans l'interface à completer
+	// TODO: Par le développeur
+	public  void writeMsg(String st){
+		//tx.setText(tx.getText() + "\n" + st);
+	}
+
+
+	
 	///////////////////////////
 	///						///
 	///		PARTIE User		///
 	///						///
 	///////////////////////////
-	private static 				UserClient 		client;
+	
+	private static 			UserClient 		client;
 	private 				UserServerInt 	server;
 	private static final 	String 			ip 		= "152.77.82.56";
 	
@@ -547,4 +624,7 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+
+	
+	
 }
