@@ -28,7 +28,7 @@
                   <Font name="TeXGyreTermesMath-Regular" size="24.0" />
                </font>
             </Text>
-            <Button contentDisplay="CENTER" layoutX="263.0" layoutY="66.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
+            <Button fx:id="chat" contentDisplay="CENTER" layoutX="263.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
                <font>
                   <Font size="14.0" />
                </font>
@@ -44,12 +44,12 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button contentDisplay="CENTER" layoutX="14.0" layoutY="66.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
+            <Button fx:id="ged" contentDisplay="CENTER" layoutX="14.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <MenuButton graphicTextGap="8.0" layoutX="435.0" layoutY="18.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
+            <MenuButton fx:id="moncompte" graphicTextGap="8.0" layoutX="435.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
                <items>
                   <MenuItem mnemonicParsing="false" text="Afficher/Modifier profil" />
                   <MenuItem mnemonicParsing="false" text="Déconnexion" />
@@ -84,14 +84,14 @@
                   </LinearGradient>
                </fill>
             </Text>
-            <Button layoutX="16.0" layoutY="168.0" mnemonicParsing="false" text="Créer un nouveau evenement" />
+            <Button fx:id="nvevent" layoutX="16.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Créer un nouveau evenement" />
             <TextField layoutX="17.0" layoutY="50.0" promptText="Event Name" />
-            <Button layoutX="422.0" layoutY="50.0" mnemonicParsing="false" text="Modifier" />
+            <Button fx:id="modifevent" layoutX="422.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Modifier" />
             <TextField layoutX="16.0" layoutY="83.0" promptText="Event Name" />
             <TextField layoutX="16.0" layoutY="117.0" promptText="Event Name" />
             <Button layoutX="422.0" layoutY="83.0" mnemonicParsing="false" text="Modifier" />
             <Button layoutX="422.0" layoutY="117.0" mnemonicParsing="false" text="Modifier" />
-            <Button layoutX="513.0" layoutY="50.0" mnemonicParsing="false" text="Info" />
+            <Button fx:id="infoevent" layoutX="513.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Info" />
             <Button layoutX="513.0" layoutY="83.0" mnemonicParsing="false" text="Info" />
             <Button layoutX="513.0" layoutY="117.0" mnemonicParsing="false" text="Info" />
             <DatePicker layoutX="198.0" layoutY="50.0" />

@@ -72,8 +72,8 @@
             </Text>
             <TextField floatText="Nom" layoutX="38.0" layoutY="61.0" text="Nom" />
             <TextField floatText="Prénom" layoutX="38.0" layoutY="109.0" text="Prénom" />
-            <Button layoutX="38.0" layoutY="207.0" mnemonicParsing="false" text="Modifier profil" />
-            <Button layoutX="190.0" layoutY="207.0" mnemonicParsing="false" text="Changer mot de passe" />
+            <Button fx:id="modifprofil" layoutX="38.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Modifier profil" />
+            <Button fx:id="modifmdp" layoutX="190.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Changer mot de passe" />
             <TextField floatText="Username" layoutX="38.0" layoutY="155.0" text="Username" />
          </children>
       </Pane>

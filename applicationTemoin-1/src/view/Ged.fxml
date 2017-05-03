@@ -44,7 +44,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <MenuButton graphicTextGap="8.0" layoutX="435.0" layoutY="17.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
+            <MenuButton fx:id="moncompte" graphicTextGap="8.0" layoutX="435.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
               <items>
                 <MenuItem mnemonicParsing="false" text="Afficher/Modifier profil" />
                 <MenuItem mnemonicParsing="false" text="Déconnexion" />
