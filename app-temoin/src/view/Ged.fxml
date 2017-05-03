@@ -4,9 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,7 +25,7 @@
                   <Font name="TeXGyreTermesMath-Regular" size="24.0" />
                </font>
             </Text>
-            <Button contentDisplay="CENTER" layoutX="254.0" layoutY="67.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #ecf0f1; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
+            <Button contentDisplay="CENTER" layoutX="254.0" layoutY="67.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
                <font>
                   <Font size="14.0" />
                </font>
@@ -42,12 +41,12 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button contentDisplay="CENTER" layoutX="6.0" layoutY="67.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
+            <Button contentDisplay="CENTER" layoutX="6.0" layoutY="67.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <MenuButton depthTest="DISABLE" graphicTextGap="8.0" layoutX="435.0" layoutY="17.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
+            <MenuButton graphicTextGap="8.0" layoutX="435.0" layoutY="17.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
               <items>
                 <MenuItem mnemonicParsing="false" text="Afficher/Modifier profil">
                      <graphic>
@@ -78,46 +77,13 @@
       </Pane>
       <Pane layoutY="93.0" prefHeight="362.0" prefWidth="606.0">
          <children>
-            <Pane prefHeight="362.0" prefWidth="210.0">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1c40f" height="358.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.2" style="-fx-background-color: #ecf0f1;" width="218.0" />
-                  <Text fill="#837123" layoutX="14.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salons" wrappingWidth="64.0">
-                     <font>
-                        <Font name="TeXGyreTermesMath-Regular" size="12.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#837123" layoutX="14.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conversation privée" wrappingWidth="144.72949040308595">
-                     <font>
-                        <Font name="TeXGyreTermesMath-Regular" size="12.0" />
-                     </font>
-                  </Text>
-                  <ScrollPane layoutX="13.0" layoutY="21.0" prefHeight="150.0" prefWidth="185.0">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #ecf0f1;" />
-                    </content>
-                  </ScrollPane>
-                  <ScrollPane layoutX="13.0" layoutY="205.0" prefHeight="150.0" prefWidth="185.0">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="180.0">
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </AnchorPane>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </Pane>
-            <Pane layoutX="215.0" layoutY="1.0" prefHeight="362.0" prefWidth="391.0">
-               <children>
-                  <TextArea layoutX="3.0" layoutY="3.0" prefHeight="307.0" prefWidth="388.0" />
-                  <TextField layoutX="14.0" layoutY="322.0" prefHeight="26.0" prefWidth="328.0" />
-                  <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="353.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/send-1.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
+            <TableView layoutX="20.0" layoutY="60.0" prefHeight="282.0" prefWidth="559.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Type" />
+                <TableColumn prefWidth="340.0" text="Nom" />
+                  <TableColumn prefWidth="151.0" text="Date modification" />
+              </columns>
+            </TableView>
          </children></Pane>
    </children>
 </AnchorPane>
