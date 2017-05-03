@@ -28,12 +28,28 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
 
 	}
 	
+	public void afficherOneEvent(int idEvenement) throws SQLException, RemoteException{
+		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
+	    Statement stmt = conn.createStatement();
+		try {
+			
+	        ResultSet rs = stmt.executeQuery("SELECT idEvenement, libelle, dateDebut, dateFin FROM Evenement WHERE idEvenement = " + idEvenement);
+			while(rs.next()){
+	            System.out.print("id : "+rs.getInt(1) + " libelle : "+rs.getString(2) + " dateD : "+rs.getString(3) + " dateF : "+rs.getString(4) + "\n");
+	        }
+	        stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	* Affiche les événements en fonction de l'idUser
 	* @param idUser : id de l'utilisateur
 	* @throws SQLException
 	**/
-	public void afficher(int idUser) throws SQLException, RemoteException{
+	public void afficherEventsUser(int idUser) throws SQLException, RemoteException{
 		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
 	    Statement stmt = conn.createStatement();
 		try {

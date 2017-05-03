@@ -1,7 +1,9 @@
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public interface CalClientInt {
-	public void afficherOrder(CalServerInt server, int idUser) throws RemoteException;
+	public void afficherOneEventOrder(int idEvenement) throws SQLException, RemoteException;
+	public void afficherEventsUserOrder(CalServerInt server, int idUser) throws RemoteException;
 	public void createEventOrder(CalServerInt server, int idUser, String libelle, String dateDebut, String dateFin) throws RemoteException;
 	public void updateEventOrder(CalServerInt server, int idEvent, String libelle, String dateDebut, String dateFin) throws RemoteException;
 	public void deleteEventOrder(CalServerInt server, int idEvent) throws RemoteException;

@@ -3,14 +3,23 @@ import java.sql.SQLException;
 
 public class CalClient {
 
+	public static void afficherOneEventOrder(CalServerInt server, int idEvenement) throws RemoteException{
+		try {
+			server.afficherOneEvent(idEvenement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	* Donne l'ordre au seveur d'afficher les événements en fonction de l'idUser
 	* @param server : serveur
 	* @param idUser : id de l'utilisateur
 	**/
-	public static void afficherOrder(CalServerInt server, int idUser) throws RemoteException {
+	public static void afficherEventsUserOrder(CalServerInt server, int idUser) throws RemoteException {
 		try {
-			server.afficher(idUser);
+			server.afficherEventsUser(idUser);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
