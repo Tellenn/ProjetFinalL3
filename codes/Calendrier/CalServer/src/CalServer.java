@@ -89,7 +89,7 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
 		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
 	    Statement stmt = conn.createStatement();
 		try {
-			stmt.executeQuery("UPDATE Evenement SET libelle = '" + libelle + "', dateDebut = to_date('" + dateDebut + "', 'DD-Mon-YY', 'nls_date_language = American'), dateFin = to_date('" + dateFin + "', 'DD-Mon-YY', 'nls_date_language = American') WHERE idEvenement = " + idEvent);
+			stmt.executeQuery("UPDATE Evenement SET libelle = '" + libelle + "', dateDebut = to_date('" + dateDebut + "', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American'), dateFin = to_date('" + dateFin + "', 'DD-Mon-YY hh24:mi:ss', 'nls_date_language = American') WHERE idEvenement = " + idEvent);
 			stmt.executeQuery("COMMIT");
          stmt.close();
 

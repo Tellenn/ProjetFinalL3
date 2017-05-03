@@ -8,7 +8,7 @@ public class CalClient {
 	* @param server : serveur
 	* @param idUser : id de l'utilisateur
 	**/
-	public void afficherOrder(CalServerInt server, int idUser) throws RemoteException {
+	public static void afficherOrder(CalServerInt server, int idUser) throws RemoteException {
 		try {
 			server.afficher(idUser);
 		} catch (SQLException e) {
@@ -24,7 +24,7 @@ public class CalClient {
 	* @param dateFin : date de fin de l’événement
 	* @param libelle : libelle de l’événement  
 	*/
-	public void createEventOrder(CalServerInt server, int idUser, String libelle, String dateDebut, String dateFin) throws RemoteException{
+	public static void createEventOrder(CalServerInt server, int idUser, String libelle, String dateDebut, String dateFin) throws RemoteException{
 		try {
 			server.createEvent(idUser, libelle, dateDebut, dateFin);
 		} catch (Exception e) {
@@ -41,7 +41,7 @@ public class CalClient {
 	* @param dateFin : nouvelle date de fin de l’événement
 	* @param libelle : nouveau libellé de l’événement
 	*/
-	public void updateEventOrder(CalServerInt server, int idEvent, String libelle, String dateDebut, String dateFin) throws RemoteException{
+	public static void updateEventOrder(CalServerInt server, int idEvent, String libelle, String dateDebut, String dateFin) throws RemoteException{
 		try {
 			server.updateEvent(idEvent, libelle, dateDebut, dateFin);
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class CalClient {
 	* @param server : serveur
 	* @param idEvent : id de l’événement à supprimer
 	*/
-	public void deleteEventOrder(CalServerInt server, int idEvent) throws RemoteException{
+	public static void deleteEventOrder(CalServerInt server, int idEvent) throws RemoteException{
 		try {
 			server.deleteEvent(idEvent);
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class CalClient {
 	* @param idEvent : id de l’événement
 	* @param idParticipant : id du participant
 	*/
-	public void addParticipantOrder(CalServerInt server, int idEvent, int idParticipant) throws RemoteException{
+	public static void addParticipantOrder(CalServerInt server, int idEvent, int idParticipant) throws RemoteException{
 		try {
 			server.addParticipant(idEvent, idParticipant);
 		} catch (Exception e) {
@@ -85,7 +85,7 @@ public class CalClient {
 	* @param idEvent : id de l’événement
 	* @param idParticipant : id du participant
 	*/
-	public void deleteParticipantOrder(CalServerInt server, int idEvent, int idParticipant) throws RemoteException{
+	public static void deleteParticipantOrder(CalServerInt server, int idEvent, int idParticipant) throws RemoteException{
 		try {
 			server.deleteEvent(idEvent);
 		} catch (Exception e) {

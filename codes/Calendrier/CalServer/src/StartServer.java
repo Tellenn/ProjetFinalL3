@@ -12,7 +12,7 @@ public class StartServer {
 			System.out.println("Port ok");
 			CalServer cal=new CalServer();
 			System.out.println("Création serveur ok");
-			Naming.rebind("rmi://152.77.82.30/abc", cal);//"+ipServ+"
+			Naming.rebind("rmi://172.20.10.5/abc", cal);//"+ipServ+"
 			System.out.println("Le serveur est pret a opérer");
 		}catch(Exception e){
 			e.printStackTrace();
