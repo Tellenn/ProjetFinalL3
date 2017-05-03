@@ -1,5 +1,6 @@
 import java.rmi.*;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public interface GEDServeurInt extends Remote {
 	/**
@@ -103,7 +104,7 @@ public interface GEDServeurInt extends Remote {
 	 * @param nomFolder
 	 * @throws java.rmi.RemoteException
 	 */
-	public void infoFolder(String nomFolder) throws RemoteException;
+	public int infoFolder(String nomFolder) throws RemoteException;
 
 	/**
 	 * Affichage Information d'acces à un dossier
@@ -111,7 +112,7 @@ public interface GEDServeurInt extends Remote {
 	 * @param idFolder
 	 * @throws java.rmi.RemoteException
 	 */
-	public void getAccessFolder(int idFolder) throws RemoteException;
+	public Vector<Integer> getAccessFolder(int idFolder) throws RemoteException;
 
 	/**
 	 * Affichage Information d'acces à un fichier
@@ -119,7 +120,7 @@ public interface GEDServeurInt extends Remote {
 	 * @param idDoc
 	 * @throws java.rmi.RemoteException
 	 */
-	public void getAccessDoc(int idDoc) throws RemoteException;
+	public Vector<Integer> getAccessDoc(int idDoc) throws RemoteException;
 
 	/**
 	 * Affichage Information dossier Racine
@@ -127,7 +128,7 @@ public interface GEDServeurInt extends Remote {
 	 * @param idFolder
 	 * @throws java.rmi.RemoteException
 	 */
-	public void getRacineFolder(int idFolder) throws RemoteException;
+	public int getRacineFolder(int idFolder) throws RemoteException;
 
 	/**
 	 * Affichage Information dossier fils d'un dossier
@@ -135,6 +136,6 @@ public interface GEDServeurInt extends Remote {
 	 * @param idFolder
 	 * @throws java.rmi.RemoteException
 	 */
-	public void getFilsFolder(int idFolder) throws RemoteException;
+	public Vector<Integer> getFilsFolder(int idFolder) throws RemoteException;
 
 }
