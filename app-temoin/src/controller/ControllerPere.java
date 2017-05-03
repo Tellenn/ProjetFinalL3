@@ -91,13 +91,31 @@ public class ControllerPere implements Initializable{
         stage.show(); 
     }
 
-    @FXML
-    private void printProfilAction(ActionEvent event) {
-    }
+   @FXML
+     private void printProfilAction(ActionEvent event) throws IOException {
+         Stage stage = new Stage();        
+         Parent root = new Pane();
+         if(event.getSource()==printProfil){
+             stage = (Stage) printProfil.getParentPopup().getOwnerWindow().getScene().getWindow();
+             root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+         }        
+         Scene scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show(); 
+     }
 
-    @FXML
-    private void deconnexionAction(ActionEvent event) {
-    }
+  @FXML
+     private void deconnexionAction(ActionEvent event) throws IOException {
+         Stage stage = new Stage();        
+         Parent root = new Pane();
+         if(event.getSource()==deconnexion){
+             stage = (Stage) deconnexion.getParentPopup().getOwnerWindow().getScene().getWindow();
+             root = FXMLLoader.load(getClass().getResource("/view/Connection.fxml"));
+         }        
+         Scene scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show(); 
+     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
