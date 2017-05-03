@@ -16,16 +16,12 @@ public abstract class Client {
 	///////////////////////////
 	// TODO: connecter et créer objet
 	private static 			ChatClient 		clientChat;
-	private 				ChatServerInt 	serverChat;
-	
+	private 				ChatServerInt 	serverChat;	
 	
 	/**
 	 * Permet de démarer un serveur
-	 * @param ipServ l'ip du serveur
-	 * @return l'interface serveur pour effectuer les autres action
-	 * @throws NotBoundException 
+	 * @param ip: l'ip du serveur
 	 * @throws RemoteException 
-	 * @throws MalformedURLException 
 	 */
 	public void connectChat (String ip) throws RemoteException{
 		serverChat = null;
@@ -37,9 +33,14 @@ public abstract class Client {
 		}
 	}
 	
-	public void sendTextPrivate(String text, int idRecepteur) {			
+	/**
+	 * Permet d'envoyer un message privé
+	 * @param text: le texte à envoyer 
+	 * @param idDestinataire: personne qui reçoit le message
+	 */
+	public void sendTextPrivate(String text, int idDestinataire) {			
 		try {
-			serverChat.publishPrivate(text, client.getId(), idRecepteur);
+			serverChat.publishPrivate(text, client.getId(), idDestinataire);
 		} catch (Exception e) {
 			System.out.println(e);
 		}		
@@ -68,16 +69,22 @@ public abstract class Client {
 		tf.setText("");
 	}*/
 	
-	public void addSalon(String text, int idRecepteur) {			
-		try {
-			serverChat.publishPrivate(text, client.getId(), idRecepteur);
+	/**
+	 * Permet d'ajouter un salon privé à un client
+	 * @param text: nom du salon 
+	 * @param idDestinataire: personne qui reçoit le message
+	 */
+	public void addSalon(String nomSalon, int idRecepteur) {			
+		/*try {
+			serverChat.publishPrivate(nomSalon, client.getId(), idRecepteur);
 		} catch (Exception e) {
 			System.out.println(e);
-		}		
+		}*/		
 	}
 	
+	
 	// ecrit le message dans l'interface à completer
-	// TODO: Par le développeur
+	// TODO: à coder par le développeur
 	public  void writeMsg(String st){
 		//tx.setText(tx.getText() + "\n" + st);
 	}
