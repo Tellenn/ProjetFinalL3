@@ -11,7 +11,7 @@ public class Serveur {
 	 * Permet de demarer le serveur GED
 	 * @param ipServ l'ip du serveur qui sera également utilisé par les clients
 	 */
-	public static void start() {
+	public static void startGEDserver() {
 		System.out.println("Demarage du serveur");
 		try{
 			java.rmi.registry.LocateRegistry.createRegistry(1099);
