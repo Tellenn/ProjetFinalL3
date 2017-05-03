@@ -1,7 +1,172 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 public class Client {
+	///////////////////////////
+	///						///
+	///		PARTIE User		///
+	///						///
+	///////////////////////////
+	private static 				UserClient 		client;
+	private 				UserServerInt 	server;
+	private static final 	String 			ip 		= "152.77.82.56";
+	
+	public void doConnect(String login, String mdp) {
+
+		if (login.length() < 2) {
+			// il faut que le nom ait plus de 2 caractères
+			System.out.println( "Format du mot de login impossible");
+			return;
+		}
+		if (mdp.length() < 2) {
+			//il faut que le champ ne soit pas vide
+			System.out.println(  "Format du mot de passe impossible");
+			return;
+		}
+		try {
+			//ip.getText()
+			client = new UserClient(login,mdp);
+			client.setGUI(this);
+			server = (UserServerInt) Naming.lookup("rmi://" + ip + "/myabc");
+
+			int id = server.login(client, login, mdp);
+			if (id != -1) {
+				System.out.println("id ======="+id);
+				client.setId(id);
+			} else {
+				System.out.println("Identification impossible, Veuillez écrire un login ou mot de passe correct");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println( "ERROR, Connexion impossible....");
+		}
+
+	}
+
+
+	public void ajoutUtilisateur(){
+		try {
+			server.ajoutUser(client, client.getName(), client.getMdp());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void suppressionUtilisateur(){
+		try {
+			server.suppressionUser(client);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void ajoutRelation(int idUser2){
+		try {
+			server.ajoutDeRelation(client, idUser2);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void suppressionRelation(int idUser2){
+		try {
+			server.suppressiontDeRelation(client, idUser2);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void ajoutAdmin(){
+		try {
+			server.ajoutAdmin(client);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void suppressionAdmin(){
+		try {
+			server.suppressionAdmin(client);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void chargementProfil(){
+		try {
+			server.chargementProfil(client);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificationProfil(){
+		try {
+			server.modificationProfil(client);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificationUsername(String userName){
+		try {
+			server.modificationUsername(client, userName);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificationPassword(String userPassword){
+		try {
+			server.modificationPassword(client, userPassword);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificationProfilParChamp(String champ, String content){
+		try {
+			server.modificationProfilParChamp(client, champ, content);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void ajoutChamp(String champ){
+		try {
+			server.ajoutChamp(champ);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void ajoutChamp(String champ, String content){
+		try {
+			server.ajoutChamp(client,champ,content);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void suppressionChamp(String champ){
+		try {
+			server.suppressionChamp(champ);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void suppressionChampPourUser(String champ){
+		try {
+			server.suppressionChamp(client,champ);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	///////////////////////////
 	///						///
 	///		PARTIE GED		///
