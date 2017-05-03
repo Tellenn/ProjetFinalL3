@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="app-temoin/src"/>
+	<classpathentry kind="src" path="codes/Calendrier/CalClient/src"/>
+	<classpathentry kind="src" path="codes/Calendrier/CalServer/src"/>
+	<classpathentry kind="src" path="codes/Chat/ChatClientProj/src"/>
+	<classpathentry kind="src" path="codes/Chat/ChatServerProj/src"/>
+	<classpathentry kind="src" path="codes/GED/GEDClient/src"/>
+	<classpathentry kind="src" path="codes/GED/GEDServer/src"/>
+	<classpathentry kind="src" path="codes/Users/UserClientProj/src"/>
+	<classpathentry kind="src" path="codes/Users/UserServer/src"/>
+	<classpathentry kind="src" path="KICQAClient/src"/>
+	<classpathentry kind="src" path="KICQAServeur/src"/>
+	<classpathentry kind="lib" path="app-temoin/dist/app-temoin.jar"/>
+	<classpathentry kind="lib" path="app-temoin/lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
+	<classpathentry kind="lib" path="codes/Calendrier/CalServer/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="codes/Chat/ChatServerProj/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="codes/Users/UserServer/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="KICQAServeur/ojdbc6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="output" path="app-temoin/build/classes"/>
+</classpath>

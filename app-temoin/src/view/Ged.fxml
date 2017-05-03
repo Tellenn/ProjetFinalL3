@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GedController">
    <children>
       <Pane prefHeight="96.0" prefWidth="606.0">
          <children>
@@ -25,7 +25,7 @@
                   <Font name="TeXGyreTermesMath-Regular" size="24.0" />
                </font>
             </Text>
-            <Button contentDisplay="CENTER" layoutX="254.0" layoutY="67.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
+            <Button fx:id="chat" contentDisplay="CENTER" layoutX="254.0" layoutY="67.0" mnemonicParsing="false" onAction="#chatButtonAction" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CHAT">
                <font>
                   <Font size="14.0" />
                </font>
@@ -33,7 +33,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button contentDisplay="CENTER" layoutX="131.0" layoutY="67.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CALENDRIER">
+            <Button fx:id="calendrier" contentDisplay="CENTER" layoutX="131.0" layoutY="67.0" mnemonicParsing="false" onAction="#calButtonAction" prefHeight="24.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="CALENDRIER">
                <font>
                   <Font size="14.0" />
                </font>
@@ -46,9 +46,9 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <MenuButton graphicTextGap="8.0" layoutX="435.0" layoutY="17.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
+            <MenuButton fx:id="moncompte" graphicTextGap="8.0" layoutX="435.0" layoutY="17.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="157.0" style="-fx-background-color: #ecf0f1;" text="Mon compte" textFill="#979696">
               <items>
-                <MenuItem mnemonicParsing="false" text="Afficher/Modifier profil">
+                <MenuItem fx:id="printProfil" mnemonicParsing="false" onAction="#printProfilAction" text="Afficher/Modifier profil">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -56,7 +56,7 @@
                            </image>
                         </ImageView>
                      </graphic></MenuItem>
-                <MenuItem mnemonicParsing="false" text="Déconnexion">
+                <MenuItem fx:id="deconnexion" mnemonicParsing="false" onAction="#deconnexionAction" text="Déconnexion">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -77,7 +77,7 @@
       </Pane>
       <Pane layoutY="93.0" prefHeight="362.0" prefWidth="606.0">
          <children>
-            <TableView layoutX="20.0" layoutY="60.0" prefHeight="282.0" prefWidth="559.0">
+            <TableView fx:id="tabGed" layoutX="20.0" layoutY="60.0" prefHeight="282.0" prefWidth="559.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Type" />
                 <TableColumn prefWidth="340.0" text="Nom" />
