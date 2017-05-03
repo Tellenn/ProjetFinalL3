@@ -1,6 +1,9 @@
+import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 public class Client {
@@ -181,14 +184,13 @@ public class Client {
 	 * @throws MalformedURLException 
 	 */
 	public static GEDServeurInt connectGED (String ip) throws MalformedURLException, RemoteException, NotBoundException{
-	GEDServeurInt server = null;
-	try {
-		server = (GEDServeurInt) Naming.lookup("rmi://" + ip + "/abc");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}finally{
-		return server;
-	}
+		GEDServeurInt server = null;
+		try {
+			server = (GEDServeurInt) Naming.lookup("rmi://" + ip + "/abc");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			return server;
 	}
 	
 	/**
@@ -428,7 +430,7 @@ public class Client {
 	 * Affichage Information dossier fils d'un dossier
 	 * @param server l'interface serveur utilisé
 	 * @param idfol id du dossier père
-	 * @return TODO Retourne les ids fils
+	 * @return  Retourne les ids fils
 	 */
 	public static Vector<Integer> getFilsFolder(GEDServeurInt server, int idfol) {
 		Vector<Integer> idfils = null;
@@ -457,7 +459,6 @@ public class Client {
 		try {
 			server.afficherOneEvent(idEvenement);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -471,7 +472,6 @@ public class Client {
 		try {
 			server.afficherEventsUser(idUser);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -487,7 +487,6 @@ public class Client {
 		try {
 			server.createEvent(idUser, libelle, dateDebut, dateFin);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -504,7 +503,6 @@ public class Client {
 		try {
 			server.updateEvent(idEvent, libelle, dateDebut, dateFin);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -518,7 +516,6 @@ public class Client {
 		try {
 			server.deleteEvent(idEvent);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -533,7 +530,6 @@ public class Client {
 		try {
 			server.addParticipant(idEvent, idParticipant);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -548,7 +544,6 @@ public class Client {
 		try {
 			server.deleteEvent(idEvent);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
