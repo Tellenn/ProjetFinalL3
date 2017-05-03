@@ -31,6 +31,7 @@ public abstract class Client {
 		serverChat = null;
 		try {
 			serverChat = (ChatServerInt) Naming.lookup("rmi://" + ip + "/abc");
+			clientChat = new ChatClient(client.getName(), this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
