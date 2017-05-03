@@ -89,7 +89,9 @@ public class Client {
 	public  void writeMsg(String st){
 		//tx.setText(tx.getText() + "\n" + st);
 	}
-
+	public  TreeMap<Integer, ChatClientInt> getConnected() throws RemoteException{
+		return serverChat.getConnected();		
+	}
 
 	
 	///////////////////////////
