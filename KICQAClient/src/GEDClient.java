@@ -5,14 +5,14 @@ import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
  
-public class FileClient  extends UnicastRemoteObject implements FileClientInt {
+public class GEDClient  extends UnicastRemoteObject implements GEDClientInt {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public String name;
-	public  FileClient(String n) throws RemoteException {
+	public  GEDClient(String n) throws RemoteException {
 		super();
 		name=n;
 	}
@@ -56,7 +56,7 @@ public class FileClient  extends UnicastRemoteObject implements FileClientInt {
 	 * @param file nom du fichier a transfer
 	 * @return true si le fichier à bien été transféré
 	 */
-	public int sendData(FileServerInt server, String path, String file) throws RemoteException {
+	public int sendData(GEDServeurInt server, String path, String file) throws RemoteException {
 		int idfile = 0;
 		try{
 			 File f1=new File(path+file);			 

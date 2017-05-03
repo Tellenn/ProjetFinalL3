@@ -2,6 +2,7 @@
 
 <?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -29,8 +30,8 @@
                </font>
             </Text>
             <TextField layoutX="218.0" layoutY="145.0" prefHeight="28.0" prefWidth="170.0" text="Login" />
-            <TextField layoutX="218.0" layoutY="181.0" text="Mot de passe" />
-            <Button layoutX="252.0" layoutY="222.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="103.0" text="Connexion" />
+            <Button layoutX="252.0" layoutY="229.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="103.0" text="Connexion" />
+            <PasswordField layoutX="218.0" layoutY="181.0" text="password" />
          </children>
       </Pane>
    </children>
