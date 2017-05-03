@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  *
  * @author aminca
  */
-public class GedController implements Initializable {
+public class GedController extends ControllerPere implements Initializable {
     @FXML
     private Button chat;
     @FXML
@@ -49,70 +49,5 @@ public class GedController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void printProfilAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();        
-        Parent root = new Pane();
-        if(event.getSource()==printProfil){
-            stage = (Stage) printProfil.getParentPopup().getOwnerWindow().getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
-        }        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-    }
-
-    @FXML
-    private void deconnexionAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();        
-        Parent root = new Pane();
-        if(event.getSource()==deconnexion){
-            stage = (Stage) deconnexion.getParentPopup().getOwnerWindow().getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/Connection.fxml"));
-        }        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-    }
-    
-       @FXML
-    private void chatButtonAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();        
-        Parent root = new Pane();
-        if(event.getSource()==chat){
-            stage = (Stage) chat.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/Chat.fxml"));
-        }        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-    }
-
-    @FXML
-    private void calButtonAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();        
-        Parent root = new Pane();
-        if(event.getSource()==calendrier){
-            stage = (Stage) calendrier.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/Calendrier.fxml"));
-        }        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-    }
-
-    @FXML
-    private void gedButtonAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();        
-        Parent root = new Pane();
-        if(event.getSource()==ged){
-            stage = (Stage) ged.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/Ged.fxml"));
-        }        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-    }
     
 }
