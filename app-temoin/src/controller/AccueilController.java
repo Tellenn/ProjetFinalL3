@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author aminca
  */
-public class UserController implements Initializable {
+public class AccueilController implements Initializable {
     @FXML
     private Button chat;
     @FXML
@@ -38,10 +38,6 @@ public class UserController implements Initializable {
     private MenuItem printProfil;
     @FXML
     private MenuItem deconnexion;
-    @FXML
-    private Button modifprofil;
-    @FXML
-    private Button modifmdp;
 
     /**
      * Initializes the controller class.
@@ -115,20 +111,5 @@ public class UserController implements Initializable {
         stage.setScene(scene);
         stage.show(); 
     }
-    @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();        
-        Parent root = new Pane();
-        if(event.getSource()==modifmdp){
-            stage = (Stage) modifmdp.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/Mdp.fxml"));
-        }        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-    }
-        
-   
-
     
 }

@@ -45,11 +45,9 @@ public class ConnectionController implements Initializable {
     private void submitButtonAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();        
         Parent root = new Pane();
-        System.out.println("****atest");
         if(event.getSource()==connexion){
-            System.out.println("****aaazd");
             stage = (Stage) connexion.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/view/accueil.fxml"));
         }        
         Scene scene = new Scene(root);
         stage.setScene(scene);
