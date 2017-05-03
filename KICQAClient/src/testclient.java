@@ -90,12 +90,12 @@ public class testclient {
 			 * PARTIE CHAT
 			 * 
 			 */
-		 	/*
-		 	Client clientChat = new Client();
 		 	
-		 	Client.connectChat(ip);
+		 	Client c = new Client();
 		 	
-		 	Client.sendTextPrivate(String text, int idDestinataire)
+		 	c.connectChat(ip);
+		 	
+		 	Client.sendTextPrivate("J'envoie un message", int idDestinataire)
 		 	
 		 	addSalon(String nomSalon, int idRecepteur)*/
 		 	

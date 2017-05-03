@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
-public abstract class Client {
+public class Client {
 	///////////////////////////
 	///						///
 	///		PARTIE CHAT		///
@@ -23,6 +23,8 @@ public abstract class Client {
 	 * @param ip: l'ip du serveur
 	 * @throws RemoteException 
 	 */
+	public Client() {}
+
 	public void connectChat (String ip) throws RemoteException{
 		serverChat = null;
 		try {
