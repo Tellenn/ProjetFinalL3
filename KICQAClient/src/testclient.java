@@ -90,12 +90,12 @@ public class testclient {
 			 * PARTIE CHAT
 			 * 
 			 */
+		 	/*
+		 	Client clientChat = new Client();
 		 	
-		 	Client c = new Client();
+		 	Client.connectChat(ip);
 		 	
-		 	c.connectChat(ip);
-		 	
-		 	Client.sendTextPrivate("J'envoie un message", int idDestinataire)
+		 	Client.sendTextPrivate(String text, int idDestinataire)
 		 	
 		 	addSalon(String nomSalon, int idRecepteur)*/
 		 	
@@ -105,6 +105,28 @@ public class testclient {
 			 * PARTIE USER
 			 * 
 			 */
+		 	/*Client client = new Client();
+		 	String username = "aminc";
+		 	String password = "toto";
+		 	client.doConnect(username,password);
+		 	client.ajoutUtilisateur(username, password);
+		 	client.suppressionUtilisateur();
+		 	client.ajoutAdmin();
+		 	client.suppressionAdmin();
+		 	
+		 	client.chargementProfil();
+		 	client.ajoutChamp("age");
+		 	client.suppressionChamp("age");
+		 	client.ajoutChamp("age", "20");
+		 	client.modificationProfilParChamp("nom", "amin");
+		 	client.suppressionChampPourUser("age");
+		 	client.modificationPassword("toto");
+		 	client.modificationUsername("aminc");
+		 	client.modificationProfil();
+		 	client.ajoutRelation(2);
+		 	client.suppressionRelation(2);*/
+		 	
+		 	
 		 	
 		}
 }
