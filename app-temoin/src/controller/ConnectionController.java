@@ -1,11 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
-
-
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,14 +27,11 @@ import javafx.stage.Stage;
  */
 public class ConnectionController implements Initializable {
     @FXML
-    private Button connexion;
-    
-    @FXML
     private TextField username;
-    
+    @FXML
+    private Button connexion;
     @FXML
     private PasswordField password;
-        
 
     /**
      * Initializes the controller class.
@@ -44,22 +43,15 @@ public class ConnectionController implements Initializable {
 
     @FXML
     private void submitButtonAction(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
+        Stage stage = new Stage();        
         Parent root = new Pane();
         if(event.getSource()==connexion){
             stage = (Stage) connexion.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
-        }
-        
+        }        
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
-        //username.setPromptText("username");
-        //password.setPromptText("password");
-        
-       /* String login = username.getText();
-        String mdp = password.getText();
-        connexion.setText("connexion");*/
+        stage.show(); 
     }
     
 }
