@@ -26,7 +26,7 @@ CREATE TABLE Admin
 (
 	idUser 		INTEGER PRIMARY KEY,
    	CONSTRAINT ck_Admin_idAdmin CHECK (idAdmin>0),
-   	CONSTRAINT fk_Admin_idAdmin FOREIGN KEY (idAdmin) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
+   	CONSTRAINT fk_Admin_idAdmin FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
 --Table Relation
 CREATE TABLE Relation
