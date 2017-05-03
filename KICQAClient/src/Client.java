@@ -167,24 +167,42 @@ public class Client {
 		}
 	}
 	
-	///////////////////////////
+///////////////////////////
 	///						///
 	///		PARTIE GED		///
 	///						///
 	///////////////////////////
 	/**
+	 * Permet de démarer un serveur
+	 * @param ipServ
+	 * @return l'interface serveur pour effectuer les autres action
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
+	 */
+	public static GEDServeurInt connectGED (String ip) throws MalformedURLException, RemoteException, NotBoundException{
+	GEDServeurInt server = null;
+	try {
+		server = (GEDServeurInt) Naming.lookup("rmi://" + ip + "/abc");
+	} catch (Exception e) {
+		e.printStackTrace();
+	}finally{
+		return server;
+	}
+	}
+	
+	/**
 	 * Télécharge depuis le serveur le fichier cible pour le client
-	 * @param ipServ l'ip du serveur cible
+	 * @param server l'interface serveur utilisé
 	 * @param client le nom du client
 	 * @param home l'endroit où est rangé le fichier dans le serveur
 	 * @param file le nom du fichier
 	 * @param cible l'endroit où le fichier doit être téléchargé
 	 */
-	public static void downloadFile(String ipServ, String client, String home, String file, String cible) {
+	public static void downloadFile(GEDServeurInt server, String client, String home, String file, String cible) {
 		System.out.println("Mode Download client démarré");
 		try {
 			GEDClient c = new GEDClient(client);
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.setFile(file, home);
 			server.sendData(c, cible);
 			System.out.println("Fin du download client");
@@ -195,17 +213,16 @@ public class Client {
 
 	/**
 	 * Permet à un client d'upload la sur la GED un fichier
-	 * @param ipServ ip du serveur
+	 * @param server l'interface serveur utilisé
 	 * @param client nom du client
 	 * @param home endroit où est rengé le serveur
 	 * @param file nom du fichier
 	 */
-	public static int UploadFile(String ipServ, String client, String home, String file) {
+	public static int UploadFile(GEDServeurInt server, String client, String home, String file) {
 		int id = 0;
 		System.out.println("Mode Upload client démarré");
 		try {
 			GEDClient c = new GEDClient(client);
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.setFile(file, "GED/");
 			id = c.sendData(server, home, file);
 			System.out.println("Fin de l'upload client");
@@ -217,16 +234,14 @@ public class Client {
 
 	/**
 	 * Supprimer un fichier
-	 * 
-	 * @param ipServ
-	 * @param iddoc
-	 * @param home
+	 * @param server l'interface serveur utilisé
+	 * @param iddoc l'id du document à supprimer
+	 * @param home le chemin vers le fichier à supprimer
 	 */
-	public static void DeleteFile(String ipServ, int iddoc, String home) {
+	public static void DeleteFile(GEDServeurInt server, int iddoc, String home) {
 
 		System.out.println("Mode Delete File ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.deleteDoc(iddoc, home);
 			System.out.println("Fichier supprimé ");
 		} catch (Exception e) {
@@ -236,16 +251,14 @@ public class Client {
 
 	/**
 	 * Supprimer un dossier
-	 * 
-	 * @param ipServ 
-	 * @param idfol
-	 * @param home
+	 * @param server l'interface serveur utilisé
+	 * @param idfol l'id du fichier à supprimer
+	 * @param home le chemin vers le dossier
 	 */
-	public static void DeleteFolder(String ipServ, int idfol, String home) {
+	public static void DeleteFolder(GEDServeurInt server, int idfol, String home) {
 
 		System.out.println("Mode Delete Folder ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.deleteFolder(idfol, home);
 			System.out.println("Dossier supprimé");
 		} catch (Exception e) {
@@ -255,16 +268,14 @@ public class Client {
 
 	/**
 	 * Partager un Fichier
-	 * 
-	 * @param ipServ
-	 * @param iddoc
-	 * @param iduser
+	 * @param server l'interface serveur utilisé
+	 * @param iddoc l'id du document à partager
+	 * @param iduser id de l'utilisateur avec qui partager
 	 */
-	public static void ShareFile(String ipServ, int iddoc, int iduser) {
+	public static void ShareFile(GEDServeurInt server, int iddoc, int iduser) {
 
 		System.out.println("Mode Partage File ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.shareDoc(iddoc, iduser);
 			System.out.println("Fichier partagé ");
 		} catch (Exception e) {
@@ -273,17 +284,15 @@ public class Client {
 	}
 
 	/**
-	 * Partager un dossier
-	 * 
-	 * @param ipServ
-	 * @param idfol
-	 * @param iduser
+	 * Partager un dossier	
+	 * @param server l'interface serveur utilisé
+	 * @param idfol id du dossier à partager
+	 * @param iduser id de l'utilisateur à qui partager le dossier
 	 */
-	public static void ShareFolder(String ipServ, int idfol, int iduser) {
+	public static void ShareFolder(GEDServeurInt server, int idfol, int iduser) {
 
 		System.out.println("Mode Partage Folder ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.shareFolder(idfol, iduser);
 			System.out.println("Dossier partagé ");
 		} catch (Exception e) {
@@ -293,16 +302,14 @@ public class Client {
 
 	/**
 	 * Supprimer le droit d'acces d'un utilisateur sur un fichier
-	 * 
-	 * @param ipServ
-	 * @param iddoc
-	 * @param iduser
+	 * @param server l'interface serveur utilisé
+	 * @param iddoc id du document où l'accès doit être révoqué
+	 * @param iduser id du client à qui on va révoquer l'accès
 	 */
-	public static void deleteAccessDoc(String ipServ, int iddoc, int iduser) {
+	public static void deleteAccessDoc(GEDServeurInt server, int iddoc, int iduser) {
 
 		System.out.println("Mode Delete Droit File ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.deleteAccessDoc(iddoc, iduser);
 			System.out.println("Droit Fichier supprimé ");
 		} catch (Exception e) {
@@ -312,16 +319,14 @@ public class Client {
 
 	/**
 	 * Supprimer le droit d'acces d'un utilisateur sur un dossier
-	 * 
-	 * @param ipServ
+	 * @param server l'interface serveur utilisé
 	 * @param idfol
 	 * @param iduser
 	 */
-	public static void deleteAccessFolder(String ipServ, int idfol, int iduser) {
+	public static void deleteAccessFolder(GEDServeurInt server, int idfol, int iduser) {
 
 		System.out.println("Mode Delete Droit Folder ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
 			server.deleteAccessFolder(idfol, iduser);
 			System.out.println("Droit Dossier supprimé ");
 		} catch (Exception e) {
@@ -331,10 +336,9 @@ public class Client {
 
 	/**
 	 * Créer un dossier
-	 * 
-	 * @param ipServ
-	 * @param idfol
-	 * @param nomfol
+	 * @param server l'interface serveur utilisé
+	 * @param nomfol le nom du dossier à créer
+	 * @return l'id du dossier créé
 	 */
 	public static int createFolder(GEDServeurInt server, String nomfol) {
 		int idfol = 0;
@@ -349,93 +353,93 @@ public class Client {
 	}
 
 	/**
-	 * Affichage Information d'un dossier
-	 * 
-	 * @param ipServ
-	 * @param nomfol
+	 * Renvoi l'id du dossier en fonction du nom
+	 * @param server l'interface serveur utilisé
+	 * @param nomfol le nom du dossier au quel on récupère les info
+	 * @return Retourne l'id
 	 */
-	public static void infoFolder(String ipServ, String nomfol) {
-
+	public static int infoFolder(GEDServeurInt server, String nomfol) {
+		int iddos = 0;
 		System.out.println("Mode Edit Dossier ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
-			server.infoFolder(nomfol);
+			iddos = server.infoFolder(nomfol);
 			System.out.println("Info Dossier ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return iddos;
 	}
 
 	/**
 	 * Affichage Information d'acces à un dossier
-	 * 
-	 * @param ipServ
-	 * @param idfol
+	 * @param server l'interface serveur utilisé
+	 * @param idfol l'id du dossier 
+	 * @return Retourne les users qui ont accès au dossier
 	 */
-	public static void getAccessFolder(String ipServ, int idfol) {
-
+	public static Vector<Integer> getAccessFolder(GEDServeurInt server, int idfol) {
+		Vector<Integer> users = null;
 		System.out.println("Mode Edit Dossier ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
-			server.getAccessFolder(idfol);
+			users = server.getAccessFolder(idfol);
 			System.out.println("Info Acces Dossier");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return users;
 	}
 
 	/**
-	 * Affichage Information d'acces à un fichier
-	 * 
-	 * @param ipServ
-	 * @param iddoc
+	 * Affichage Information d'acces à un fichier	
+	 * @param server l'interface serveur utilisé
+	 * @param iddoc l'id du document
+	 * @return retourne les users qui ont accès au fichier
 	 */
-	public static void getAccessDoc(String ipServ, int iddoc) {
-
+	public static Vector<Integer> getAccessDoc(GEDServeurInt server, int iddoc) {
+		Vector<Integer> users = null;
 		System.out.println("Mode Edit Acces File ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
-			server.getAccessDoc(iddoc);
+			users = server.getAccessDoc(iddoc);
 			System.out.println("Fichier supprimé ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return users;
 	}
 
 	/**
 	 * Affichage Information dossier Racine
-	 * 
-	 * @param ipServ
-	 * @param idfol
+	 * @param server l'interface serveur utilisé
+	 * @param idfol id du dossier fils
+	 * @return l'id du dossier pere
 	 */
-	public static void getRacineFolder(String ipServ, int idfol) {
-
+	public static int getRacineFolder(GEDServeurInt server, int idfol) {
+		int idPere = 0;
 		System.out.println("Mode Delete File ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
-			server.getRacineFolder(idfol);
+			idPere = server.getRacineFolder(idfol);
 			System.out.println("Info ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return idPere;
 	}
 
 	/**
 	 * Affichage Information dossier fils d'un dossier
-	 * 
-	 * @param ipServ
-	 * @param idfol
+	 * @param server l'interface serveur utilisé
+	 * @param idfol id du dossier père
+	 * @return TODO Retourne les ids fils
 	 */
-	public static void getFilsFolder(String ipServ, int idfol) {
-
+	public static Vector<Integer> getFilsFolder(GEDServeurInt server, int idfol) {
+		Vector<Integer> idfils = null;
 		System.out.println("Mode Delete File ");
 		try {
-			GEDServeurInt server = (GEDServeurInt) Naming.lookup("rmi://" + ipServ + "/abc");
-			server.getFilsFolder(idfol);
+			idfils = server.getFilsFolder(idfol);
 			System.out.println("Info  ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return idfils;
 	}
 	
 	///////////////////////////
