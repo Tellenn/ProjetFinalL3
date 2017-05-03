@@ -170,14 +170,14 @@ public class Client {
 		}
 	}
 	
-///////////////////////////
+	///////////////////////////
 	///						///
 	///		PARTIE GED		///
 	///						///
 	///////////////////////////
 	/**
 	 * Permet de démarer un serveur
-	 * @param ipServ
+	 * @param ipServ l'ip du serveur
 	 * @return l'interface serveur pour effectuer les autres action
 	 * @throws NotBoundException 
 	 * @throws RemoteException 
