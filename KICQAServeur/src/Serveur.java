@@ -9,20 +9,63 @@ public class Serveur {
 
 	/**
 	 * Permet de demarer le serveur GED
-	 * @param ipServ l'ip du serveur qui sera également utilisé par les clients
 	 */
 	public static void startGEDserver() {
 		System.out.println("Demarage du serveur GED");
 		try{
-			java.rmi.registry.LocateRegistry.createRegistry(1099);
-			System.out.println("Port ok");
+			java.rmi.registry.LocateRegistry.createRegistry(2220);
 			GEDServeur fs=new GEDServeur();
-			System.out.println("Création serveur ok");
 			Naming.rebind("rmi://"+ip+"/abc", fs);
 			System.out.println("Le serveur GED est pret a opérer");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Permet de demarer le serveur Calendrier
+	 */
+	public static void startCALserver() {
+		System.out.println("Demarage du serveur CAL");
+		try{
+			java.rmi.registry.LocateRegistry.createRegistry(2221);
+			CalServer fs=new CalServer();
+			Naming.rebind("rmi://"+ip+"/abc", fs);
+			System.out.println("Le serveur CAL est pret a opérer");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Permet de demarer le serveur Gestion utilisateurs
+	 */
+	public static void startUSERserver() {
+		System.out.println("Demarage du serveur USER");
+		try{
+			java.rmi.registry.LocateRegistry.createRegistry(2222);
+			UserServer fs=new UserServer();
+			Naming.rebind("rmi://"+ip+"/abc", fs);
+			System.out.println("Le serveur USER est pret a opérer");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Permet de demarer le serveur Chat
+	 */
+	public static void startCHATserver() {
+		System.out.println("Demarage du serveur CHAT");
+		try{
+			java.rmi.registry.LocateRegistry.createRegistry(2223);
+			ChatServer fs=new ChatServer();
+			Naming.rebind("rmi://"+ip+"/abc", fs);
+			System.out.println("Le serveur CHAT est pret a opérer");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
