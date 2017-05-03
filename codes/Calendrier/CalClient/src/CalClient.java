@@ -3,6 +3,11 @@ import java.sql.SQLException;
 
 public class CalClient {
 
+	/**
+	* Donne l'ordre au seveur d'afficher un événement
+	* @param server : serveur
+	* @param idEvenement : id de l'evenement
+	**/
 	public static void afficherOneEventOrder(CalServerInt server, int idEvenement) throws RemoteException{
 		try {
 			server.afficherOneEvent(idEvenement);

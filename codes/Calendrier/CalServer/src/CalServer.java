@@ -28,6 +28,11 @@ public class CalServer extends UnicastRemoteObject implements CalServerInt {
 
 	}
 	
+	/**
+	* Affiche un evenement
+	* @param idEvenement : id de l'evenement
+	* @throws SQLException
+	**/
 	public void afficherOneEvent(int idEvenement) throws SQLException, RemoteException{
 		Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
 	    Statement stmt = conn.createStatement();
