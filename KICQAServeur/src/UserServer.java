@@ -66,6 +66,7 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 		
 		public void suppressiontDeRelation(UserClientInt a, int idUser2) throws RemoteException{	
 			int idUser1 = user.rechercheUtilisateur(a.getName());
+			System.out.println(idUser1);
 			user.supprimerRelation(idUser1, idUser2);
 		}
 		
@@ -145,11 +146,6 @@ public class UserServer extends UnicastRemoteObject implements UserServerInt {
 		return v;
 	}
 
-	@Override
-	public void publish(String s, int id) throws RemoteException {
-		
-		
-	}
 
 }
 	

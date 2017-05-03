@@ -5,7 +5,6 @@ import java.util.Vector;
  
 public interface UserServerInt extends Remote{	
 	public int login(UserClientInt a, String login, String mdp) throws RemoteException;
-	public void publish (String s, int id )throws RemoteException ;
 	public Vector getConnected() throws RemoteException ;
 	
 	public void ajoutDeRelation(UserClientInt a, int idUser2) throws RemoteException;

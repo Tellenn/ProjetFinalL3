@@ -141,6 +141,7 @@ public class Utilisateur {
 	        Statement stmt = conn.createStatement();
 	        String rqt = "delete FROM Relation WHERE idUser1=" + idUser1 + "and idUser2=" + idUser2 ;
 	        stmt.executeUpdate(rqt);
+	        System.out.println("delete relation");
 	        stmt.close();
 	        commit();
     	} catch (SQLException e) {
