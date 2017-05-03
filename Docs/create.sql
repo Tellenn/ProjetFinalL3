@@ -24,9 +24,9 @@ CREATE TABLE Utilisateur
 --Table Admin
 CREATE TABLE Admin
 (
-	idAdmin 		INTEGER PRIMARY KEY,
+	idUser 		INTEGER PRIMARY KEY,
    	CONSTRAINT ck_Admin_idAdmin CHECK (idAdmin>0),
-   	CONSTRAINT fk_Admin_idAdmin FOREIGN KEY (idAdmin) REFERENCES Utilisateur(idUser)
+   	CONSTRAINT fk_Admin_idAdmin FOREIGN KEY (idAdmin) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
 --Table Relation
 CREATE TABLE Relation
@@ -34,8 +34,8 @@ CREATE TABLE Relation
     idUser1 		INTEGER,
     idUser2 		INTEGER,
     CONSTRAINT pk_Relation PRIMARY KEY(iduser1,iduser2),
-    CONSTRAINT fk_Relation_idUser1 FOREIGN KEY (idUser1) REFERENCES Utilisateur(idUser),
-    CONSTRAINT fk_Relation_idUser2 FOREIGN KEY (idUser2) REFERENCES Utilisateur(idUser)
+    CONSTRAINT fk_Relation_idUser1 FOREIGN KEY (idUser1) REFERENCES Utilisateur(idUser) ON DELETE CASCADE,
+    CONSTRAINT fk_Relation_idUser2 FOREIGN KEY (idUser2) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
 --Table Salons
 CREATE TABLE Salon
@@ -49,8 +49,8 @@ CREATE TABLE DroitSalon
     idSalon 			INTEGER,
     idUser 			INTEGER,
     CONSTRAINT pk_DroitSalon PRIMARY KEY (idSalon, idUser),
-    CONSTRAINT fk_DroitSalon_idSalon FOREIGN KEY (idSalon) REFERENCES salon(idSalon),
-    CONSTRAINT fk_DroitSalon_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+    CONSTRAINT fk_DroitSalon_idSalon FOREIGN KEY (idSalon) REFERENCES salon(idSalon) ON DELETE CASCADE,
+    CONSTRAINT fk_DroitSalon_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
 --Table Evenement
 CREATE TABLE Evenement
@@ -67,8 +67,8 @@ CREATE TABLE Participant
 	idEvenement 	INTEGER,
 	idUser 			INTEGER,
 	CONSTRAINT pk_Participant PRIMARY KEY (idEvenement, idUser),
-	CONSTRAINT fk_Participant_idEvenement FOREIGN KEY (idEvenement) REFERENCES Evenement(idEvenement),
-	CONSTRAINT fk_Participant_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+	CONSTRAINT fk_Participant_idEvenement FOREIGN KEY (idEvenement) REFERENCES Evenement(idEvenement) ON DELETE CASCADE,
+	CONSTRAINT fk_Participant_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
 --Table Dossier
 CREATE TABLE Dossier(
@@ -89,16 +89,16 @@ CREATE TABLE DossierDansDossier
 (
 	idDossierFils 	INTEGER PRIMARY KEY,
 	idDossierPere 	INTEGER,
-	CONSTRAINT fk_DdsD_idDossierFils FOREIGN KEY (idDossierFils) REFERENCES Dossier(idDossier),
-	CONSTRAINT fk_DdsD_idDossierPere FOREIGN KEY (idDossierPere) REFERENCES Dossier(idDossier)
+	CONSTRAINT fk_DdsD_idDossierFils FOREIGN KEY (idDossierFils) REFERENCES Dossier(idDossier) ON DELETE CASCADE,
+	CONSTRAINT fk_DdsD_idDossierPere FOREIGN KEY (idDossierPere) REFERENCES Dossier(idDossier) ON DELETE CASCADE
 );
 --Table FichierDansDossier
 CREATE TABLE FichierDansDossier
 (
 	idFichier 		INTEGER PRIMARY KEY,
 	idDossier 		INTEGER,
-	CONSTRAINT fk_FdsD_idFichier FOREIGN KEY (idFichier) REFERENCES Fichier(idFichier),
-	CONSTRAINT fk_FdsD_idDossier FOREIGN KEY (idDossier) REFERENCES Dossier(idDossier)
+	CONSTRAINT fk_FdsD_idFichier FOREIGN KEY (idFichier) REFERENCES Fichier(idFichier) ON DELETE CASCADE,
+	CONSTRAINT fk_FdsD_idDossier FOREIGN KEY (idDossier) REFERENCES Dossier(idDossier) ON DELETE CASCADE
 );
 --Table DroitDossier
 CREATE TABLE DroitDossier
@@ -106,8 +106,8 @@ CREATE TABLE DroitDossier
 	idDossier 		INTEGER,
 	idUser 			INTEGER,
 	CONSTRAINT pk_DroitDossier PRIMARY KEY (idDossier, idUser),
-	CONSTRAINT fk_DroitDossier_idDossier FOREIGN KEY (idDossier) REFERENCES Dossier(idDossier),
-	CONSTRAINT fk_DroitDossier_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+	CONSTRAINT fk_DroitDossier_idDossier FOREIGN KEY (idDossier) REFERENCES Dossier(idDossier) ON DELETE CASCADE,
+	CONSTRAINT fk_DroitDossier_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
 --Table DroitFichier
 CREATE TABLE DroitFichier
@@ -115,6 +115,6 @@ CREATE TABLE DroitFichier
 	idFichier 		INTEGER,
 	idUser 			INTEGER,
 	CONSTRAINT pk_DroitFichier PRIMARY KEY (idFichier, idUser),
-	CONSTRAINT fk_DroitFichier_idFichier FOREIGN KEY (idFichier) REFERENCES Fichier(idFichier),
-	CONSTRAINT fk_DroitFichier_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser)
+	CONSTRAINT fk_DroitFichier_idFichier FOREIGN KEY (idFichier) REFERENCES Fichier(idFichier) ON DELETE CASCADE,
+	CONSTRAINT fk_DroitFichier_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser) ON DELETE CASCADE
 );
