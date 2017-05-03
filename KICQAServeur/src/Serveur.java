@@ -13,8 +13,8 @@ public class Serveur {
 			System.out.println("Port ok");
 			GEDServeur fs=new GEDServeur();
 			System.out.println("New server ok");
-			Naming.rebind("rmi://"+ip+"/abc", fs);
-			System.out.println("Le serveur GED est pret a opérer");
+			Naming.rebind("rmi://"+ip+"/ged", fs);
+			System.out.println("Le serveur GED estcmw pret a opérer");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -27,9 +27,11 @@ public class Serveur {
 	public static void startCALserver(String ip) {
 		System.out.println("Demarrage du serveur CAL");
 		try{
-			java.rmi.registry.LocateRegistry.createRegistry(1100);
+			//java.rmi.registry.LocateRegistry.createRegistry(1099);
+			System.out.println("Port ok");
 			CalServer fs=new CalServer();
-			Naming.rebind("rmi://"+ip+"/abc", fs);
+			System.out.println("New server ok");
+			Naming.rebind("rmi://"+ip+"/cal", fs);
 			System.out.println("Le serveur CAL est pret a opérer");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -43,9 +45,9 @@ public class Serveur {
 	public static void startUSERserver(String ip) {
 		System.out.println("Demarrage du serveur USER");
 		try{
-			java.rmi.registry.LocateRegistry.createRegistry(1101);
+			//java.rmi.registry.LocateRegistry.createRegistry(1099);
 			UserServer fs=new UserServer();
-			Naming.rebind("rmi://"+ip+"/abc", fs);
+			Naming.rebind("rmi://"+ip+"/user", fs);
 			System.out.println("Le serveur USER est pret a opérer");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -59,9 +61,9 @@ public class Serveur {
 	public static void startCHATserver(String ip) {
 		System.out.println("Demarrage du serveur CHAT");
 		try{
-			java.rmi.registry.LocateRegistry.createRegistry(1102);
+			//java.rmi.registry.LocateRegistry.createRegistry(1099);
 			ChatServer fs=new ChatServer();
-			Naming.rebind("rmi://"+ip+"/abc", fs);
+			Naming.rebind("rmi://"+ip+"/chat", fs);
 			System.out.println("Le serveur CHAT est pret a opérer");
 		}catch(Exception e){
 			e.printStackTrace();

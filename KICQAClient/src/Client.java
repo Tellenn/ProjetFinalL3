@@ -26,7 +26,7 @@ public abstract class Client {
 	public void connectChat (String ip) throws RemoteException{
 		serverChat = null;
 		try {
-			serverChat = (ChatServerInt) Naming.lookup("rmi://" + ip + "/abc");
+			serverChat = (ChatServerInt) Naming.lookup("rmi://" + ip + "/chat");
 			clientChat = new ChatClient(client.getName(), this);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,7 +117,7 @@ public abstract class Client {
 			//ip.getText()
 			client = new UserClient(login,mdp);
 			client.setGUI(this);
-			server = (UserServerInt) Naming.lookup("rmi://" + ip + "/myabc");
+			server = (UserServerInt) Naming.lookup("rmi://" + ip + "/user");
 
 			int id = server.login(client, login, mdp);
 			if (id != -1) {
@@ -271,7 +271,7 @@ public abstract class Client {
 	public static GEDServeurInt connectGED (String ip) throws MalformedURLException, RemoteException, NotBoundException{
 		GEDServeurInt server = null;
 		try {
-			server = (GEDServeurInt) Naming.lookup("rmi://" + ip + "/abc");
+			server = (GEDServeurInt) Naming.lookup("rmi://" + ip + "/ged");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -534,6 +534,18 @@ public abstract class Client {
 	///		PARTIE CAL		///
 	///						///
 	///////////////////////////
+	
+	
+	public static CalServerInt connectCal (String ip) throws MalformedURLException, RemoteException, NotBoundException{
+		CalServerInt server = null;
+		try {
+			server=(CalServerInt) Naming.lookup("rmi://"+ip+"/cal");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			return server;
+	}
+	
 	
 	/**
 	* Donne l'ordre au seveur d'afficher un événement
