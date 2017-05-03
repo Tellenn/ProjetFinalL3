@@ -66,7 +66,7 @@ INSERT INTO Fichier VALUES(1,'Archi',null,null,null);
 INSERT INTO Fichier VALUES(2,'Regle du pole',1,'Regle de depot sur RH pour Carine',null);
 INSERT INTO Fichier VALUES(3,'Poubelle',1,'Ne sert a rien, comme Antoine',null);
 INSERT INTO Fichier VALUES(4,'Fiche de paie n 87',2,'Fiche de paie de Quentin Blondel',null);
-INSERT INTO Fichier VALUES(5,'Ibrahima.jpg',4,'Photo d\'un génie',null);
+INSERT INTO Fichier VALUES(5,'Ibrahima.jpg',4,'Photo d un génie',null);
 
 --Dossier(idDossier,nomDossier)
 
