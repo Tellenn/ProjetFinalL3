@@ -7,6 +7,14 @@ public class testclient {
 	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException{
 		 	
 		 	String ip = "127.0.0.1";
+		 	
+		 	/*
+			 * 
+			 * PARTIE GED
+			 * 
+			 */
+		 	/*
+		 	
 			String home = "C:\\Users\\Kyllian\\Desktop\\";
 			String file = "sabre.png";
 			String cible = "";
@@ -15,7 +23,7 @@ public class testclient {
 			int idfol = 4;
 			int iddoc = 5;
 			int iduser = 1;
-/*
+
 			GEDServeurInt serverged = Client.connectGED(ip);
 			
 			System.out.println("Debut créer dossier");
@@ -66,7 +74,7 @@ public class testclient {
 			 * PARTIE CALENDRIER
 			 * 
 			 */
-			
+			/*
 			CalServerInt servercal = Client.connectCal(ip);
 			Client.afficherOneEventOrder(servercal, 5);
 			Client.afficherEventsUserOrder(servercal, 5);
@@ -74,6 +82,29 @@ public class testclient {
 			Client.updateEventOrder(servercal, 1, "update event 1", "3-MAY-17 9:00:00", "3-MAY-17 10:00:00");
 			Client.deleteEventOrder(servercal, 1);
 			Client.addParticipantOrder(servercal, 6, 1);
-			Client.deleteParticipantOrder(servercal, 6, 1);
+			Client.deleteParticipantOrder(servercal, 6, 1);*/
+		 	
+		 	
+		 	/*
+			 * 
+			 * PARTIE CHAT
+			 * 
+			 */
+		 	/*
+		 	Client clientChat = new Client();
+		 	
+		 	Client.connectChat(ip);
+		 	
+		 	Client.sendTextPrivate(String text, int idDestinataire)
+		 	
+		 	addSalon(String nomSalon, int idRecepteur)*/
+		 	
+		 	
+		 	/*
+			 * 
+			 * PARTIE USER
+			 * 
+			 */
+		 	
 		}
 }
