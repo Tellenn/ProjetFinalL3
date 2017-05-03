@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 
@@ -423,31 +424,29 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 
 	/**
 	 * Renvoi les information du dossier contenue dans le XML
-	 * 
 	 * @param nomFolder
 	 * @throws java.rmi.RemoteException
+	 * @return 
 	 */
-	@Override
-	public void infoFolder(String nomFolder) throws RemoteException {
+	public int infoFolder(String nomFolder) throws RemoteException {
 		String sql = "select * from dossier where lower(nomdossier)='" + nomFolder + "'";
+		int iddos = 0;
 		try {
 			Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
 			conn.setAutoCommit(true);
 			// Execute the query
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				System.out.println("L'identifiant du dossier " + rs.getInt(1));
-				System.out.println("Nom du dossier " + rs.getString(2));
-			}
+			rs.next();
+			iddos = rs.getInt(1);			
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+		return iddos;
 	}
 
 	/**
 	 * Renvoi l'id du dossier contenu dans le XML
-	 * 
 	 * @param nomDoc
 	 * @return id du doc passé en paramètre
 	 * @throws java.sql.SQLException
@@ -493,9 +492,10 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 	/**
 	 * @param idFolder
 	 * @throws java.rmi.RemoteException
+	 * @return l'ensemble des utilisateurs ayant accès au dossier
 	 */
-	@Override
-	public void getAccessFolder(int idFolder) throws RemoteException {
+	public Vector<Integer> getAccessFolder(int idFolder) throws RemoteException {
+		Vector<Integer> users = new Vector();
 		String sql = "select distinct iduser from droitdossier where iddossier=" + idFolder;
 		try {
 			Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
@@ -504,12 +504,14 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println("Les utilisateurs ayant droit sur ce Dossier " + getFolderName(idFolder));
+
 			while (rs.next()) {
-				System.out.println(getUserName(rs.getInt(1)));
+				users.addElement(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+		return users;
 	}
 
 	/**
@@ -518,8 +520,8 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 	 * @param idDoc
 	 * @throws java.rmi.RemoteException
 	 */
-	@Override
-	public void getAccessDoc(int idDoc) throws RemoteException {
+	public Vector<Integer> getAccessDoc(int idDoc) throws RemoteException {
+		Vector<Integer> users = new Vector();
 		String sql = "select distinct iduser from droitfichier where idfichier=" + idDoc;
 		try {
 			Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
@@ -529,16 +531,17 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println("Les utilisateurs ayant droit sur ce fichier " + getDocName(idDoc));
 			while (rs.next()) {
-				System.out.println(getUserName(rs.getInt(1)));
+				users.addElement(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+		return users;
 	}
 
 	/**
 	 * @param idUser
-	 * @return ???
+	 * @return 
 	 * @throws java.sql.SQLException
 	 */
 	public String getUserName(int idUser) throws SQLException {
@@ -553,9 +556,9 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 	}
 
 	/**
-	 *
-	 * @param idDoc
-	 * @return
+	 * Renvoi le nom du ducoment fournis en agument
+	 * @param idDoc un id de document
+	 * @return le nom du document
 	 * @throws SQLException
 	 */
 	public String getDocName(int idDoc) throws SQLException {
@@ -575,8 +578,8 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 	 * @param idFolder
 	 * @throws java.rmi.RemoteException
 	 */
-	@Override
-	public void getRacineFolder(int idFolder) throws RemoteException {
+	public int getRacineFolder(int idFolder) throws RemoteException {
+		int idPere = 0;
 		String sql = "select * from dossierdansdossier where iddossierfils=" + idFolder;
 		try {
 			Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
@@ -584,12 +587,12 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 			// Execute the query
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				System.out.println("Nom du dossier Racine " + getFolderName(rs.getInt(2)));
-			}
+			rs.next();
+			idPere = rs.getInt(1);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+		return idPere;
 	}
 
 	/**
@@ -598,7 +601,8 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 	 * @param idFolder
 	 * @throws java.rmi.RemoteException
 	 */
-	public void getFilsFolder(int idFolder) throws RemoteException {
+	public Vector<Integer> getFilsFolder(int idFolder) throws RemoteException {
+		Vector<Integer> idFils = new Vector();
 		String sql = "select * from dossierdansdossier where iddossierpere=" + idFolder;
 		try {
 			Connection conn = DriverManager.getConnection(dbUrl, login, mdp);
@@ -607,11 +611,12 @@ public class GEDServeur extends UnicastRemoteObject implements GEDServeurInt {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				System.out.println("Nom du dossier Fils " + getFolderName(rs.getInt(1)));
+				idFils.addElement(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+		return idFils;
 	}
 
 	/**
