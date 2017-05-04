@@ -93,12 +93,12 @@
                   </Text>
                   <ScrollPane layoutX="13.0" layoutY="21.0" prefHeight="150.0" prefWidth="185.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #ecf0f1;" />
+                      <AnchorPane fx:id="tabSalon" minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #ecf0f1;" />
                     </content>
                   </ScrollPane>
                   <ScrollPane layoutX="13.0" layoutY="205.0" prefHeight="150.0" prefWidth="185.0">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="180.0">
+                        <AnchorPane fx:id="tabConversationPrivee" minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="180.0">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
