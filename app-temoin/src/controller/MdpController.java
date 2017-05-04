@@ -49,7 +49,33 @@ public class MdpController extends ControllerPere implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
+
+    @FXML
+    private void validerButtonAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+         Parent root = new Pane();
+         if(event.getSource()==valider){
+             stage = (Stage) valider.getScene().getWindow();
+             root = FXMLLoader.load(getClass().getResource("/view/Accueil.fxml"));
+         }        
+         Scene scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show(); 
+    }
+
+    @FXML
+    private void annulerButtonAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+         Parent root = new Pane();
+         if(event.getSource()==annuler){
+             stage = (Stage) annuler.getScene().getWindow();
+             root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+         }        
+         Scene scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show(); 
+    }
    
     
 }

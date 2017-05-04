@@ -23,7 +23,14 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import Client.*;
+import java.io.IOException;
 import java.util.TreeMap;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 /**
@@ -49,18 +56,19 @@ public class ChatController extends ControllerPere implements Initializable {
    
     @FXML
     private AnchorPane tabConversationPrivee;
-    @FXML
     private ListView salon;
     
     protected ListProperty<String> salonProperty = new SimpleListProperty<>();
     protected List<String> connectedCurrencyList = new ArrayList<>();
+    @FXML
+    private AnchorPane tabSalon;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Client c = new Client();
+      // Client c = new Client();
         /*try {
             Problème de connexion ...
            c.connectChat(ip);
@@ -75,18 +83,22 @@ public class ChatController extends ControllerPere implements Initializable {
         }*/
 
 
-        salon.itemsProperty().bind(salonProperty);
+     /*   salon.itemsProperty().bind(salonProperty);
 
         //This does not work, you can not directly add to a ListProperty
         //listProperty.addAll( asianCurrencyList );
         salonProperty.set(FXCollections.observableArrayList(connectedCurrencyList));
         salon.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            //System.out.println("ListView Selection Changed (selected: " + newValue.toString() + ")");
+            System.out.println("ListView Selection Changed (selected: " + newValue.toString() + ")");
            //affichage des clients
         });
-        
+        */
         
     }  
+
+    @FXML
+    private void sendButtonAction(ActionEvent event) {
+    }
     
    
 }

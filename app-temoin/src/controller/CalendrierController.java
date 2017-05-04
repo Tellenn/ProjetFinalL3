@@ -54,5 +54,19 @@ public class CalendrierController extends ControllerPere implements Initializabl
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+   
+
+    @FXML
+    private void modifierEventButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void infoEventButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void supprimerEventButtonAction(ActionEvent event) {
+    }
     
 }

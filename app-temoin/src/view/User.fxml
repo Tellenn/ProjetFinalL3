@@ -40,7 +40,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="ged" contentDisplay="CENTER" layoutX="6.0" layoutY="67.0" mnemonicParsing="false" onAction="#gedButtonAction" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
+            <Button fx:id="ged" contentDisplay="CENTER" layoutX="6.0" layoutY="67.0" mnemonicParsing="false" onAction="#gedButtonAction" prefHeight="28.0" prefWidth="117.0" style="-fx-background-color: #eb982d; -fx-background-radius: 15px 15px 0px 0px;" text="GED">
                <font>
                   <Font size="14.0" />
                </font>
