@@ -5,20 +5,26 @@
  */
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import Client.*;
+import java.util.TreeMap;
+
 
 /**
  * FXML Controller class
@@ -40,19 +46,47 @@ public class ChatController extends ControllerPere implements Initializable {
     private MenuItem deconnexion;
     @FXML
     private Button send;
+   
+    @FXML
+    private AnchorPane tabConversationPrivee;
+    @FXML
+    private ListView salon;
+    
+    protected ListProperty<String> salonProperty = new SimpleListProperty<>();
+    protected List<String> connectedCurrencyList = new ArrayList<>();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       System.out.println("okkkk chat");
-       
-    }    
+        Client c = new Client();
+        /*try {
+            Problème de connexion ...
+           c.connectChat(ip);
+            TreeMap<Integer, ChatClientInt> t = new TreeMap<>();
+            t = c.getConnected();
+            for (ChatClientInt item : t.values()) {
+                //connectedCurrencyList.add(item.getName());
+                 System.out.println("--- " + item.getName());
+            }
+        } catch (RemoteException e) {
+            System.out.print(e);
+        }*/
 
-   
-    @FXML
-    private void sendButtonAction(ActionEvent event) {
-    }
+
+        salon.itemsProperty().bind(salonProperty);
+
+        //This does not work, you can not directly add to a ListProperty
+        //listProperty.addAll( asianCurrencyList );
+        salonProperty.set(FXCollections.observableArrayList(connectedCurrencyList));
+        salon.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            //System.out.println("ListView Selection Changed (selected: " + newValue.toString() + ")");
+           //affichage des clients
+        });
+        
+        
+    }  
     
+   
 }
