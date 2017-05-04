@@ -22,6 +22,12 @@ public class Client {
 	private static 				UserServerInt 	server;
 	private static final 	String 			ip 		= "127.0.0.1";
 	
+	/**
+	 *Se connecte avec login et mot de passe
+	* @param login le login de l'utilisateur
+	* @param mdp le mot de passe de l'utilisateur
+	* @return un entier qui indique si on arrive à se connecter
+	 */
 	public int doConnect(String login, String mdp) {
 
 		if (login.length() < 2) {
@@ -56,7 +62,11 @@ public class Client {
 
 	}
 
-
+	    /**
+	     * appelle la fonction ajoutUser du serveur
+	     * @param userName le login de l'utilisateur
+	     * @param userPassword le mot de passe de l'utilisateur
+	     */
 	public void ajoutUtilisateur(String username, String password){
 		try {
 			server.ajoutUser(client, username, password);
@@ -65,6 +75,9 @@ public class Client {
 		}
 	}
 	
+	     /**
+	     * appelle la fonction suppressionUser du serveur
+	     */
 	public void suppressionUtilisateur(){
 		try {
 			server.suppressionUser(client);
@@ -73,6 +86,10 @@ public class Client {
 		}
 	}
 	
+	     /**
+	     * appelle la fonction ajoutDeRelation du serveur
+	     * @param idUser2 l'identifiant du second utilisateur
+	     */
 	public void ajoutRelation(int idUser2){
 		try {
 			server.ajoutDeRelation(client, idUser2);
@@ -81,6 +98,10 @@ public class Client {
 		}
 	}
 	
+             /**
+	     * appelle la fonction suppressionDeRelation du serveur
+	     * @param idUser2 l'identifiant du second utilisateur
+	     */
 	public void suppressionRelation(int idUser2){
 		try {
 			server.suppressiontDeRelation(client, idUser2);
@@ -89,6 +110,10 @@ public class Client {
 		}
 	}
 	
+	
+             /**
+	     * appelle la fonction ajoutAdmin du serveur
+	     */
 	public void ajoutAdmin(){
 		try {
 			server.ajoutAdmin(client);
@@ -97,6 +122,10 @@ public class Client {
 		}
 	}
 	
+		
+             /**
+	     * appelle la fonction suppressionAdmin du serveur
+	     */
 	public void suppressionAdmin(){
 		try {
 			server.suppressionAdmin(client);
@@ -105,6 +134,9 @@ public class Client {
 		}
 	}
 	
+	     /**
+	     * appelle la fonctionchargementProfil du serveur
+	     */
 	public void chargementProfil(){
 		try {
 			server.chargementProfil(client);
@@ -113,6 +145,9 @@ public class Client {
 		}
 	}
 	
+	   /**
+	   * appelle la fonction modificationProfil du serveur
+	   */
 	public void modificationProfil(){
 		try {
 			server.modificationProfil(client);
@@ -121,6 +156,10 @@ public class Client {
 		}
 	}
 	
+	     /**
+	     * appelle la fonction modificationUsername du serveur
+	     * @param userName le nouveau login du client
+	     */
 	public void modificationUsername(String userName){
 		try {
 			server.modificationUsername(client, userName);
@@ -129,6 +168,10 @@ public class Client {
 		}
 	}
 	
+	      /**
+	     * appelle la fonction modificationPassword du serveur
+	     * @param userPassword le nouveau mot de passe du client
+	     */
 	public void modificationPassword(String userPassword){
 		try {
 			server.modificationPassword(client, userPassword);
@@ -137,6 +180,11 @@ public class Client {
 		}
 	}
 	
+	    /**
+	     * appelle la fonction .modificationProfilParChamp du serveur
+	     * @param champ le champ à ajouter pour un client
+	     * @param content le contenu
+	     */
 	public void modificationProfilParChamp(String champ, String content){
 		try {
 			server.modificationProfilParChamp(client, champ, content);
@@ -145,6 +193,10 @@ public class Client {
 		}
 	}
 	
+	     /**
+	     * appelle la fonction ajoutChamp du serveur
+	     * @param champ le champ à ajouter pour tous les clients
+	     */
 	public void ajoutChamp(String champ){
 		try {
 			server.ajoutChamp(champ);
@@ -153,6 +205,11 @@ public class Client {
 		}
 	}
 	
+	     /**
+	     * appelle la fonction ajoutChamp du serveur
+	     * @param champ le champ à ajouter pour un client
+	     * @param content le contenu
+	     */
 	public void ajoutChamp(String champ, String content){
 		try {
 			server.ajoutChamp(client,champ,content);
@@ -161,6 +218,10 @@ public class Client {
 		}
 	}
 	
+	    /**
+	     * appelle la fonction suppressionChamp du serveur
+	     * @param champ le champ à supprimer pour tous les clients
+	     */
 	public void suppressionChamp(String champ){
 		try {
 			server.suppressionChamp(champ);
@@ -169,6 +230,10 @@ public class Client {
 		}
 	}
 	
+	      /**
+	     * appelle la fonction suppressionChamp du serveur
+	     * @param champ le champ à supprimer pour un client
+	     */
 	public void suppressionChampPourUser(String champ){
 		try {
 			server.suppressionChamp(client,champ);
@@ -211,6 +276,47 @@ public class Client {
 			System.out.println(e);
 		}		
 	}
+	
+	/**
+	 * Permet d'envoyer un message au salon
+	 * @param text: le texte à envoyer 
+	 * @param idSalon: salon qui reçoit le message
+	 */
+	  public void sendTextSalon(String text, int idSalon) {	
+		if (client.getIdConversationPrivee() != -1) {
+			try {
+				server.publishPrivate(st, client.getId(), idRecepteur);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		} else {
+			if (client.getNumSalon() != -1) {
+				try {
+					server.publish(st, client.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("[System] ERROR: Pas normal d'être là");
+				// erreur
+			}
+		}
+		
+	}
+	
+	/**
+	 * Permet d'ajouter un salon privé à un client
+	 * @param text: nom du salon 
+	 * @param idDestinataire: personne qui reçoit le message
+	 */
+	public void addSalon(String nomSalon, int idRecepteur) {			
+		/*try {
+			serverChat.publishPrivate(nomSalon, client.getId(), idRecepteur);
+		} catch (Exception e) {
+			System.out.println(e);
+		}*/		
+	}
+	
 	
 	// ecrit le message dans l'interface à completer
 	// TODO: à coder par le développeur
@@ -497,9 +603,9 @@ public class Client {
 	}
 	
 	///////////////////////////
-	///			///
-	///	PARTIE CAL	///
-	///			///
+	///						///
+	///		PARTIE CAL		///
+	///						///
 	///////////////////////////
 	
 	/**
