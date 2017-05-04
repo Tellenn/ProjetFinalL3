@@ -26,7 +26,7 @@ public class testclient {
 
 			GEDServeurInt serverged = Client.connectGED(ip);
 			
-			System.out.println("Debut créer dossier");
+			System.out.println("Debut crÃ©er dossier");
 			idfol = Client.createFolder(serverged, nomfol);
 
 			System.out.println("Debut upload file");
@@ -89,15 +89,13 @@ public class testclient {
 			 * 
 			 * PARTIE CHAT
 			 * 
-			 */
-		 	/*
-		 	Client clientChat = new Client();
+			 */		 	
+		 	/*Client c = new Client();
 		 	
-		 	Client.connectChat(ip);
-		 	
-		 	Client.sendTextPrivate(String text, int idDestinataire)
-		 	
-		 	addSalon(String nomSalon, int idRecepteur)*/
+		 	c.connectChat(ip);
+		 	int idDestinataire = 9;
+		 	c.sendTextPrivate("J'envoie un message", idDestinataire );		 	
+		 	*/
 		 	
 		 	
 		 	/*
