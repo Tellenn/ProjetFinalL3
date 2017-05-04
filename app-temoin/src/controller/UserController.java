@@ -23,9 +23,9 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author aminca
+ * @author Antoine
  */
-public class UserController extends ControllerPere implements Initializable {
+public class UserController implements Initializable {
     @FXML
     private Button chat;
     @FXML
@@ -42,6 +42,8 @@ public class UserController extends ControllerPere implements Initializable {
     private Button modifprofil;
     @FXML
     private Button modifmdp;
+    @FXML
+    private Button admin;
 
     /**
      * Initializes the controller class.
@@ -51,8 +53,45 @@ public class UserController extends ControllerPere implements Initializable {
         // TODO
     }    
 
-   
-   
+    @FXML
+    private void chatButtonAction(ActionEvent event) {
+    }
 
+    @FXML
+    private void calButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void gedButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void printProfilAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void deconnexionAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void modifProfButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void modifMdpButtonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void adminButtonAction(ActionEvent event) throws IOException {
+     Stage stage = new Stage();        
+         Parent root = new Pane();
+         if(event.getSource()==admin){
+             stage = (Stage) admin.getScene().getWindow();
+             root = FXMLLoader.load(getClass().getResource("/view/Admin.fxml"));
+         }        
+         Scene scene = new Scene(root);
+         stage.setScene(scene);
+         stage.show(); 
+     }
     
 }
