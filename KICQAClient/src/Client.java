@@ -212,47 +212,6 @@ public class Client {
 		}		
 	}
 	
-	/**
-	 * Permet d'envoyer un message au salon
-	 * @param text: le texte à envoyer 
-	 * @param idSalon: salon qui reçoit le message
-	 */
-	  public void sendTextSalon(String text, int idSalon) {	
-		if (client.getIdConversationPrivee() != -1) {
-			try {
-				server.publishPrivate(st, client.getId(), idRecepteur);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		} else {
-			if (client.getNumSalon() != -1) {
-				try {
-					server.publish(st, client.getId());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else {
-				System.out.println("[System] ERROR: Pas normal d'être là");
-				// erreur
-			}
-		}
-		
-	}
-	
-	/**
-	 * Permet d'ajouter un salon privé à un client
-	 * @param text: nom du salon 
-	 * @param idDestinataire: personne qui reçoit le message
-	 */
-	public void addSalon(String nomSalon, int idRecepteur) {			
-		/*try {
-			serverChat.publishPrivate(nomSalon, client.getId(), idRecepteur);
-		} catch (Exception e) {
-			System.out.println(e);
-		}*/		
-	}
-	
-	
 	// ecrit le message dans l'interface à completer
 	// TODO: à coder par le développeur
 	public  void writeMsg(String st){
@@ -538,9 +497,9 @@ public class Client {
 	}
 	
 	///////////////////////////
-	///						///
-	///		PARTIE CAL		///
-	///						///
+	///			///
+	///	PARTIE CAL	///
+	///			///
 	///////////////////////////
 	
 	/**
