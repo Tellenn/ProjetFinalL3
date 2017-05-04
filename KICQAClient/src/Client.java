@@ -10,94 +10,12 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 public class Client {
 
-	///////////////////////////
-	///						///
-	///		PARTIE CHAT		///
-	///						///
-	///////////////////////////
-	// TODO: connecter et créer objet
-	private static 			ChatClient 		clientChat;
-	private 				ChatServerInt 	serverChat;	
-	
-	/**
-	 * Permet de démarer un serveur
-	 * @param ip: l'ip du serveur
-	 * @throws RemoteException 
-	 */
-	public void connectChat (String ip) throws RemoteException{
-		serverChat = null;
-		try {
-			serverChat = (ChatServerInt) Naming.lookup("rmi://" + ip + "/chat");
-			clientChat = new ChatClient(client.getName(), this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Permet d'envoyer un message privé
-	 * @param text: le texte à envoyer 
-	 * @param idDestinataire: personne qui reçoit le message
-	 */
-	public void sendTextPrivate(String text, int idDestinataire) {			
-		try {
-			serverChat.publishPrivate(text, client.getId(), idDestinataire);
-		} catch (Exception e) {
-			System.out.println(e);
-		}		
-	}
-	
-	// Message de salon
-	 /* public void sendTextSalon(String text, int idRecepteur) {	
-		if (client.getIdConversationPrivee() != -1) {
-			try {
-				server.publishPrivate(st, client.getId(), idRecepteur);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		} else {
-			if (client.getNumSalon() != -1) {
-				try {
-					server.publish(st, client.getId());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else {
-				System.out.println("[System] ERROR: Pas normal d'être là");
-				// erreur
-			}
-		}
-		tf.setText("");
-	}*/
-	
-	/**
-	 * Permet d'ajouter un salon privé à un client
-	 * @param text: nom du salon 
-	 * @param idDestinataire: personne qui reçoit le message
-	 */
-	public void addSalon(String nomSalon, int idRecepteur) {			
-		/*try {
-			serverChat.publishPrivate(nomSalon, client.getId(), idRecepteur);
-		} catch (Exception e) {
-			System.out.println(e);
-		}*/		
-	}
-	
-	
-	// ecrit le message dans l'interface à completer
-	// TODO: à coder par le développeur
-	public  void writeMsg(String st){
-		//tx.setText(tx.getText() + "\n" + st);
-	}
-	public  TreeMap<Integer, ChatClientInt> getConnected() throws RemoteException{
-		return serverChat.getConnected();		
-	}
 
 	
 	///////////////////////////
-	///						///
-	///		PARTIE User		///
-	///						///
+	///			///
+	///	PARTIE User	///
+	///			///
 	///////////////////////////
 	
 	private static 			UserClient 		client;
@@ -258,11 +176,97 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+	///////////////////////////
+	///			///
+	///	PARTIE CHAT	///
+	///			///
+	///////////////////////////
+	private static 				ChatClient 		clientChat;
+	private 				ChatServerInt 	serverChat;	
+	
+	/**
+	 * Permet de démarer un serveur
+	 * @param ip: l'ip du serveur
+	 * @throws RemoteException 
+	 */
+	public void connectChat (String ip) throws RemoteException{
+		serverChat = null;
+		try {
+			serverChat = (ChatServerInt) Naming.lookup("rmi://" + ip + "/chat");
+			clientChat = new ChatClient(client.getName(), this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Permet d'envoyer un message privé
+	 * @param text: le texte à envoyer 
+	 * @param idDestinataire: personne qui reçoit le message
+	 */
+	public void sendTextPrivate(String text, int idDestinataire) {			
+		try {
+			serverChat.publishPrivate(text, client.getId(), idDestinataire);
+		} catch (Exception e) {
+			System.out.println(e);
+		}		
+	}
+	
+	/**
+	 * Permet d'envoyer un message au salon
+	 * @param text: le texte à envoyer 
+	 * @param idSalon: salon qui reçoit le message
+	 */
+	  public void sendTextSalon(String text, int idSalon) {	
+		if (client.getIdConversationPrivee() != -1) {
+			try {
+				server.publishPrivate(st, client.getId(), idRecepteur);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		} else {
+			if (client.getNumSalon() != -1) {
+				try {
+					server.publish(st, client.getId());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("[System] ERROR: Pas normal d'être là");
+				// erreur
+			}
+		}
+		
+	}
+	
+	/**
+	 * Permet d'ajouter un salon privé à un client
+	 * @param text: nom du salon 
+	 * @param idDestinataire: personne qui reçoit le message
+	 */
+	public void addSalon(String nomSalon, int idRecepteur) {			
+		/*try {
+			serverChat.publishPrivate(nomSalon, client.getId(), idRecepteur);
+		} catch (Exception e) {
+			System.out.println(e);
+		}*/		
+	}
+	
+	
+	// ecrit le message dans l'interface à completer
+	// TODO: à coder par le développeur
+	public  void writeMsg(String st){
+		//tx.setText(tx.getText() + "\n" + st);
+	}
+	public  TreeMap<Integer, ChatClientInt> getConnected() throws RemoteException{
+		return serverChat.getConnected();		
+	}
+
 	
 	///////////////////////////
-	///						///
-	///		PARTIE GED		///
-	///						///
+	///			///
+	///	PARTIE GED	///
+	///			///
 	///////////////////////////
 	/**
 	 * Permet de démarer un serveur
