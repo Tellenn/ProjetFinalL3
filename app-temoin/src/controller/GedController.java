@@ -8,7 +8,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
+import java.util.Vector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,15 +20,26 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import Client.*;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 /**
  * FXML Controller class
  *
  * @author aminca
  */
-public class GedController extends ControllerPere implements Initializable {
+public class GedController implements Initializable {
     @FXML
     private Button chat;
     @FXML
@@ -42,9 +53,9 @@ public class GedController extends ControllerPere implements Initializable {
     @FXML
     private MenuItem deconnexion;
     @FXML
-    private TableView<String> tabGed;
+    private TableView<Fichier> tabGed;
     @FXML
-    private TableColumn<String,String> nom;
+    private TableColumn<Fichier,String> nom;
     @FXML
     private Button ouvrir;
     @FXML
@@ -55,15 +66,101 @@ public class GedController extends ControllerPere implements Initializable {
     private Button share;
     @FXML
     private Button refresh;
-
+    private GEDServeurInt server = null;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //nom.setText("image.jpg");
-        tabGed.setItems("Bonjour");
+        try {
+            System.out.println("Connection au serveur");
+            server = Client.connectGED("127.0.0.1");
+             System.out.println("Lecture des fils à la racine");
+            Vector<Integer> ids = Client.getFilsFolder(server, 1);
+            String filename;
+            ObservableList<Fichier> files = FXCollections.observableArrayList();
+             System.out.println("Association dans un ObservableList");
+            for(int i=0;i<ids.size();i++){
+                filename = server.getDocName(ids.get(i));
+                files.add(new Fichier(filename));
+            }
+             System.out.println("Ajout a la TableView");
+            tabGed.setItems(files);
+            nom = new TableColumn("NomFichier");
+             System.out.println("Association des noms");
+            nom.setCellValueFactory(new PropertyValueFactory<Fichier,String>("nom"));
+             System.out.println("Assciation de la collone a la tableview");
+            tabGed.getColumns().setAll(nom);
+         } catch (Exception ex) {
+            Logger.getLogger(GedController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
+
+    @FXML
+    private void printProfilAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+        Parent root = new Pane();
+        if(event.getSource()==printProfil){
+            stage = (Stage) printProfil.getParentPopup().getOwnerWindow().getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/User.fxml"));
+        }        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void deconnexionAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+        Parent root = new Pane();
+        if(event.getSource()==deconnexion){
+            stage = (Stage) deconnexion.getParentPopup().getOwnerWindow().getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/Connection.fxml"));
+        }        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+    
+       @FXML
+    private void chatButtonAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+        Parent root = new Pane();
+        if(event.getSource()==chat){
+            stage = (Stage) chat.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/Chat.fxml"));
+        }        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void calButtonAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+        Parent root = new Pane();
+        if(event.getSource()==calendrier){
+            stage = (Stage) calendrier.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/Calendrier.fxml"));
+        }        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void gedButtonAction(ActionEvent event) throws IOException {
+        Stage stage = new Stage();        
+        Parent root = new Pane();
+        if(event.getSource()==ged){
+            stage = (Stage) ged.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/Ged.fxml"));
+        }        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
     
     @FXML
     private void openButtonAction(ActionEvent event) throws IOException {
