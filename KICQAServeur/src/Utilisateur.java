@@ -73,8 +73,10 @@ public class Utilisateur {
    
 	
 	    /**
-	     * insert dans la table Utilisateur l' identifiant de l'Utilisateur, son nom et son prénom.
-	     * @throws SQLException 
+	     * insert dans la table Utilisateur l' identifiant de l'Utilisateur, son login et son mot de passe.
+	     * @param idUser l'identifiant de l'utilisateur
+	     * @param userName le nouveau login de l'utilisateur
+	     * @param password le nouveau mot de passe de l'utilisateur
 	     */
 	    public void ajouterUtilisateur(int idUser , String userName, String userPassword) {
 	    
@@ -97,8 +99,8 @@ public class Utilisateur {
 	    };
 	    
 	    /**
-	     * insert dans la table Utilisateur l' identifiant de l'Utilisateur, son nom et son prénom.
-	     * @throws SQLException 
+	     * insert dans la table Admin l' identifiant du nouveau admin.
+	     *  @param idUser l'identifiant de l'utilisateur
 	     */
 	    public void ajouterAdmin(int idUser) {
 	    
@@ -117,7 +119,11 @@ public class Utilisateur {
 	    	 
 	    };
 	    
-	    
+	  /**
+	     * insert la relation entre idUser1 et idUser2 dans la base de donnÃ©es
+	     * @param idUser1 reprÃ©sente l'identifiant du premier utilisateur
+	     * @param idUser2 reprÃ©sente l'identifiant du second utilisateur
+	     */  
 	    public void ajouterRelation(int idUser1 , int idUser2){
 	    	try {
 	            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -133,7 +139,11 @@ public class Utilisateur {
 			}
     	 
     };
-    
+    /**
+     * Supprime la relation entre IdUser1 et IdUser2 de la base de donnÃ©es
+     * @param idUser1 reprÃ©sente l'identifiant du premier utilisateur
+     * @param idUser2 reprÃ©sente l'identifiant du second utilisateur
+     */
     public void supprimerRelation(int idUser1 , int idUser2){
     	try {
 	        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -150,8 +160,8 @@ public class Utilisateur {
     };
 	    
 	    /**
-	     * calcule l'incrémentation de idUser en executant une requête qui cherche le dernier idUser dans la table Utilisateur. 
-	     * @throws SQLException 
+	     * calcule l'incrémentation de idUser en executant une requÃªte qui cherche le dernier idUser dans la table Utilisateur. 
+	     * @return idUser 
 	     */
 	    public int calcul_idUser() {
 	    	int idUser = 0;
@@ -176,8 +186,9 @@ public class Utilisateur {
 	    
 	    
 	    /**
-	     * recherche le login
-	     * @throws SQLException 
+	     * recherche l'idUser dans la base de donnÃ©es
+	     * @param userName le login de l'utilisateur
+	     * @return l'idUser de l'utilisateur ayant le login userName
 	     */
 	    public int rechercheUtilisateur(String userName){
 	    	int idUser=0;
@@ -201,9 +212,10 @@ public class Utilisateur {
 	    
 	    
 	    
-	    /**
-	     * recherche le login
-	     * @throws SQLException 
+	     /**
+	     * recherche l'idUser dans la table Admin
+	     * @param userName le login de l'utilisateur
+	     * @return l'idUser de l'utilisateur ayant le login userName et qui est un admin
 	     */
 	    public int rechercheAdmin(String userName){
 	        int idUser=0;
@@ -226,7 +238,11 @@ public class Utilisateur {
 	    }
 	    
 	    
-	    
+	    /**
+	     * affiche le profil de l'idUser donnÃ©
+	     * @param idUser l'identifiant de l'utilisateur qu'on veut charger son profil
+	     * @return un tableau avec les champs du profil et son contenu
+	     */
 	    public TreeMap<String, String> chargerProfil(int idUser) {
 	    	TreeMap<String, String> tt = new TreeMap<String, String>();
 	    	try {
@@ -263,7 +279,12 @@ public class Utilisateur {
 	    }
 	    
 	    
-	    
+   	    /**
+	     * ajoute le profil dans le fichier xml des profils
+	     * @param idUser l'identifiant de l'utilisateur 
+	     * @param nom le nom de l'utilisateur
+	     * @param prenom le prenom de l'utilisateur
+	     */
 	    public void ajouterProfil(int idUser, String nom, String prenom) {
 	    	try{
 		    	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -286,7 +307,14 @@ public class Utilisateur {
 	    }
 		    
 	   
-	    
+	/**
+	 * creer les champs nom et prenom dans le fichier xml avec leur valeur et creation de l'element user
+	 * @param doc ou on veut creer le noeud user
+	 * @param idUser l'identiant de l'utilisateur
+	 * @param nom le champ qu'on veut creer
+	 * @param prenom le champ qu'on veut creer
+	 * @return la noeud user qu'on a creer 
+	 */
 	private static Node getUser(Document doc, int idUser, String nom, String prenom) {
 	    Element user = doc.createElement("user");
 	    user.setAttribute("id", Integer.toString(idUser));
@@ -296,13 +324,23 @@ public class Utilisateur {
 	    return user;
 	}
 
-	// utility method to create text node
+		/**
+	 * creer et remplir le champ champ avec sa valeur 
+	 * @param doc ou se trouve le noeud
+	 * @param champ le champ a crÃ©er
+	 * @param content la valeur du champ 
+	 * @return la noeud créee
+	 */
 	private static Node getUserElements(Document doc, String champ, String content) {
 	    Element node = doc.createElement(champ);
 	    node.appendChild(doc.createTextNode(content));
 	    return node;
 	} 
 	
+	/**
+	  *modifie le profil de l'idUser donnÃ© 
+	  * @param idUser identifiant de l'utilisateur
+	  */
 	 public void modifierProfil(int idUser) {
 		 try{
 			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -337,7 +375,12 @@ public class Utilisateur {
 			}
 	    }
 	 
-	 
+	  /**
+	 *modifie le champ donnÃ© avec le contenu content de l'idUser donnÃ© 
+	 * @param idUser l'identifiant de l'utilisateur
+	 * @param champ le nom du champ
+	 * @param content le contenu du champ
+	 */
 	 public void modifierProfilParChamp(int idUser, String champ, String content) {
 		 try{
 			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -372,6 +415,11 @@ public class Utilisateur {
 		}
 	 }
 	 
+	/**
+	 *modifie le login de l'idUser donné
+	 * @param idUser l'identifiant de l'utilisateur
+	 * @param userName le nouveau login de l'utilisateur
+	 */
 	 public void modifierUsername(int idUser , String userName) {
 		 try{
 		    
@@ -388,7 +436,12 @@ public class Utilisateur {
 		}
 	 };
 	 
-	 public void modifierPassword(int idUser , String password){
+	/**
+	 *modifie le mot de passe de l'idUser donnÃ©
+	 * @param idUser l'identifiant de l'utilisateur
+	 * @param password le nouveau mot de passe de l'utilisateur
+	 */
+	public void modifierPassword(int idUser , String password){
 		 try{  
 	         Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 	
@@ -402,7 +455,11 @@ public class Utilisateur {
 		 }
 	 };
  
-	 public void supprimerUser(int idUser){
+	/**
+	 *supprime l'utilisateur de la base de donnÃ© et du fichier xml
+	 * @param idUser l'identifiant de l'utilisateur
+	 */
+	public void supprimerUser(int idUser){
 		try{   
 		     Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 		
@@ -440,7 +497,11 @@ public class Utilisateur {
 		}
 	 }
 
-	 public void supprimerAdmin(int idUser){
+	/**
+	 *supprime l'admin de la table Admin
+	 * @param idUser l'identifiant de l'admin
+	 */
+	public void supprimerAdmin(int idUser){
 		 try {
 		        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
 		
@@ -454,7 +515,12 @@ public class Utilisateur {
 			}
 	    };
 	 
-	 //Ajouter champ pour un user
+	/**
+	 * Ajoute champ avec le contenu content pour l'idUser donnÃ©
+	 * @param champ le champ a ajouter
+	 * @param idUser l'identifiant de l'utilisateur
+	 * @param content le contenu du champ
+	 */
 	 public void ajouterChamp(String champ, int idUser, String content) {
 		 try{
 			 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -487,7 +553,10 @@ public class Utilisateur {
 	    }
 	 
 	 
-	 //Ajouter champ pour tous les users
+	/**
+	 *ajoute champ dans le fichier xml (pour tous les utilisateurs) 
+	 * @param champ le champ a ajouter
+	 */
 	 public void ajouterChamp(String champ){
 		 try{
 			 Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -513,7 +582,11 @@ public class Utilisateur {
 	    }
 	 
     
-   	 //Supprimer champ pour un user	
+   	/**
+   	 *Supprime champ dans le fichier xml pour l'idUser donnÃ© 
+   	 * @param champ le champ supprimÃ©
+   	 * @param idUser l'identifiant de l'utilisateur
+   	 */	
    	 public void supprimerChamp(String champ, int idUser) {
    		 try {
 	   		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -547,7 +620,11 @@ public class Utilisateur {
    		 		e.printStackTrace();
    		 	}
 	    }
-	 //Supprimer champ pour tous les users 
+	
+	 /**
+   	 * Supprime champ dans le fichier xml pour tous les utilisateurs
+   	 * @param champ le champ supprimÃ©
+   	 */  
    	public void supprimerChamp(String champ) {
    		try{
 	   		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag", "charroan", "Aclf2016");
@@ -586,8 +663,10 @@ public class Utilisateur {
 		}
 	 }
    	 
-
-   		private void save() {
+	 /**
+   	 * sauvegarde le fichier 
+   	 */
+	private void save() {
    			TransformerFactory transformerFactory = TransformerFactory.newInstance();
    	        Transformer transformer;
    			try {
@@ -600,7 +679,12 @@ public class Utilisateur {
    				e.printStackTrace();
    			}		
    		}
-   	 
+   	
+	 /**
+   	 * parse le fichier donnÃ©
+   	 * @param file le nom du fichier
+   	 * @return document
+   	 */
    	public static Document parser(){
    		
         try {
